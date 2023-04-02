@@ -4,7 +4,7 @@ import photo from "../../assets/placeholder.jpg";
 
 const HeroSection = () => {
   return (
-    <div className="p-20 bg-secondary bg-opacity-70">
+    <div className="p-20 bg-secondary relative bg-opacity-70">
       <Image priority className="z-[-1]" src={photo} fill alt="" />
       <div className="flex flex-col items-center text-white py-10 space-y-16">
         <div className="text-center border-t-4 ">
