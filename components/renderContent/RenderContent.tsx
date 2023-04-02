@@ -4,11 +4,13 @@ import {
   IRichTextSection,
   IPhotoSlider,
   IFreeConsultationBanner,
+  IZSection,
 } from "@/@types/generated/contentful";
 import LandingSection from "../landingSection/LandingSection";
 import RichTextSection from "../richTextSection/RichTextSection";
 import Carousel from "../carousel/Carousel";
 import FreeConsultationBanner from "../freeConsultationBanner/FreeConsultationBanner";
+import ZSection from "../zSection/ZSection";
 
 interface RenderComponentProps {
   sections:
@@ -17,6 +19,7 @@ interface RenderComponentProps {
         | IRichTextSection
         | IPhotoSlider
         | IFreeConsultationBanner
+        | IZSection
       )[]
     | undefined;
 }
@@ -40,6 +43,10 @@ const RenderContent = ({ sections }: RenderComponentProps) => {
       if (section.sys.contentType.sys.id === "freeConsultationBanner") {
         const consultationBanner = section as IFreeConsultationBanner;
         return <FreeConsultationBanner key={id} props={consultationBanner} />;
+      }
+      if (section.sys.contentType.sys.id === "zSection") {
+        const zSection = section as IZSection;
+        return <ZSection key={id} props={zSection} />;
       }
     });
   };

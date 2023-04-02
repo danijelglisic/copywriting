@@ -161,6 +161,7 @@ export interface IPageFields {
         | IRichTextSection
         | IPhotoSlider
         | IFreeConsultationBanner
+        | IZSection
       )[]
     | undefined;
 }
@@ -238,6 +239,40 @@ export interface IRichTextSection extends Entry<IRichTextSectionFields> {
   };
 }
 
+export interface IZSectionFields {
+  /** Title */
+  title?: string | undefined;
+
+  /** Subtitle */
+  subtitle?: string | undefined;
+
+  /** richText */
+  richText?: Document | undefined;
+
+  /** Image */
+  image?: IImage | undefined;
+
+  /** Image Position */
+  imagePosition?: boolean | undefined;
+}
+
+export interface IZSection extends Entry<IZSectionFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: "zSection";
+        linkType: "ContentType";
+        type: "Link";
+      };
+    };
+  };
+}
+
 export type CONTENT_TYPE =
   | "cta"
   | "freeConsultationBanner"
@@ -246,7 +281,8 @@ export type CONTENT_TYPE =
   | "landingSection"
   | "page"
   | "photoSlider"
-  | "richTextSection";
+  | "richTextSection"
+  | "zSection";
 
 export type IEntry =
   | ICta
@@ -256,7 +292,8 @@ export type IEntry =
   | ILandingSection
   | IPage
   | IPhotoSlider
-  | IRichTextSection;
+  | IRichTextSection
+  | IZSection;
 
 export type LOCALE_CODE = "en-US";
 
