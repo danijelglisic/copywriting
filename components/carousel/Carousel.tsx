@@ -15,7 +15,7 @@ const settings = {
   arrows: false,
   speed: 300,
   slidesToShow: 4,
-  slidesToScroll: 1,
+  slidesToScroll: 2,
   initialSlide: 0,
   nextArrow: <div className="none-imp"></div>,
   prevArrow: <div className="none-imp"></div>,

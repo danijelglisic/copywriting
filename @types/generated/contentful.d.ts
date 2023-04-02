@@ -142,6 +142,12 @@ export interface ILandingSection extends Entry<ILandingSectionFields> {
 }
 
 export interface IPageFields {
+  /** SEO Title */
+  seoTitle?: string | undefined;
+
+  /** SEO Desctiption */
+  seoDesctiption?: string | undefined;
+
   /** Title */
   title?: string | undefined;
 
