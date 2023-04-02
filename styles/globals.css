@@ -83,3 +83,7 @@
     rgba(140, 212, 188, 1) 66%
   );
 }
+
+.none-imp {
+  display: none !important;
+}

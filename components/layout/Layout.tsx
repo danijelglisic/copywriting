@@ -67,6 +67,20 @@ const Layout: FC<Props> = ({ children, links }) => {
       <main className="pt-[80px]" id="#main-content">
         {children}
       </main>
+      <footer className="border-t-4 border-secondary py-10">
+        <div className="container text-center text-secondary space-y-8">
+          <div className="subtitle-1">
+            <p>© 2023 Slaviša Bogdanović, All Rights Reserved.</p>
+          </div>
+          <div className="regular-1">
+            <p>Created by: Danijel Glišić</p>
+            <div className="text-primary underline gap-4 flex items-center justify-center">
+              <a href="https://www.linkedin.com/in/danijel-glisic/">Linkedin</a>
+              <a href="mailto:dglisic8@gmail.com">E-mail</a>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
