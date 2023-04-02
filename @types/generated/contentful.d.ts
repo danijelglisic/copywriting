@@ -28,6 +28,35 @@ export interface ICta extends Entry<ICtaFields> {
   };
 }
 
+export interface IFreeConsultationBannerFields {
+  /** Text */
+  text?: string | undefined;
+
+  /** CTA */
+  cta?: ICta | undefined;
+
+  /** Description */
+  description?: string | undefined;
+}
+
+export interface IFreeConsultationBanner
+  extends Entry<IFreeConsultationBannerFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: "freeConsultationBanner";
+        linkType: "ContentType";
+        type: "Link";
+      };
+    };
+  };
+}
+
 export interface IHeaderFields {
   /** Name */
   name?: string | undefined;
@@ -46,6 +75,31 @@ export interface IHeader extends Entry<IHeaderFields> {
     contentType: {
       sys: {
         id: "header";
+        linkType: "ContentType";
+        type: "Link";
+      };
+    };
+  };
+}
+
+export interface IImageFields {
+  /** Image description */
+  imageDescription?: string | undefined;
+
+  /** Image */
+  image?: Asset | undefined;
+}
+
+export interface IImage extends Entry<IImageFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: "image";
         linkType: "ContentType";
         type: "Link";
       };
@@ -96,7 +150,12 @@ export interface IPageFields {
 
   /** Content sections */
   contentSections?:
-    | (ILandingSection | IRichTextSection | IPhotoSlider)[]
+    | (
+        | ILandingSection
+        | IRichTextSection
+        | IPhotoSlider
+        | IFreeConsultationBanner
+      )[]
     | undefined;
 }
 
@@ -127,8 +186,8 @@ export interface IPhotoSliderFields {
   /** Description */
   description?: string | undefined;
 
-  /** Photos */
-  photos?: Asset[] | undefined;
+  /** Images */
+  images?: IImage[] | undefined;
 }
 
 export interface IPhotoSlider extends Entry<IPhotoSliderFields> {
@@ -175,7 +234,9 @@ export interface IRichTextSection extends Entry<IRichTextSectionFields> {
 
 export type CONTENT_TYPE =
   | "cta"
+  | "freeConsultationBanner"
   | "header"
+  | "image"
   | "landingSection"
   | "page"
   | "photoSlider"
@@ -183,7 +244,9 @@ export type CONTENT_TYPE =
 
 export type IEntry =
   | ICta
+  | IFreeConsultationBanner
   | IHeader
+  | IImage
   | ILandingSection
   | IPage
   | IPhotoSlider
