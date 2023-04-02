@@ -4,6 +4,7 @@ import { client } from "@/helpers/clinet";
 import { GetStaticProps } from "next";
 import HeroSection from "@/components/heroSection/HeroSection";
 import RenderContent from "@/components/renderContent/RenderContent";
+import Metadata from "@/components/metadata/Metadata";
 
 const HEADER_CONTENT_TYPE = "header";
 const LANDING_SECTION_TYPE = "landingSection";
@@ -22,6 +23,10 @@ const Home = ({ header, homepage }: HomeProps) => {
 
   return (
     <Layout links={header.fields?.headerLinks}>
+      <Metadata
+        title={homepage.fields?.seoTitle}
+        description={homepage.fields.seoDesctiption}
+      />
       <HeroSection />
       <RenderContent sections={contentSections} />
     </Layout>
