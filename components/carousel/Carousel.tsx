@@ -69,7 +69,7 @@ const Carousel = ({ props }: CarouselProps) => {
             {images?.map((image, id) => (
               <div key={id} className="p-2 rounded grid items-center">
                 <Image
-                  src={"https://" + image.fields.image?.fields.file.url}
+                  src={"https:" + image.fields.image?.fields.file.url}
                   alt={image.fields.imageDescription || ""}
                   width={300}
                   height={600}

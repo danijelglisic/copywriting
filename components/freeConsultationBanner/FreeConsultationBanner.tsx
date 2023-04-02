@@ -10,7 +10,7 @@ const FreeConsultationBanner = ({ props }: BannerProps) => {
   return (
     <div className="py-10 bg-secondary">
       <div className="container">
-        <div className="flex flex-col items-center justify-center gap-8">
+        <div className="flex flex-col items-center justify-center text-center gap-8">
           <div className="text-white heading-4">
             <h3>{text}</h3>
           </div>
