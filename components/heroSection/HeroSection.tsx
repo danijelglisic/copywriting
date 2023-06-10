@@ -31,7 +31,7 @@ const HeroSection = () => {
   return (
     <div className="p-20 lg:p-40 bg-secondary relative bg-opacity-70">
       <Image priority className="z-[-1] object-cover" src={photo} fill alt="" />
-      <div className="flex flex-col items-center text-white py-10 space-y-16">
+      <div className="flex flex-col items-center text-white py-10 space-y-16 overflow-hidden">
         <motion.div
           initial="offscreen"
           whileInView="onscreen"
