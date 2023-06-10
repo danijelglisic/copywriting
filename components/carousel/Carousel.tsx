@@ -58,7 +58,7 @@ const Carousel = ({ props }: CarouselProps) => {
   };
 
   return (
-    <div className="py-20">
+    <div className="py-20 text-secondary">
       <div className="container">
         <div className="text-center space-y-8">
           <h2 className="heading-4">{title}</h2>

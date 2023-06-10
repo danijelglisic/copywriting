@@ -1,7 +1,8 @@
 import { ICta } from "@/@types/generated/contentful";
 import Link from "next/link";
-import React, { FC, ReactElement, useState } from "react";
+import React, { FC, ReactElement, useEffect, useState } from "react";
 import HamburgerMenu from "../hamburgerMenu/HamburgerMenu";
+import { useRouter } from "next/router";
 
 interface Props {
   children: ReactElement | ReactElement[];
@@ -10,13 +11,30 @@ interface Props {
 
 const Layout: FC<Props> = ({ children, links }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    const handleRouteChange = () => {
+      setIsOpen(false);
+    };
+
+    router.events.on("routeChangeComplete", handleRouteChange);
+
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, []);
+
   return (
     <div>
       <div className="fixed bg-white h-[80px] w-full z-50">
         <div className="container">
           <div className="flex justify-between items-center py-4">
             <Link href="/">
-              <span className="text-black heading-4">Slaviša Bogdanović</span>
+              <span className="text-secondary  heading-4">
+                Slaviša Bogdanović
+              </span>
             </Link>
             <div className="hidden lg:flex gap-10">
               {links?.map((link, id) => {
@@ -52,7 +70,6 @@ const Layout: FC<Props> = ({ children, links }) => {
                               : "text-black"
                           }`}
                           href={link.fields.url || ""}
-                          onClick={() => setIsOpen(false)}
                         >
                           {link.fields.text || ""}
                         </Link>

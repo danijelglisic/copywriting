@@ -74,9 +74,14 @@
     @apply text-xs font-bold md:text-sm;
   }
 
-  .rich-text-bg {
+  .pen-bg {
     background-image: url("../assets/svg/pen.svg");
-    background-repeat: round;
+    background-repeat: space;
+  }
+
+  .typewrite-bg {
+    background-image: url("../assets/svg/typewrite.svg");
+    background-repeat: space;
   }
 }
 
