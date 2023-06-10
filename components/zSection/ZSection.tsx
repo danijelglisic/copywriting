@@ -45,7 +45,7 @@ const ZSection = ({ props }: ZSectionProps) => {
   return (
     <div className={bgColor + " py-20 " + textColor}>
       <div className="container">
-        <div className="flex flex-col justify-between items-center lg:flex-row gap-6">
+        <div className="flex flex-col justify-between items-center lg:flex-row gap-6 overflow-hidden">
           <div className={imageOrder}>
             <motion.div
               initial="offscreen"
@@ -65,13 +65,16 @@ const ZSection = ({ props }: ZSectionProps) => {
               </motion.div>
             </motion.div>
           </div>
-          <div className="flex flex-col gap-4 lg:max-w-[50%]">
+          <div className="lg:max-w-[50%]">
             <motion.div
               initial="offscreen"
               whileInView="onscreen"
               viewport={{ once: true }}
             >
-              <motion.div variants={imagePosition ? rightElement : leftElement}>
+              <motion.div
+                className="flex flex-col gap-4"
+                variants={imagePosition ? rightElement : leftElement}
+              >
                 <p className="heading-4">{title}</p>
                 <p className="subtitle-2">{subtitle}</p>
                 <div className="regular-1">

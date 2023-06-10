@@ -22,7 +22,7 @@ const leftElement: Variants = {
 
 const LandingSection = ({ props }: LandingSectionprops) => {
   return (
-    <div className="relative gradient py-20">
+    <div className="relative gradient py-20 overflow-hidden">
       <motion.div
         initial="offscreen"
         whileInView="onscreen"
