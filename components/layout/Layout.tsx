@@ -52,6 +52,7 @@ const Layout: FC<Props> = ({ children, links }) => {
                               : "text-black"
                           }`}
                           href={link.fields.url || ""}
+                          onClick={() => setIsOpen(false)}
                         >
                           {link.fields.text || ""}
                         </Link>
