@@ -10,10 +10,14 @@ const RichTextSection = ({ props }: RichTextSectionProps) => {
   const { title, content } = props.fields;
 
   return (
-    <div className="bg-secondary text-white py-20">
-      <div className="container space-y-8">
-        <h2 className="heading-4">{title}</h2>
-        <div className="">{content && documentToReactComponents(content)}</div>
+    <div className="bg-white text-secondary py-20">
+      <div className="container flex items-center flex-col gap-8">
+        <div className="text-center">
+          <h2 className="heading-4">{title}</h2>
+        </div>
+        <div className="space-y-8 prose subtitle-2">
+          {content && documentToReactComponents(content)}
+        </div>
       </div>
     </div>
   );

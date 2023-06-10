@@ -18,6 +18,7 @@
     "contentful": "^9.3.5",
     "eslint": "8.36.0",
     "eslint-config-next": "13.2.4",
+    "framer-motion": "^10.12.16",
     "install": "^0.13.0",
     "next": "13.2.4",
     "npm": "^9.6.2",

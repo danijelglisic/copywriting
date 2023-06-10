@@ -2,16 +2,44 @@ import { IZSection } from "@/@types/generated/contentful";
 import React from "react";
 import Image from "next/image";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import Link from "next/link";
+import { Variants, motion } from "framer-motion";
 
 interface ZSectionProps {
   props: IZSection;
 }
 
+const leftElement: Variants = {
+  offscreen: {
+    x: -300,
+  },
+  onscreen: {
+    x: 0,
+    transition: {
+      duration: 0.5,
+    },
+  },
+};
+
+const rightElement: Variants = {
+  offscreen: {
+    x: 300,
+  },
+  onscreen: {
+    x: 0,
+    transition: {
+      duration: 0.5,
+    },
+  },
+};
+
 const ZSection = ({ props }: ZSectionProps) => {
-  const { image, imagePosition, title, subtitle, richText } = props.fields;
+  const { image, imagePosition, title, subtitle, richText, cta } = props.fields;
 
   const bgColor = imagePosition ? "bg-primary" : "bg-secondary";
   const textColor = imagePosition ? "text-secondary" : "text-white";
+  const buttonBgColor = imagePosition ? "bg-secondary" : "bg-primary";
+  const buttonTxtColor = !imagePosition ? "text-secondary" : "text-white";
   const imageOrder = imagePosition ? "" : "order-2";
 
   return (
@@ -19,18 +47,46 @@ const ZSection = ({ props }: ZSectionProps) => {
       <div className="container">
         <div className="flex flex-col justify-between items-center lg:flex-row gap-6">
           <div className={imageOrder}>
-            <Image
-              className="rounded-xl"
-              src={"https:" + image?.fields.image?.fields.file.url || ""}
-              alt={image?.fields.imageDescription || ""}
-              width={450}
-              height={300}
-            />
+            <motion.div
+              initial="offscreen"
+              whileInView="onscreen"
+              viewport={{ once: true }}
+            >
+              <motion.div
+                variants={!imagePosition ? rightElement : leftElement}
+              >
+                <Image
+                  className="rounded-xl"
+                  src={"https:" + image?.fields.image?.fields.file.url || ""}
+                  alt={image?.fields.imageDescription || ""}
+                  width={450}
+                  height={300}
+                />
+              </motion.div>
+            </motion.div>
           </div>
-          <div className="lg:max-w-[50%] space-y-4">
-            <p className="body-1">{title}</p>
-            <p className="regular-1">{subtitle}</p>
-            {richText && documentToReactComponents(richText)}
+          <div className="flex flex-col gap-4 lg:max-w-[50%]">
+            <motion.div
+              initial="offscreen"
+              whileInView="onscreen"
+              viewport={{ once: true }}
+            >
+              <motion.div variants={imagePosition ? rightElement : leftElement}>
+                <p className="heading-4">{title}</p>
+                <p className="subtitle-2">{subtitle}</p>
+                <div className="regular-1">
+                  {richText && documentToReactComponents(richText)}
+                </div>
+                {cta?.fields.url && cta?.fields.text && (
+                  <Link
+                    className={`p-4 font-bold ${buttonBgColor} ${buttonTxtColor} w-fit rounded`}
+                    href={cta?.fields.url}
+                  >
+                    {cta?.fields.text}
+                  </Link>
+                )}
+              </motion.div>
+            </motion.div>
           </div>
         </div>
       </div>
