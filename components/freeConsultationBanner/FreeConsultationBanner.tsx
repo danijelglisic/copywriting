@@ -8,7 +8,7 @@ interface BannerProps {
 const FreeConsultationBanner = ({ props }: BannerProps) => {
   const { text, description, cta } = props.fields;
   return (
-    <div className="py-10 bg-secondary">
+    <div className="py-10 bg-secondary pen-bg">
       <div className="container">
         <div className="flex flex-col items-center justify-center text-center gap-8">
           <div className="text-white heading-4">

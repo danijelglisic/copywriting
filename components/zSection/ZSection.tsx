@@ -36,7 +36,9 @@ const rightElement: Variants = {
 const ZSection = ({ props }: ZSectionProps) => {
   const { image, imagePosition, title, subtitle, richText, cta } = props.fields;
 
-  const bgColor = imagePosition ? "bg-primary" : "bg-secondary";
+  const bgColor = imagePosition
+    ? "bg-primary typewrite-bg"
+    : "bg-secondary pen-bg";
   const textColor = imagePosition ? "text-secondary" : "text-white";
   const buttonBgColor = imagePosition ? "bg-secondary" : "bg-primary";
   const buttonTxtColor = !imagePosition ? "text-secondary" : "text-white";
