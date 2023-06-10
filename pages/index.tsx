@@ -6,19 +6,18 @@ import HeroSection from "@/components/heroSection/HeroSection";
 import RenderContent from "@/components/renderContent/RenderContent";
 import Metadata from "@/components/metadata/Metadata";
 
-const HEADER_CONTENT_TYPE = "header";
-const LANDING_SECTION_TYPE = "landingSection";
-const PAGE_TYPE = "page";
+export const HEADER_CONTENT_TYPE = "header";
+export const LANDING_SECTION_TYPE = "landingSection";
+export const PAGE_TYPE = "page";
 
-const RESERVED_PAGES = ["homepage"];
+export const RESERVED_PAGES = ["/"];
 
-interface HomeProps {
+export interface PageProps {
   header: IHeader;
-  landingSection: ILandingSection;
   homepage: IPage;
 }
 
-const Home = ({ header, homepage }: HomeProps) => {
+const Home = ({ header, homepage }: PageProps) => {
   const { contentSections } = homepage.fields;
 
   return (
@@ -45,7 +44,7 @@ export const getStaticProps: GetStaticProps<any> = async (context) => {
 
   const homepageResponse = await client().getEntries<IPage>({
     content_type: PAGE_TYPE,
-    "fields.slug": "homepage",
+    "fields.slug": "/",
     include: 10,
   });
 

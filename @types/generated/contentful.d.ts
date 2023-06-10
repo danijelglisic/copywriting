@@ -254,6 +254,9 @@ export interface IZSectionFields {
 
   /** Image Position */
   imagePosition?: boolean | undefined;
+
+  /** CTA */
+  cta?: ICta | undefined;
 }
 
 export interface IZSection extends Entry<IZSectionFields> {
