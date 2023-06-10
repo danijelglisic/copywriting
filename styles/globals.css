@@ -73,6 +73,11 @@
   .quote-3 {
     @apply text-xs font-bold md:text-sm;
   }
+
+  .rich-text-bg {
+    background-image: url("../assets/svg/pen.svg");
+    background-repeat: round;
+  }
 }
 
 .gradient {

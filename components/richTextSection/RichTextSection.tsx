@@ -10,7 +10,7 @@ const RichTextSection = ({ props }: RichTextSectionProps) => {
   const { title, content } = props.fields;
 
   return (
-    <div className="bg-white text-secondary py-20">
+    <div className="rich-text-bg text-secondary py-20">
       <div className="container flex items-center flex-col gap-8">
         <div className="text-center">
           <h2 className="heading-4">{title}</h2>
