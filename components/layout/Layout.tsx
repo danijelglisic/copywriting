@@ -47,7 +47,7 @@ const Layout: FC<Props> = ({ children, links }) => {
                         ? "bg-secondary text-white rounded-sm"
                         : "text-black"
                     }`}
-                    href={link.fields.url || ""}
+                    href={"/" + link.fields.url || ""}
                   >
                     {link.fields.text || ""}
                   </Link>
