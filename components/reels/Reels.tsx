@@ -6,23 +6,24 @@ interface ReelsProps {
 }
 
 const Reels = ({ reels }: ReelsProps) => {
-  const [isClientRendered, setIsClientRendered] = useState(false);
+  const [firstRender, setFirstRender] = useState(false);
+  const { embededReels } = reels.fields;
+  const fixedEmbed = embededReels;
 
   useEffect(() => {
-    setIsClientRendered(true);
+    setFirstRender(true);
+    if (!window) return;
+    window.instgrm.Embeds.process();
   }, []);
+  if (!firstRender) null;
 
-  if (!isClientRendered) return null;
-
-  const { embededReels } = reels.fields;
-
-  if (!embededReels) return <></>;
+  if (!fixedEmbed) return <></>;
   return (
     <div className="container py-20">
       <div
         className="grid place-items-center"
         dangerouslySetInnerHTML={{
-          __html: embededReels,
+          __html: fixedEmbed,
         }}
       />
     </div>
