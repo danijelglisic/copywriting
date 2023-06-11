@@ -83,6 +83,17 @@
     background-image: url("../assets/svg/typewrite.svg");
     background-repeat: space;
   }
+
+  .progress-bar {
+    position: fixed;
+    top: 76px;
+    left: 0;
+    right: 0;
+    height: 4px;
+    @apply bg-primary;
+    transform-origin: 0%;
+    z-index: 100;
+  }
 }
 
 .gradient {

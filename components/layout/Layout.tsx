@@ -3,6 +3,7 @@ import Link from "next/link";
 import React, { FC, ReactElement, useEffect, useState } from "react";
 import HamburgerMenu from "../hamburgerMenu/HamburgerMenu";
 import { useRouter } from "next/router";
+import ScrollProgress from "./ScrollProgress";
 
 interface Props {
   children: ReactElement | ReactElement[];
@@ -82,6 +83,7 @@ const Layout: FC<Props> = ({ children, links }) => {
           </div>
         </div>
       </div>
+      <ScrollProgress />
       <main className="pt-[80px]" id="#main-content">
         {children}
       </main>
