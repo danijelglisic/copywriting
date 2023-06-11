@@ -86,10 +86,10 @@
 
   .progress-bar {
     position: fixed;
-    top: 76px;
+    top: 74px;
     left: 0;
     right: 0;
-    height: 4px;
+    height: 6px;
     @apply bg-primary;
     transform-origin: 0%;
     z-index: 100;
