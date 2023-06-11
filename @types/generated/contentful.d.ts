@@ -3,6 +3,52 @@
 import { Asset, Entry } from "contentful";
 import { Document } from "@contentful/rich-text-types";
 
+export interface IBlogPageFields {
+  /** SEO Title */
+  seoTitle?: string | undefined;
+
+  /** SEO Description */
+  seoDescription?: string | undefined;
+
+  /** Title */
+  title?: string | undefined;
+
+  /** Blog Image */
+  blogImage?: IImage | undefined;
+
+  /** Slug */
+  slug: string;
+
+  /** Content Sections */
+  contentSections?:
+    | (
+        | IFreeConsultationBanner
+        | ILandingSection
+        | IPhotoSlider
+        | IReels
+        | IRichTextSection
+        | IZSection
+      )[]
+    | undefined;
+}
+
+export interface IBlogPage extends Entry<IBlogPageFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: "blogPage";
+        linkType: "ContentType";
+        type: "Link";
+      };
+    };
+  };
+}
+
 export interface ICtaFields {
   /** text */
   text?: string | undefined;
@@ -214,6 +260,31 @@ export interface IPhotoSlider extends Entry<IPhotoSliderFields> {
   };
 }
 
+export interface IReelsFields {
+  /** Title */
+  title?: string | undefined;
+
+  /** EmbededReels */
+  embededReels?: string | undefined;
+}
+
+export interface IReels extends Entry<IReelsFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: "reels";
+        linkType: "ContentType";
+        type: "Link";
+      };
+    };
+  };
+}
+
 export interface IRichTextSectionFields {
   /** Title */
   title?: string | undefined;
@@ -277,6 +348,7 @@ export interface IZSection extends Entry<IZSectionFields> {
 }
 
 export type CONTENT_TYPE =
+  | "blogPage"
   | "cta"
   | "freeConsultationBanner"
   | "header"
@@ -284,10 +356,12 @@ export type CONTENT_TYPE =
   | "landingSection"
   | "page"
   | "photoSlider"
+  | "reels"
   | "richTextSection"
   | "zSection";
 
 export type IEntry =
+  | IBlogPage
   | ICta
   | IFreeConsultationBanner
   | IHeader
@@ -295,6 +369,7 @@ export type IEntry =
   | ILandingSection
   | IPage
   | IPhotoSlider
+  | IReels
   | IRichTextSection
   | IZSection;
 
