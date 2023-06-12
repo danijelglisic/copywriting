@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { IReels } from "@/@types/generated/contentful";
 
+declare global {
+  interface Window {
+    instgrm: any;
+  }
+}
+
 interface ReelsProps {
   reels: IReels;
 }
@@ -12,12 +18,14 @@ const Reels = ({ reels }: ReelsProps) => {
 
   useEffect(() => {
     setFirstRender(true);
-    if (!window) return;
+    if (!window.instgrm) return;
     window.instgrm.Embeds.process();
   }, []);
-  if (!firstRender) null;
+
+  if (!firstRender) return null;
 
   if (!fixedEmbed) return <></>;
+
   return (
     <div className="container py-20">
       <div
