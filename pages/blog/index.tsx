@@ -27,11 +27,11 @@ const BlogPage = ({ header, blogs }: BlogPageProps) => {
           {blogs.map((blog) => {
             return (
               <Link
+                legacyBehavior
                 key={blog.sys.id}
                 href={"/blog/" + blog.fields.slug}
-                className="min-w-[300px] max-w-[450px] group border-2 border-primary overflow-hidden rounded-xl bg-opacity-10 bg-transparent backdrop-filter backdrop-blur-sm hover:bg-primary hover:bg-opacity-10 hover:border-secondary"
               >
-                <a>
+                <a className="min-w-[300px] max-w-[450px] group border-2 border-primary overflow-hidden rounded-xl bg-opacity-10 bg-transparent backdrop-filter backdrop-blur-sm hover:bg-primary hover:bg-opacity-10 hover:border-secondary">
                   <Image
                     src={
                       "https:" +
