@@ -32,7 +32,7 @@ const Layout: FC<Props> = ({ children, links }) => {
       <div className="fixed bg-white h-[80px] w-full z-50">
         <div className="container">
           <div className="flex justify-between items-center py-4">
-            <Link href="/">
+            <Link href="/" legacyBehavior>
               <a>
                 <span className="text-secondary  heading-4">
                   Slaviša Bogdanović
@@ -43,15 +43,19 @@ const Layout: FC<Props> = ({ children, links }) => {
               {links?.map((link, id) => {
                 return (
                   <Link
+                    legacyBehavior
                     key={id}
-                    className={`hover:underline whitespace-nowrap p-2 body-2 ${
-                      id === links.length - 1
-                        ? "bg-secondary text-white rounded-sm"
-                        : "text-black"
-                    }`}
                     href={"/" + link.fields.url || ""}
                   >
-                    <a>{link.fields.text || ""}</a>
+                    <a
+                      className={`hover:underline whitespace-nowrap p-2 body-2 ${
+                        id === links.length - 1
+                          ? "bg-secondary text-white rounded-sm"
+                          : "text-black"
+                      }`}
+                    >
+                      {link.fields.text || ""}
+                    </a>
                   </Link>
                 );
               })}
@@ -66,15 +70,19 @@ const Layout: FC<Props> = ({ children, links }) => {
                     {links?.map((link, id) => {
                       return (
                         <Link
+                          legacyBehavior
                           key={id}
-                          className={`hover:underline whitespace-nowrap p-2 body-2 ${
-                            id === links.length - 1
-                              ? "bg-secondary text-white rounded-sm"
-                              : "text-black"
-                          }`}
                           href={link.fields.url || ""}
                         >
-                          <a>{link.fields.text || ""}</a>
+                          <a
+                            className={`hover:underline whitespace-nowrap p-2 body-2 ${
+                              id === links.length - 1
+                                ? "bg-secondary text-white rounded-sm"
+                                : "text-black"
+                            }`}
+                          >
+                            {link.fields.text || ""}
+                          </a>
                         </Link>
                       );
                     })}
@@ -93,6 +101,14 @@ const Layout: FC<Props> = ({ children, links }) => {
         <div className="container text-center text-secondary space-y-8">
           <div className="subtitle-1">
             <p>© 2023 Slaviša Bogdanović, All Rights Reserved.</p>
+          </div>
+          <div className="flex gap-4 items-center justify-center regular-1">
+            <Link href="/politika-privatnosti" legacyBehavior>
+              <a className="hover:underline">Politika privatnosti</a>
+            </Link>
+            <Link href="/uslovi-koriscenja-sajta" legacyBehavior>
+              <a className="hover:underline">Uslovi korišćenja sajta</a>
+            </Link>
           </div>
           <div className="regular-1">
             <p>Created by: Danijel Glišić</p>

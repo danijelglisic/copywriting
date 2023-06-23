@@ -83,11 +83,12 @@ const ZSection = ({ props }: ZSectionProps) => {
                   {richText && documentToReactComponents(richText)}
                 </div>
                 {cta?.fields.url && cta?.fields.text && (
-                  <Link
-                    className={`p-4 font-bold ${buttonBgColor} ${buttonTxtColor} w-fit rounded`}
-                    href={cta?.fields.url}
-                  >
-                    <a>{cta?.fields.text}</a>
+                  <Link legacyBehavior href={cta?.fields.url}>
+                    <a
+                      className={`p-4 font-bold ${buttonBgColor} ${buttonTxtColor} w-fit rounded`}
+                    >
+                      {cta?.fields.text}
+                    </a>
                   </Link>
                 )}
               </motion.div>
