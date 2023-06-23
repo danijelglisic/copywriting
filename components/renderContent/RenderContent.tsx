@@ -7,6 +7,7 @@ import {
   IZSection,
   IReels,
   IPage,
+  IVideoLandingSection,
 } from "@/@types/generated/contentful";
 import LandingSection from "../landingSection/LandingSection";
 import RichTextSection from "../richTextSection/RichTextSection";
@@ -14,6 +15,7 @@ import Carousel from "../carousel/Carousel";
 import FreeConsultationBanner from "../freeConsultationBanner/FreeConsultationBanner";
 import ZSection from "../zSection/ZSection";
 import Reels from "../reels/Reels";
+import VideoLandingSection from "../videoLandingSection/VideoLandingSection";
 
 interface RenderComponentProps {
   sections:
@@ -24,6 +26,7 @@ interface RenderComponentProps {
         | IReels
         | IRichTextSection
         | IZSection
+        | IVideoLandingSection
       )[]
     | undefined;
 }
@@ -55,6 +58,10 @@ const RenderContent = ({ sections }: RenderComponentProps) => {
       if (section.sys.contentType.sys.id === "reels") {
         const reels = section as IReels;
         return <Reels key={id} reels={reels} />;
+      }
+      if (section.sys.contentType.sys.id === "videoLandingSection") {
+        const reels = section as IVideoLandingSection;
+        return <VideoLandingSection key={id} props={reels} />;
       }
     });
   };
