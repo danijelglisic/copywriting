@@ -13,6 +13,7 @@ interface ReelsProps {
 
 const Reels = ({ reels }: ReelsProps) => {
   const { embededReels } = reels.fields;
+
   return (
     <div className="container py-20">
       <div

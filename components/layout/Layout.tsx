@@ -72,7 +72,7 @@ const Layout: FC<Props> = ({ children, links }) => {
                         <Link
                           legacyBehavior
                           key={id}
-                          href={link.fields.url || ""}
+                          href={"/" + link.fields.url || ""}
                         >
                           <a
                             className={`hover:underline whitespace-nowrap p-2 body-2 ${
