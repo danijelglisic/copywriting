@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /api/*
+
+Sitemap: http://www.copywritingbyslavisa.com/sitemap.xml

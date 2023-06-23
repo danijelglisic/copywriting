@@ -26,7 +26,6 @@ const Home = ({ header, homepage }: PageProps) => {
         title={homepage.fields?.seoTitle}
         description={homepage.fields.seoDesctiption}
       />
-      <HeroSection />
       <RenderContent sections={contentSections} />
     </Layout>
   );

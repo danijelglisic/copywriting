@@ -31,11 +31,11 @@ const LandingSection = ({ props }: LandingSectionprops) => {
         <motion.div variants={leftElement}>
           <div className="container py-10 heading-4 text-white flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="space-y-6">
-              <h2 className="heading-1 drop-shadow">{props.fields.heading}</h2>
+              <h1 className="heading-1 drop-shadow">{props.fields.heading}</h1>
               <ul className="list-disc ml-8 space-y-2">
                 {props.fields.heading2?.map((heading, id) => (
                   <li key={id}>
-                    <h3 className="heading-3 text-secondary">{heading}</h3>
+                    <h2 className="heading-3 text-secondary">{heading}</h2>
                   </li>
                 ))}
               </ul>

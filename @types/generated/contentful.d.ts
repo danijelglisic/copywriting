@@ -208,6 +208,7 @@ export interface IPageFields {
         | IPhotoSlider
         | IFreeConsultationBanner
         | IZSection
+        | IVideoLandingSection
       )[]
     | undefined;
 }
@@ -310,6 +311,35 @@ export interface IRichTextSection extends Entry<IRichTextSectionFields> {
   };
 }
 
+export interface IVideoLandingSectionFields {
+  /** Title */
+  title?: string | undefined;
+
+  /** Description */
+  description?: Document | undefined;
+
+  /** Youtube video URL */
+  youtubeVideoUrl?: string | undefined;
+}
+
+export interface IVideoLandingSection
+  extends Entry<IVideoLandingSectionFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: "videoLandingSection";
+        linkType: "ContentType";
+        type: "Link";
+      };
+    };
+  };
+}
+
 export interface IZSectionFields {
   /** Title */
   title?: string | undefined;
@@ -358,6 +388,7 @@ export type CONTENT_TYPE =
   | "photoSlider"
   | "reels"
   | "richTextSection"
+  | "videoLandingSection"
   | "zSection";
 
 export type IEntry =
@@ -371,6 +402,7 @@ export type IEntry =
   | IPhotoSlider
   | IReels
   | IRichTextSection
+  | IVideoLandingSection
   | IZSection;
 
 export type LOCALE_CODE = "en-US";
