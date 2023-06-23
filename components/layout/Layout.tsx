@@ -33,9 +33,11 @@ const Layout: FC<Props> = ({ children, links }) => {
         <div className="container">
           <div className="flex justify-between items-center py-4">
             <Link href="/">
-              <span className="text-secondary  heading-4">
-                Slaviša Bogdanović
-              </span>
+              <a>
+                <span className="text-secondary  heading-4">
+                  Slaviša Bogdanović
+                </span>
+              </a>
             </Link>
             <div className="hidden lg:flex gap-10">
               {links?.map((link, id) => {
@@ -49,7 +51,7 @@ const Layout: FC<Props> = ({ children, links }) => {
                     }`}
                     href={"/" + link.fields.url || ""}
                   >
-                    {link.fields.text || ""}
+                    <a>{link.fields.text || ""}</a>
                   </Link>
                 );
               })}
@@ -72,7 +74,7 @@ const Layout: FC<Props> = ({ children, links }) => {
                           }`}
                           href={link.fields.url || ""}
                         >
-                          {link.fields.text || ""}
+                          <a>{link.fields.text || ""}</a>
                         </Link>
                       );
                     })}

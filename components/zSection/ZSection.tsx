@@ -87,7 +87,7 @@ const ZSection = ({ props }: ZSectionProps) => {
                     className={`p-4 font-bold ${buttonBgColor} ${buttonTxtColor} w-fit rounded`}
                     href={cta?.fields.url}
                   >
-                    {cta?.fields.text}
+                    <a>{cta?.fields.text}</a>
                   </Link>
                 )}
               </motion.div>
