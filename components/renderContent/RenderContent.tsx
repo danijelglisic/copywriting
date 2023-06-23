@@ -15,7 +15,14 @@ import Carousel from "../carousel/Carousel";
 import FreeConsultationBanner from "../freeConsultationBanner/FreeConsultationBanner";
 import ZSection from "../zSection/ZSection";
 import Reels from "../reels/Reels";
-import VideoLandingSection from "../videoLandingSection/VideoLandingSection";
+import dynamic from "next/dynamic";
+
+const VideoLandingSection = dynamic(
+  () => import("../videoLandingSection/VideoLandingSection"),
+  {
+    ssr: false,
+  }
+);
 
 interface RenderComponentProps {
   sections:
