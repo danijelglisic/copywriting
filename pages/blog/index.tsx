@@ -31,19 +31,22 @@ const BlogPage = ({ header, blogs }: BlogPageProps) => {
                 href={"/blog/" + blog.fields.slug}
                 className="min-w-[300px] max-w-[450px] group border-2 border-primary overflow-hidden rounded-xl bg-opacity-10 bg-transparent backdrop-filter backdrop-blur-sm hover:bg-primary hover:bg-opacity-10 hover:border-secondary"
               >
-                <Image
-                  src={
-                    "https:" +
-                      blog.fields.blogImage?.fields.image?.fields.file.url || ""
-                  }
-                  alt={blog.fields.blogImage?.fields.imageDescription || ""}
-                  width={450}
-                  height={300}
-                  className="rounded"
-                />
-                <div className="p-8">
-                  <h2 className="heading-5">{blog.fields.title}</h2>
-                </div>
+                <a>
+                  <Image
+                    src={
+                      "https:" +
+                        blog.fields.blogImage?.fields.image?.fields.file.url ||
+                      ""
+                    }
+                    alt={blog.fields.blogImage?.fields.imageDescription || ""}
+                    width={450}
+                    height={300}
+                    className="rounded"
+                  />
+                  <div className="p-8">
+                    <h2 className="heading-5">{blog.fields.title}</h2>
+                  </div>
+                </a>
               </Link>
             );
           })}
