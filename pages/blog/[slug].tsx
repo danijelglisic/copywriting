@@ -5,6 +5,7 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import RenderContent from "@/components/renderContent/RenderContent";
 import Metadata from "@/components/metadata/Metadata";
 import { HEADER_CONTENT_TYPE, PAGE_TYPE } from "..";
+import Image from "next/image";
 
 const BLOG_TYPE = "blogPage";
 
@@ -23,8 +24,21 @@ const BlogPage = ({ header, blog }: BlogPageProps) => {
         description={blog.fields.seoDescription}
       />
       <div className="pen-bg">
-        <div className="text-center pt-20 heading-3 text-secondary">
+        <div className="container text-left pt-20 heading-3 text-secondary mb-10">
           <h1>{blog.fields.title}</h1>
+        </div>
+        <div className="container">
+          <div className="relative h-[250px] md:h-[300px] lg:h-[400px]">
+            <Image
+              src={
+                "https:" +
+                  blog.fields.blogImage?.fields.image?.fields.file.url || ""
+              }
+              alt={blog.fields.blogImage?.fields.imageDescription || ""}
+              fill
+              className="rounded-xl object-cover"
+            />
+          </div>
         </div>
         <RenderContent sections={contentSections} />
       </div>

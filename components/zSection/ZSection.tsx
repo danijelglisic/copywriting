@@ -79,7 +79,7 @@ const ZSection = ({ props }: ZSectionProps) => {
               >
                 <p className="heading-4">{title}</p>
                 <p className="subtitle-2">{subtitle}</p>
-                <div className="regular-1">
+                <div className="regular-1 p-height">
                   {richText && documentToReactComponents(richText)}
                 </div>
                 {cta?.fields.url && cta?.fields.text && (

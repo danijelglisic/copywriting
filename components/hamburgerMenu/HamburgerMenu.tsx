@@ -12,6 +12,7 @@ const HamburgerMenu = ({ isOpen, setIsOpen }: MenuProps) => {
     <button
       className="flex flex-col h-12 w-12 rounded justify-center items-start group"
       onClick={() => setIsOpen(!isOpen)}
+      aria-label="toggle menu"
     >
       <div
         className={`${genericHamburgerLine} ${
