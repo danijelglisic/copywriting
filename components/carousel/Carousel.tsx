@@ -60,7 +60,7 @@ const Carousel = ({ props }: CarouselProps) => {
   return (
     <div className="py-20 text-secondary">
       <div className="container">
-        <div className="text-center space-y-8">
+        <div className="text-center space-y-8 mb-10">
           <h2 className="heading-4">{title}</h2>
           <p className="body-1">{description}</p>
         </div>

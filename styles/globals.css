@@ -108,3 +108,7 @@
 .none-imp {
   display: none !important;
 }
+
+.p-height p{
+  min-height: 1rem;
+}

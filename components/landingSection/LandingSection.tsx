@@ -30,8 +30,8 @@ const LandingSection = ({ props }: LandingSectionprops) => {
       >
         <motion.div variants={leftElement}>
           <div className="container py-10 heading-4 text-white flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="space-y-6">
-              <h1 className="heading-1 drop-shadow">{props.fields.heading}</h1>
+            <div className="space-y-20">
+              <h1 className="heading-2 drop-shadow">{props.fields.heading}</h1>
               <ul className="list-disc ml-8 space-y-2">
                 {props.fields.heading2?.map((heading, id) => (
                   <li key={id}>
@@ -39,12 +39,12 @@ const LandingSection = ({ props }: LandingSectionprops) => {
                   </li>
                 ))}
               </ul>
-              <div className="body-1">
+              <div className="body-1 p-height mt-4">
                 {props.fields.text &&
                   documentToReactComponents(props.fields.text)}
               </div>
             </div>
-            <div className="rounded-full overflow-hidden">
+            <div className="rounded-full overflow-hidden min-w-[30%]">
               {props.fields.image && (
                 <Image
                   src={"https:" + props.fields.image.fields.file.url}
