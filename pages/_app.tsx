@@ -34,10 +34,11 @@ export default function App({ Component, pageProps }: AppProps) {
     <main className={poppins.className}>
       <Script
         strategy="lazyOnload"
+        id="gtag"
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
       />
 
-      <Script strategy="lazyOnload">
+      <Script strategy="lazyOnload" id="gtag-config">
         {`
                     window.dataLayer = window.dataLayer || [];
                     function gtag(){dataLayer.push(arguments);}
