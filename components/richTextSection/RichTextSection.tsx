@@ -12,7 +12,7 @@ const RichTextSection = ({ props }: RichTextSectionProps) => {
   return (
     <div className="pen-bg text-secondary py-20">
       <div className="container flex items-center flex-col gap-8">
-        <div className="text-center">
+        <div className="text-center mb-20">
           <h1 className="heading-4">{title}</h1>
         </div>
         <div className="space-y-8 prose subtitle-2">
