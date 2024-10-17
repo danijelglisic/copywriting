@@ -20,34 +20,39 @@ const BlogPage = ({ header, blogs }: BlogPageProps) => {
       <Metadata
         title={"Blogovi | Copywriting By Slaviša"}
         description={"Optimizuj svoj biznis | BLOG | Copywriting"}
+        path="blog"
       />
       <div className="pen-bg py-20 space-y-10 text-secondary container">
-        <h1 className="heading-3">Blog</h1>
-        <div className="flex flex-row flex-wrap gap-8 items-center">
+        <h1 className="heading-3">Blogovi | Copywriting By Slaviša</h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 items-center">
           {blogs.map((blog) => {
             return (
-              <Link
-                legacyBehavior
+              <div
                 key={blog.sys.id}
-                href={"/blog/" + blog.fields.slug}
+                className="h-full group border-2 border-primary overflow-hidden rounded-xl bg-opacity-10 bg-transparent backdrop-filter backdrop-blur-sm hover:bg-primary hover:bg-opacity-10 hover:border-secondary"
               >
-                <a className="min-w-[300px] max-w-[450px] group border-2 border-primary overflow-hidden rounded-xl bg-opacity-10 bg-transparent backdrop-filter backdrop-blur-sm hover:bg-primary hover:bg-opacity-10 hover:border-secondary">
-                  <Image
-                    src={
-                      "https:" +
-                        blog.fields.blogImage?.fields.image?.fields.file.url ||
-                      ""
-                    }
-                    alt={blog.fields.blogImage?.fields.imageDescription || ""}
-                    width={450}
-                    height={300}
-                    className="rounded"
-                  />
-                  <div className="p-8">
-                    <h2 className="heading-5">{blog.fields.title}</h2>
-                  </div>
-                </a>
-              </Link>
+                <Link legacyBehavior href={"/blog/" + blog.fields.slug}>
+                  <a className="w-full h-full flex flex-col justify-start">
+                    <div className="relative w-full aspect-[4/3]">
+                      <Image
+                        src={
+                          "https:" +
+                            blog.fields.blogImage?.fields.image?.fields.file
+                              .url || ""
+                        }
+                        alt={
+                          blog.fields.blogImage?.fields.imageDescription || ""
+                        }
+                        fill
+                        className="rounded object-cover"
+                      />
+                    </div>
+                    <div className="p-8">
+                      <h2 className="heading-5">{blog.fields.title}</h2>
+                    </div>
+                  </a>
+                </Link>
+              </div>
             );
           })}
         </div>

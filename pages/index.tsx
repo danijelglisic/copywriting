@@ -25,6 +25,7 @@ const Home = ({ header, homepage }: PageProps) => {
       <Metadata
         title={homepage.fields?.seoTitle}
         description={homepage.fields.seoDesctiption}
+        path=""
       />
       <RenderContent sections={contentSections} />
     </Layout>

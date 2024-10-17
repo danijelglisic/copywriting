@@ -112,7 +112,7 @@ const Layout: FC<Props> = ({ children, links }) => {
           </div>
           <div className="regular-1">
             <p>Created by: Danijel Glišić</p>
-            <div className="text-primary underline gap-4 flex items-center justify-center">
+            <div className="text-primary-contrast underline gap-4 flex items-center justify-center">
               <a href="https://www.linkedin.com/in/danijel-glisic/">Linkedin</a>
               <a href="mailto:dglisic8@gmail.com">E-mail</a>
             </div>
