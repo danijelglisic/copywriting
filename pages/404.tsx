@@ -21,6 +21,7 @@ const Home = ({ header }: PageProps) => {
       <Metadata
         title={"Nije pronađeno | Greška 404 | Stranica ne postoji"}
         description={"Tražena stranica ne postoji."}
+        path="404"
       />
       <HeroSection
         heading="Greška 404"

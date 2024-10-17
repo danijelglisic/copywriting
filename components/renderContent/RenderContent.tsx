@@ -33,8 +33,9 @@ interface RenderComponentProps {
         | IVideoLandingSection
       )[]
     | undefined;
+  isBlogPage?: boolean;
 }
-const RenderContent = ({ sections }: RenderComponentProps) => {
+const RenderContent = ({ sections, isBlogPage }: RenderComponentProps) => {
   if (!sections) return <div></div>;
 
   const render = () => {
@@ -45,7 +46,13 @@ const RenderContent = ({ sections }: RenderComponentProps) => {
       }
       if (section.sys.contentType.sys.id === "richTextSection") {
         const richTextSection = section as IRichTextSection;
-        return <RichTextSection key={id} props={richTextSection} />;
+        return (
+          <RichTextSection
+            key={id}
+            props={richTextSection}
+            isBlogPage={isBlogPage}
+          />
+        );
       }
       if (section.sys.contentType.sys.id === "photoSlider") {
         const photoSlider = section as IPhotoSlider;

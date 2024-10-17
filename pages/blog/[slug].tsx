@@ -22,6 +22,7 @@ const BlogPage = ({ header, blog }: BlogPageProps) => {
       <Metadata
         title={blog.fields?.seoTitle}
         description={blog.fields.seoDescription}
+        path={`blog/${blog.fields.slug}`}
       />
       <div className="pen-bg">
         <div className="container text-left pt-20 heading-3 text-secondary mb-10">
@@ -40,7 +41,7 @@ const BlogPage = ({ header, blog }: BlogPageProps) => {
             />
           </div>
         </div>
-        <RenderContent sections={contentSections} />
+        <RenderContent sections={contentSections} isBlogPage={true} />
       </div>
     </Layout>
   );
