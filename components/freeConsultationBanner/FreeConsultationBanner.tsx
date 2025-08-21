@@ -6,7 +6,8 @@ interface BannerProps {
 }
 
 const FreeConsultationBanner = ({ props }: BannerProps) => {
-  const { text, description, cta } = props.fields;
+  const fields = props.fields as any; // Temporary fix for type issue
+  const { text, description, cta } = fields;
   return (
     <div className="py-10 bg-secondary pen-bg">
       <div className="container">

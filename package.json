@@ -2,6 +2,9 @@
   "name": "copywriting",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=22.0.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -11,35 +14,33 @@
     "codegen": "contentful-typescript-codegen --output @types/generated/contentful.d.ts"
   },
   "dependencies": {
-    "@contentful/rich-text-react-renderer": "^15.16.3",
-    "@next/bundle-analyzer": "^13.2.4",
-    "@next/font": "^13.2.4",
-    "@tailwindcss/typography": "^0.5.9",
-    "contentful": "^9.3.5",
-    "eslint": "8.36.0",
-    "eslint-config-next": "13.2.4",
-    "framer-motion": "^10.12.16",
-    "install": "^0.13.0",
-    "next": "13.2.4",
-    "npm": "^9.6.2",
-    "react": "18.2.0",
+    "@contentful/rich-text-react-renderer": "^15.22.11",
+    "@next/bundle-analyzer": "^15.1.0",
+    "@tailwindcss/typography": "^0.5.15",
+    "contentful": "^11.7.15",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "^15.1.0",
+    "framer-motion": "^11.11.17",
+    "next": "^15.1.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-facebook-pixel": "^1.0.4",
-    "react-slick": "^0.29.0",
+    "react-slick": "^0.30.2",
     "sharp": "^0.33.5",
     "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
-    "@types/node": "^18.15.5",
-    "@types/react": "^18.0.28",
-    "@types/react-dom": "^18.0.11",
-    "@types/react-slick": "^0.23.10",
-    "autoprefixer": "^10.4.14",
-    "contentful-management": "^10.30.1",
+    "@types/node": "^22.10.2",
+    "@types/react": "^18.3.17",
+    "@types/react-dom": "^18.3.5",
+    "@types/react-slick": "^0.23.13",
+    "autoprefixer": "^10.4.20",
+    "contentful-management": "^11.54.4",
     "contentful-typescript-codegen": "^3.4.0",
-    "dotenv": "^16.0.3",
-    "postcss": "^8.4.21",
-    "prettier": "^2.8.6",
-    "tailwindcss": "^3.2.7",
-    "typescript": "^5.0.2"
+    "dotenv": "^16.4.7",
+    "postcss": "^8.5.1",
+    "prettier": "^3.4.2",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.2"
   }
 }

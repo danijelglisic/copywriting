@@ -28,7 +28,7 @@ export async function getServerSideProps({ res }) {
   });
   const pages = pagesResponse.items;
 
-  const slugs = pages.map((item) => item.fields.slug);
+  const slugs = pages.map((item) => item.fields?.slug);
 
   // We generate the XML sitemap with the slugs
   const sitemap = generateSiteMap(slugs);

@@ -12,7 +12,8 @@ interface ReelsProps {
 }
 
 const Reels = ({ reels }: ReelsProps) => {
-  const { embededReels } = reels.fields;
+  const fields = reels.fields as any; // Temporary fix for type issue
+  const { embededReels } = fields;
 
   return (
     <div className="container py-20">

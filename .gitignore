@@ -5,6 +5,10 @@
 /.pnp
 .pnp.js
 
+echo ".env" >> .gitignore
+git rm --cached .env
+git commit -m "Remove .env from repo and ignore it"
+
 # testing
 /coverage
 

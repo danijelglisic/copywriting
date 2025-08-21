@@ -43,7 +43,10 @@ const settings = {
 
 const Carousel = ({ props }: CarouselProps) => {
   const sliderRef = useRef<Slider>(null);
-  const { title, description, images } = props.fields;
+  const fields = props.fields as any; // Temporary fix for type issue
+  const title = fields?.title;
+  const description = fields?.description;
+  const images = fields?.images;
 
   const handlePrevClick = () => {
     if (sliderRef.current) {
@@ -66,7 +69,7 @@ const Carousel = ({ props }: CarouselProps) => {
         </div>
         <div className="flex flex-col">
           <Slider {...settings} ref={sliderRef}>
-            {images?.map((image, id) => (
+            {images?.map((image: any, id: number) => (
               <div key={id} className="p-2 rounded grid items-center">
                 <Image
                   src={"https:" + image.fields.image?.fields.file.url}

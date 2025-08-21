@@ -34,7 +34,8 @@ const rightElement: Variants = {
 };
 
 const ZSection = ({ props }: ZSectionProps) => {
-  const { image, imagePosition, title, subtitle, richText, cta } = props.fields;
+  const fields = props.fields as any; // Temporary fix for type issue
+  const { image, imagePosition, title, subtitle, richText, cta } = fields;
 
   const bgColor = imagePosition
     ? "bg-primary typewrite-bg"

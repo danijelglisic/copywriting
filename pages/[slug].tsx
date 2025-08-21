@@ -9,14 +9,14 @@ import { HEADER_CONTENT_TYPE, PAGE_TYPE, PageProps } from ".";
 export const RESERVED_PAGES = ["/"];
 
 const GeneralPage = ({ header, homepage }: PageProps) => {
-  const { contentSections } = homepage.fields;
+  const contentSections = (homepage.fields as any)?.contentSections;
 
   return (
-    <Layout links={header.fields?.headerLinks}>
+    <Layout links={(header.fields as any)?.headerLinks}>
       <Metadata
-        title={homepage.fields?.seoTitle}
-        description={homepage.fields.seoDesctiption}
-        path={homepage.fields.slug ?? ""}
+        title={(homepage.fields as any)?.seoTitle}
+        description={(homepage.fields as any)?.seoDesctiption}
+        path={(homepage.fields as any)?.slug ?? ""}
       />
       <RenderContent sections={contentSections} />
     </Layout>
@@ -26,7 +26,7 @@ const GeneralPage = ({ header, homepage }: PageProps) => {
 export default GeneralPage;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const pagesResponse = await client().getEntries<any>({
+  const pagesResponse = await client().getEntries({
     content_type: PAGE_TYPE,
     include: 1,
   });
@@ -38,7 +38,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const pages: IPage[] = pagesResponse.items as IPage[];
 
   const slugs = pages
-    .map((item) => item.fields.slug)
+    .map((item) => (item.fields as any)?.slug)
     .filter((slug) => !RESERVED_PAGES.includes(slug || ""));
 
   const paths = slugs.map((slug) => ({
@@ -51,10 +51,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params, preview }) => {
   const { slug } = params as { slug: string };
 
-  const response = await client().getEntries<IHeader>({
+  const response = await client().getEntries({
     content_type: HEADER_CONTENT_TYPE,
   });
-  const homepageResponse = await client().getEntries<IPage>({
+  const homepageResponse = await client().getEntries({
     content_type: PAGE_TYPE,
     "fields.slug": slug,
     include: 10,

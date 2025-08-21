@@ -15,27 +15,30 @@ interface BlogPageProps {
 }
 
 const BlogPage = ({ header, blog }: BlogPageProps) => {
-  const { contentSections } = blog.fields;
+  const contentSections = (blog.fields as any)?.contentSections;
 
   return (
-    <Layout links={header.fields?.headerLinks}>
+    <Layout links={(header.fields as any)?.headerLinks}>
       <Metadata
-        title={blog.fields?.seoTitle}
-        description={blog.fields.seoDescription}
-        path={`blog/${blog.fields.slug}`}
+        title={(blog.fields as any)?.seoTitle}
+        description={(blog.fields as any)?.seoDescription}
+        path={`blog/${(blog.fields as any)?.slug}`}
       />
       <div className="pen-bg">
         <div className="container text-left pt-20 heading-3 text-secondary mb-10">
-          <h1>{blog.fields.title}</h1>
+          <h1>{(blog.fields as any)?.title}</h1>
         </div>
         <div className="container">
           <div className="relative h-[250px] md:h-[300px] lg:h-[400px]">
             <Image
               src={
                 "https:" +
-                  blog.fields.blogImage?.fields.image?.fields.file.url || ""
+                  (blog.fields as any)?.blogImage?.fields.image?.fields.file
+                    .url || ""
               }
-              alt={blog.fields.blogImage?.fields.imageDescription || ""}
+              alt={
+                (blog.fields as any)?.blogImage?.fields.imageDescription || ""
+              }
               fill
               className="rounded-xl object-cover"
             />
@@ -50,7 +53,7 @@ const BlogPage = ({ header, blog }: BlogPageProps) => {
 export default BlogPage;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const pagesResponse = await client().getEntries<any>({
+  const pagesResponse = await client().getEntries({
     content_type: BLOG_TYPE,
     include: 1,
   });
@@ -61,7 +64,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     };
   const pages: IBlogPage[] = pagesResponse.items as IBlogPage[];
 
-  const slugs = pages.map((item) => item.fields.slug);
+  const slugs = pages.map((item) => (item.fields as any)?.slug);
 
   const paths = slugs.map((slug) => ({
     params: { slug },
@@ -73,10 +76,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params, preview }) => {
   const { slug } = params as { slug: string };
 
-  const response = await client().getEntries<IHeader>({
+  const response = await client().getEntries({
     content_type: HEADER_CONTENT_TYPE,
   });
-  const homepageResponse = await client().getEntries<IBlogPage>({
+  const homepageResponse = await client().getEntries({
     content_type: BLOG_TYPE,
     "fields.slug": slug,
     include: 10,

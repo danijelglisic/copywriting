@@ -25,7 +25,7 @@ const Layout: FC<Props> = ({ children, links }) => {
     return () => {
       router.events.off("routeChangeComplete", handleRouteChange);
     };
-  }, []);
+  }, [router.events]);
 
   return (
     <div>
@@ -45,7 +45,7 @@ const Layout: FC<Props> = ({ children, links }) => {
                   <Link
                     legacyBehavior
                     key={id}
-                    href={"/" + link.fields.url || ""}
+                    href={"/" + (link.fields as any)?.url || ""}
                   >
                     <a
                       className={`hover:underline whitespace-nowrap p-2 body-2 ${
@@ -54,7 +54,7 @@ const Layout: FC<Props> = ({ children, links }) => {
                           : "text-black"
                       }`}
                     >
-                      {link.fields.text || ""}
+                      {(link.fields as any)?.text || ""}
                     </a>
                   </Link>
                 );
@@ -72,7 +72,7 @@ const Layout: FC<Props> = ({ children, links }) => {
                         <Link
                           legacyBehavior
                           key={id}
-                          href={"/" + link.fields.url || ""}
+                          href={"/" + (link.fields as any)?.url || ""}
                         >
                           <a
                             className={`hover:underline whitespace-nowrap p-2 body-2 ${
@@ -81,7 +81,7 @@ const Layout: FC<Props> = ({ children, links }) => {
                                 : "text-black"
                             }`}
                           >
-                            {link.fields.text || ""}
+                            {(link.fields as any)?.text || ""}
                           </a>
                         </Link>
                       );

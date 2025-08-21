@@ -1,8 +1,8 @@
 import { createClient, ContentfulClientApi } from "contentful";
 
-let contentfulClient: ContentfulClientApi;
+let contentfulClient: ContentfulClientApi<undefined>;
 
-export const client = (): ContentfulClientApi => {
+export const client = (): ContentfulClientApi<undefined> => {
   if (contentfulClient) {
     return contentfulClient;
   }

@@ -17,7 +17,7 @@ export interface PageProps {
 
 const Home = ({ header }: PageProps) => {
   return (
-    <Layout links={header.fields?.headerLinks}>
+    <Layout links={(header.fields as any)?.headerLinks}>
       <Metadata
         title={"Nije pronađeno | Greška 404 | Stranica ne postoji"}
         description={"Tražena stranica ne postoji."}
@@ -34,7 +34,7 @@ const Home = ({ header }: PageProps) => {
 export default Home;
 
 export const getStaticProps: GetStaticProps<any> = async (context) => {
-  const response = await client().getEntries<IHeader>({
+  const response = await client().getEntries({
     content_type: HEADER_CONTENT_TYPE,
   });
 

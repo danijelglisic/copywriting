@@ -16,7 +16,7 @@ interface BlogPageProps {
 
 const BlogPage = ({ header, blogs }: BlogPageProps) => {
   return (
-    <Layout links={header.fields?.headerLinks}>
+    <Layout links={(header.fields as any)?.headerLinks}>
       <Metadata
         title={"Blogovi | Copywriting By Slaviša"}
         description={"Optimizuj svoj biznis | BLOG | Copywriting"}
@@ -31,24 +31,30 @@ const BlogPage = ({ header, blogs }: BlogPageProps) => {
                 key={blog.sys.id}
                 className="h-full group border-2 border-primary overflow-hidden rounded-xl bg-opacity-10 bg-transparent backdrop-filter backdrop-blur-sm hover:bg-primary hover:bg-opacity-10 hover:border-secondary"
               >
-                <Link legacyBehavior href={"/blog/" + blog.fields.slug}>
+                <Link
+                  legacyBehavior
+                  href={"/blog/" + (blog.fields as any)?.slug}
+                >
                   <a className="w-full h-full flex flex-col justify-start">
                     <div className="relative w-full aspect-[4/3]">
                       <Image
                         src={
                           "https:" +
-                            blog.fields.blogImage?.fields.image?.fields.file
-                              .url || ""
+                            (blog.fields as any)?.blogImage?.fields.image
+                              ?.fields.file.url || ""
                         }
                         alt={
-                          blog.fields.blogImage?.fields.imageDescription || ""
+                          (blog.fields as any)?.blogImage?.fields
+                            .imageDescription || ""
                         }
                         fill
                         className="rounded object-cover"
                       />
                     </div>
                     <div className="p-8">
-                      <h2 className="heading-5">{blog.fields.title}</h2>
+                      <h2 className="heading-5">
+                        {(blog.fields as any)?.title}
+                      </h2>
                     </div>
                   </a>
                 </Link>
@@ -64,10 +70,10 @@ const BlogPage = ({ header, blogs }: BlogPageProps) => {
 export default BlogPage;
 
 export const getStaticProps: GetStaticProps = async ({ params, preview }) => {
-  const response = await client().getEntries<IHeader>({
+  const response = await client().getEntries({
     content_type: HEADER_CONTENT_TYPE,
   });
-  const blogsResponse = await client().getEntries<any>({
+  const blogsResponse = await client().getEntries({
     content_type: BLOG_TYPE,
     include: 10,
     limit: 1000,

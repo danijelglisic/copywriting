@@ -18,13 +18,13 @@ export interface PageProps {
 }
 
 const Home = ({ header, homepage }: PageProps) => {
-  const { contentSections } = homepage.fields;
+  const contentSections = (homepage.fields as any)?.contentSections;
 
   return (
-    <Layout links={header.fields?.headerLinks}>
+    <Layout links={(header.fields as any)?.headerLinks}>
       <Metadata
-        title={homepage.fields?.seoTitle}
-        description={homepage.fields.seoDesctiption}
+        title={(homepage.fields as any)?.seoTitle}
+        description={(homepage.fields as any)?.seoDesctiption}
         path=""
       />
       <RenderContent sections={contentSections} />
@@ -35,14 +35,14 @@ const Home = ({ header, homepage }: PageProps) => {
 export default Home;
 
 export const getStaticProps: GetStaticProps<any> = async (context) => {
-  const response = await client().getEntries<IHeader>({
+  const response = await client().getEntries({
     content_type: HEADER_CONTENT_TYPE,
   });
-  const landingSectionResponse = await client().getEntries<ILandingSection>({
+  const landingSectionResponse = await client().getEntries({
     content_type: LANDING_SECTION_TYPE,
   });
 
-  const homepageResponse = await client().getEntries<IPage>({
+  const homepageResponse = await client().getEntries({
     content_type: PAGE_TYPE,
     "fields.slug": "/",
     include: 10,

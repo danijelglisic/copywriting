@@ -8,7 +8,8 @@ interface RichTextSectionProps {
 }
 
 const RichTextSection = ({ props, isBlogPage }: RichTextSectionProps) => {
-  const { title, content } = props.fields;
+  const fields = props.fields as any; // Temporary fix for type issue
+  const { title, content } = fields;
   const style = isBlogPage ? "text-secondary" : "text-secondary py-20";
 
   return (

@@ -9,7 +9,8 @@ interface VideoLandingSectionProps {
 }
 
 const VideoLandingSection = ({ props }: VideoLandingSectionProps) => {
-  const { title, description, youtubeVideoUrl } = props.fields;
+  const fields = props.fields as any; // Temporary fix for type issue
+  const { title, description, youtubeVideoUrl } = fields;
   return (
     <div className="bg-secondary bg-opacity-80 relative text-white">
       <Image
