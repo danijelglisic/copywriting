@@ -100,7 +100,7 @@ const Layout: FC<Props> = ({ children, links }) => {
       <footer className="border-t-4 border-secondary py-10">
         <div className="container text-center text-secondary space-y-8">
           <div className="subtitle-1">
-            <p>© 2023 Slaviša Bogdanović, All Rights Reserved.</p>
+            <p>© 2025 Slaviša Bogdanović, All Rights Reserved.</p>
           </div>
           <div className="flex gap-4 items-center justify-center regular-1">
             <Link href="/politika-privatnosti" legacyBehavior>
