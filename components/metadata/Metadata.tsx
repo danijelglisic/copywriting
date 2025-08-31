@@ -21,7 +21,7 @@ const Metadata = ({ title, description, path }: MetadataProps) => {
       <meta property="og:title" content={title} />
       <meta property="og:type" content="website" />
       <meta property="og:description" content={description} />
-      <meta property="og:image" content="../../assets/placeholder.jpg" />
+      <meta property="og:image" content="/placeholder.jpg" />
     </Head>
   );
 };

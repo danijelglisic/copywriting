@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import photo from "../../assets/placeholder.jpg";
+
 import { Variants, motion } from "framer-motion";
 
 interface HeroSectionProps {
@@ -38,7 +38,13 @@ const HeroSection = ({
 }: HeroSectionProps) => {
   return (
     <div className="p-20 lg:p-40 bg-secondary relative bg-opacity-70 overflow-hidden">
-      <Image priority className="z-[-1] object-cover" src={photo} fill alt="" />
+      <Image
+        priority
+        className="z-[-1] object-cover"
+        src="/placeholder.jpg"
+        fill
+        alt=""
+      />
       <div className="flex flex-col items-center text-white py-10 space-y-16">
         <motion.div
           initial="offscreen"
