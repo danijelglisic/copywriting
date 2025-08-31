@@ -9,6 +9,7 @@ const nextConfig = {
         hostname: "images.ctfassets.net",
       },
     ],
+    unoptimized: process.env.NODE_ENV === 'production',
   },
 };
 

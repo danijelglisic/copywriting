@@ -75,12 +75,12 @@
   }
 
   .pen-bg {
-    background-image: url("../assets/svg/pen.svg");
+    background-image: url("/svg/pen.svg");
     background-repeat: space;
   }
 
   .typewrite-bg {
-    background-image: url("../assets/svg/typewrite.svg");
+    background-image: url("/svg/typewrite.svg");
     background-repeat: space;
   }
 

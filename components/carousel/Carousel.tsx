@@ -2,7 +2,7 @@ import { IPhotoSlider } from "@/@types/generated/contentful";
 import React, { useRef } from "react";
 import Slider from "react-slick";
 import Image from "next/image";
-import arrow from "../../assets/svg/arrow.svg";
+
 
 interface CarouselProps {
   props: IPhotoSlider;
@@ -85,13 +85,13 @@ const Carousel = ({ props }: CarouselProps) => {
               className="rotate-180 rounded-full bg-secondary p-2 left-0"
               onClick={handlePrevClick}
             >
-              <Image src={arrow} alt="slick prev" width={20} height={20} />
+              <Image src="/svg/arrow.svg" alt="slick prev" width={20} height={20} />
             </button>
             <button
               className="rounded-full bg-secondary p-2 right-0"
               onClick={handleNextClick}
             >
-              <Image src={arrow} alt="slick next" width={20} height={20} />
+              <Image src="/svg/arrow.svg" alt="slick next" width={20} height={20} />
             </button>
           </div>
         </div>

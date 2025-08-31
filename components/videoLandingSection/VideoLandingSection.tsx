@@ -2,7 +2,7 @@ import { IVideoLandingSection } from "@/@types/generated/contentful";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import Image from "next/image";
 import React from "react";
-import bgImage from "../../assets/video-landing.webp";
+
 
 interface VideoLandingSectionProps {
   props: IVideoLandingSection;
@@ -14,7 +14,7 @@ const VideoLandingSection = ({ props }: VideoLandingSectionProps) => {
   return (
     <div className="bg-secondary bg-opacity-80 relative text-white">
       <Image
-        src={bgImage}
+        src="/video-landing.webp"
         alt="copywriting"
         fill
         className="z-[-1] object-cover"

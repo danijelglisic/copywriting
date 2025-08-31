@@ -12,7 +12,8 @@
     "lint": "next lint",
     "format": "prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json,css}'",
     "codegen": "contentful-typescript-codegen --output @types/generated/contentful.d.ts",
-    "postinstall": "npm rebuild sharp"
+    "postinstall": "npm rebuild sharp --platform=linux --arch=x64",
+    "vercel-build": "npm run build"
   },
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^15.22.11",
