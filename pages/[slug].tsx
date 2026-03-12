@@ -6,7 +6,7 @@ import RenderContent from "@/components/renderContent/RenderContent";
 import Metadata from "@/components/metadata/Metadata";
 import { HEADER_CONTENT_TYPE, PAGE_TYPE, PageProps } from ".";
 
-export const RESERVED_PAGES = ["/"];
+export const RESERVED_PAGES = ["/", "en"];
 
 const GeneralPage = ({ header, homepage }: PageProps) => {
   const contentSections = (homepage.fields as any)?.contentSections;

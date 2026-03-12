@@ -39,7 +39,7 @@ const RenderContent = ({ sections, isBlogPage }: RenderComponentProps) => {
   if (!sections) return <div></div>;
 
   const render = () => {
-    return sections.map((section, id) => {
+    return sections.filter((section) => section?.sys?.contentType).map((section, id) => {
       if (section.sys.contentType.sys.id === "landingSection") {
         const landingSection = section as ILandingSection;
         return <LandingSection key={id} props={landingSection} />;
