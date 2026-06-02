@@ -10,7 +10,9 @@ interface VideoLandingSectionProps {
 
 const VideoLandingSection = ({ props }: VideoLandingSectionProps) => {
   const fields = props.fields as any; // Temporary fix for type issue
-  const { title, description, youtubeVideoUrl } = fields;
+  const { title, description, youtubeVideoUrl, image } = fields;
+  const imageUrl = image?.fields?.file?.url;
+
   return (
     <div className="bg-secondary bg-opacity-80 relative text-white">
       <Image
@@ -25,11 +27,20 @@ const VideoLandingSection = ({ props }: VideoLandingSectionProps) => {
             <h1 className="heading-2">{title}</h1>
           </div>
           <div className="relative rounded-2xl overflow-hidden w-full items-center aspect-video">
-            <iframe
-              title="Copywriting video"
-              src={youtubeVideoUrl}
-              className="absolute w-full h-full top-0 bottom-0 left-0 right-0"
-            />
+            {imageUrl ? (
+              <Image
+                src={`https:${imageUrl}`}
+                alt={image?.fields?.title || title || ""}
+                fill
+                className="object-cover"
+              />
+            ) : (
+              <iframe
+                title="Copywriting video"
+                src={youtubeVideoUrl}
+                className="absolute w-full h-full top-0 bottom-0 left-0 right-0"
+              />
+            )}
           </div>
         </div>
         <div className="body-1 mt-12">

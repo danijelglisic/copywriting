@@ -320,6 +320,9 @@ export interface IVideoLandingSectionFields {
 
   /** Youtube video URL */
   youtubeVideoUrl?: string | undefined;
+
+  /** Image */
+  image?: Asset | undefined;
 }
 
 export interface IVideoLandingSection
