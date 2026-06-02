@@ -58,13 +58,15 @@ const ZSection = ({ props }: ZSectionProps) => {
               <motion.div
                 variants={!imagePosition ? rightElement : leftElement}
               >
-                <Image
-                  className="rounded-xl"
-                  src={"https:" + image?.fields.image?.fields.file.url || ""}
-                  alt={image?.fields.imageDescription || ""}
-                  width={450}
-                  height={300}
-                />
+                {image?.fields.image?.fields.file.url && (
+                  <Image
+                    className="rounded-xl"
+                    src={"https:" + image.fields.image.fields.file.url}
+                    alt={image?.fields.imageDescription || ""}
+                    width={450}
+                    height={300}
+                  />
+                )}
               </motion.div>
             </motion.div>
           </div>

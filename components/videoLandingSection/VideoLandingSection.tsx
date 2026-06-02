@@ -11,7 +11,7 @@ interface VideoLandingSectionProps {
 const VideoLandingSection = ({ props }: VideoLandingSectionProps) => {
   const fields = props.fields as any; // Temporary fix for type issue
   const { title, description, youtubeVideoUrl, image } = fields;
-  const imageUrl = image?.fields?.file?.url;
+  const imageUrl = typeof image?.fields?.file?.url === "string" ? image.fields.file.url as string : undefined;
 
   return (
     <div className="bg-secondary bg-opacity-80 relative text-white">
@@ -26,22 +26,24 @@ const VideoLandingSection = ({ props }: VideoLandingSectionProps) => {
           <div className="flex flex-col gap-16">
             <h1 className="heading-2">{title}</h1>
           </div>
-          <div className="relative rounded-2xl overflow-hidden w-full items-center aspect-video">
-            {imageUrl ? (
-              <Image
-                src={`https:${imageUrl}`}
-                alt={image?.fields?.title || title || ""}
-                fill
-                className="object-cover"
-              />
-            ) : (
-              <iframe
-                title="Copywriting video"
-                src={youtubeVideoUrl}
-                className="absolute w-full h-full top-0 bottom-0 left-0 right-0"
-              />
-            )}
-          </div>
+          {(imageUrl || youtubeVideoUrl) && (
+            <div className="relative rounded-2xl overflow-hidden w-full items-center aspect-video">
+              {imageUrl ? (
+                <Image
+                  src={`https:${imageUrl}`}
+                  alt={image?.fields?.title || title || ""}
+                  fill
+                  className="object-cover"
+                />
+              ) : (
+                <iframe
+                  title="Copywriting video"
+                  src={youtubeVideoUrl}
+                  className="absolute w-full h-full top-0 bottom-0 left-0 right-0"
+                />
+              )}
+            </div>
+          )}
         </div>
         <div className="body-1 mt-12">
           {description && documentToReactComponents(description)}
