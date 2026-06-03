@@ -11,9 +11,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#20a079",
-        "primary-contrast": "rgb(13 86 64)",
-        secondary: "#190b31",
+        primary: "#4d7dff",
+        "primary-contrast": "#0038e0",
+        secondary: "#1a52ff",
+        dark: "#080d1c",
       },
     },
     container: {

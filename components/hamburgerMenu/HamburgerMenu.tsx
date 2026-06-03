@@ -6,11 +6,11 @@ interface MenuProps {
 }
 
 const HamburgerMenu = ({ isOpen, setIsOpen }: MenuProps) => {
-  const genericHamburgerLine = `h-1 w-9 my-1 rounded-full bg-secondary transition ease transform duration-300`;
+  const genericHamburgerLine = `h-1 w-9 my-1 bg-secondary transition ease transform duration-300`;
 
   return (
     <button
-      className="flex flex-col h-12 w-12 rounded justify-center items-start group"
+      className="flex flex-col h-12 w-12 justify-center items-start group"
       onClick={() => setIsOpen(!isOpen)}
       aria-label="toggle menu"
     >

@@ -86,22 +86,23 @@
 
   .progress-bar {
     position: fixed;
-    top: 80px;
+    top: 72px;
     left: 0;
     right: 0;
-    height: 6px;
-    @apply bg-primary;
+    height: 2px;
+    background: linear-gradient(90deg, #1a52ff, #6391ff);
+    box-shadow: 0 0 8px rgba(26, 82, 255, 0.8), 0 0 20px rgba(26, 82, 255, 0.4);
     transform-origin: 0%;
     z-index: 49;
   }
 }
 
 .gradient {
-  background: rgb(32, 160, 121);
+  background: rgb(26, 82, 255);
   background: linear-gradient(
     90deg,
-    rgba(32, 160, 121, 1) 33%,
-    rgba(140, 212, 188, 1) 66%
+    rgba(26, 82, 255, 1) 33%,
+    rgba(99, 145, 255, 1) 66%
   );
 }
 

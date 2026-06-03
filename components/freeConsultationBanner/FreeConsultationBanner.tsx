@@ -1,31 +1,33 @@
 import { IFreeConsultationBanner } from "@/@types/generated/contentful";
 import React from "react";
+import { AnimatedText } from "@/components/ui/AnimatedText";
+import { FadeUp } from "@/components/ui/FadeUp";
 
 interface BannerProps {
   props: IFreeConsultationBanner;
 }
 
 const FreeConsultationBanner = ({ props }: BannerProps) => {
-  const fields = props.fields as any; // Temporary fix for type issue
+  const fields = props.fields as any;
   const { text, description, cta } = fields;
   return (
-    <div className="py-10 bg-secondary pen-bg">
+    <div className="py-24 bg-dark">
       <div className="container">
         <div className="flex flex-col items-center justify-center text-center gap-8">
-          <div className="text-white heading-4">
-            <h2>{text}</h2>
-          </div>
-          <div className="text-white body-1">
+          <h2 className="text-white heading-4">
+            {text && <AnimatedText text={text} />}
+          </h2>
+          <FadeUp delay={0.2} className="text-white body-1">
             <p>{description}</p>
-          </div>
-          <div className="body-1">
+          </FadeUp>
+          <FadeUp delay={0.35}>
             <a
-              className="p-2 hover:underline bg-primary rounded text-secondary"
+              className="inline-block px-10 py-4 bg-white text-dark font-bold body-2 hover:bg-secondary hover:text-white transition-colors duration-200"
               href={cta?.fields.url}
             >
-              {cta?.fields.text}
+              {cta?.fields.text} →
             </a>
-          </div>
+          </FadeUp>
         </div>
       </div>
     </div>
