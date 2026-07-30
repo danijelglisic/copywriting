@@ -21,6 +21,17 @@ module.exports = {
         // Skoro crna — najdublje sekcije i tamni tekst na beloj pozadini.
         dark: "#05070D",
       },
+      keyframes: {
+        "menu-in": {
+          from: { transform: "translateY(-12px)" },
+          to: { transform: "translateY(0)" },
+        },
+      },
+      animation: {
+        // CSS animacija umesto Framer Motion: rAF-bazirane animacije su znale
+        // da se zamrznu na pola i ostave meni pomeren. CSS uvek zavrsi.
+        "menu-in": "menu-in 180ms ease-out both",
+      },
     },
     container: {
       center: true,

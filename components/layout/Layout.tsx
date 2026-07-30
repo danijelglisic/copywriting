@@ -4,12 +4,7 @@ import React, { FC, ReactElement, useEffect, useState } from "react";
 import HamburgerMenu from "../hamburgerMenu/HamburgerMenu";
 import { useRouter } from "next/router";
 import ScrollProgress from "./ScrollProgress";
-import { motion, AnimatePresence } from "framer-motion";
-
-interface NavItem {
-  text: string;
-  href: string;
-}
+import MobileMenu, { NavItem } from "./MobileMenu";
 
 // Engleska navigacija je zakucana u kodu jer u Contentfulu postoji samo
 // jedan `header` entry i on ima srpske linkove. Kada se u CMS-u napravi
@@ -93,39 +88,18 @@ const Layout: FC<Props> = ({ children, links, isEnglish }) => {
             <div className="lg:hidden flex items-center">
               <HamburgerMenu isOpen={isOpen} setIsOpen={setIsOpen} />
             </div>
-
-            <AnimatePresence>
-              {isOpen && (
-                <motion.div
-                  initial={{ opacity: 0, y: -8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  transition={{ duration: 0.2 }}
-                  className="fixed bg-navy top-[72px] bottom-0 left-0 right-0 z-40"
-                >
-                  <div className="container pt-10">
-                    <div className="flex flex-col items-start gap-2">
-                      {navItems.map((item, id) => (
-                        <Link legacyBehavior key={id} href={item.href}>
-                          <a
-                            className={`whitespace-nowrap py-3 body-1 w-full border-b border-white/10 transition-colors ${
-                              id === navItems.length - 1
-                                ? "text-primary font-bold"
-                                : "text-white hover:text-primary"
-                            }`}
-                          >
-                            {item.text}
-                          </a>
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
           </div>
         </div>
       </div>
+
+      {/* Meni je namerno van header diva: header je fixed sa z-50 i pravi svoj
+          stacking context, pa je ugnjezdeni panel zavisio od njega. */}
+      <MobileMenu
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        items={navItems}
+      />
+
       <ScrollProgress />
       <main className="pt-[72px]" id="#main-content">
         {children}

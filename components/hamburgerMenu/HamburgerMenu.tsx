@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 interface MenuProps {
   isOpen: boolean;
@@ -12,7 +12,9 @@ const HamburgerMenu = ({ isOpen, setIsOpen }: MenuProps) => {
     <button
       className="flex flex-col h-12 w-12 justify-center items-start group"
       onClick={() => setIsOpen(!isOpen)}
-      aria-label="toggle menu"
+      aria-label={isOpen ? "close menu" : "toggle menu"}
+      aria-expanded={isOpen}
+      aria-controls="mobile-menu"
     >
       <div
         className={`${genericHamburgerLine} ${
