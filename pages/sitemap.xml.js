@@ -1,12 +1,11 @@
 import { client } from "../helpers/clinet";
+import { siteUrl } from "../helpers/siteUrl";
 
 const PAGE_TYPE = "page";
 const EN_HOME_SLUG = "en";
 const EN_PREFIX = "en/";
 
-const SITE_URL = (
-  process.env.SITEMAP_URL || "https://www.copywritingbyslavisa.com"
-).replace(/\/+$/, "");
+const SITE_URL = siteUrl();
 
 function generateSiteMap(urls) {
   return `<?xml version="1.0" encoding="UTF-8"?>

@@ -1,11 +1,9 @@
 import Head from "next/head";
 import React from "react";
 
-// SITEMAP_URL je jedini izvor kanonskog domena. Fallback pokriva slucaj kada
-// varijabla nije postavljena (npr. lokalni build bez .env).
-const SITE_URL = (
-  process.env.SITEMAP_URL || "https://www.copywritingbyslavisa.com"
-).replace(/\/+$/, "");
+import { siteUrl } from "@/helpers/siteUrl";
+
+const SITE_URL = siteUrl();
 
 interface MetadataProps {
   title: string | undefined;
