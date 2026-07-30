@@ -90,19 +90,19 @@
     left: 0;
     right: 0;
     height: 2px;
-    background: linear-gradient(90deg, #1a52ff, #6391ff);
-    box-shadow: 0 0 8px rgba(26, 82, 255, 0.8), 0 0 20px rgba(26, 82, 255, 0.4);
+    background: linear-gradient(90deg, #0a66c2, #4a90d9);
+    box-shadow: 0 0 8px rgba(10, 102, 194, 0.8), 0 0 20px rgba(10, 102, 194, 0.4);
     transform-origin: 0%;
     z-index: 49;
   }
 }
 
 .gradient {
-  background: rgb(26, 82, 255);
+  background: rgb(10, 31, 68);
   background: linear-gradient(
     90deg,
-    rgba(26, 82, 255, 1) 33%,
-    rgba(99, 145, 255, 1) 66%
+    rgba(10, 31, 68, 1) 33%,
+    rgba(10, 102, 194, 1) 66%
   );
 }
 

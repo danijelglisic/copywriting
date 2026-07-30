@@ -3,7 +3,7 @@ import Layout from "@/components/layout/Layout";
 import { client } from "@/helpers/clinet";
 import { GetStaticProps } from "next";
 import Metadata from "@/components/metadata/Metadata";
-import { HEADER_CONTENT_TYPE } from "..";
+import { HEADER_CONTENT_TYPE } from "@/helpers/contentTypes";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -67,7 +67,7 @@ const BlogPage = ({ header, blogs }: BlogPageProps) => {
         path="blog"
       />
 
-      <div className="bg-dark py-20">
+      <div className="bg-navy py-20">
         <div className="container text-white">
           <p className="text-secondary body-3 font-semibold uppercase tracking-widest mb-3">Blog</p>
           <h1 className="heading-2">Copywriting savjeti</h1>

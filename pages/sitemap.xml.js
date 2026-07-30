@@ -1,24 +1,29 @@
 import { client } from "../helpers/clinet";
-const PAGE_TYPE = "page";
 
-function generateSiteMap(slugs) {
+const PAGE_TYPE = "page";
+const EN_HOME_SLUG = "en";
+const EN_PREFIX = "en/";
+
+const SITE_URL = (
+  process.env.SITEMAP_URL || "https://www.copywritingbyslavisa.com"
+).replace(/\/+$/, "");
+
+function generateSiteMap(urls) {
   return `<?xml version="1.0" encoding="UTF-8"?>
-   <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-     ${slugs
-       .map((slug) => {
-         return `
-       <url>
-           <loc>${`${process.env.SITEMAP_URL}/${slug}`}</loc>
-       </url>
-     `;
-       })
-       .join("")}
-   </urlset>
- `;
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urls
+  .map(
+    (url) => `  <url>
+    <loc>${url}</loc>
+  </url>`
+  )
+  .join("\n")}
+</urlset>
+`;
 }
 
 function SiteMap() {
-  // getServerSideProps will do the heavy lifting
+  // getServerSideProps radi sav posao
 }
 
 export async function getServerSideProps({ res }) {
@@ -26,21 +31,26 @@ export async function getServerSideProps({ res }) {
     content_type: PAGE_TYPE,
     include: 1,
   });
-  const pages = pagesResponse.items;
 
-  const slugs = pages.map((item) => item.fields?.slug);
+  const slugs = pagesResponse.items
+    .map((item) => item.fields?.slug)
+    .filter(Boolean);
 
-  // We generate the XML sitemap with the slugs
-  const sitemap = generateSiteMap(slugs);
+  // Sajt je presao na englesku verziju. U sitemap ide samo engleski sadrzaj —
+  // srpske strane su i dalje dostupne, ali se ne prijavljuju Googlu da se ne
+  // takmice sa engleskim za isti domen.
+  const urls = [
+    `${SITE_URL}/`,
+    ...slugs
+      .filter((slug) => slug.startsWith(EN_PREFIX) && slug !== EN_HOME_SLUG)
+      .map((slug) => `${SITE_URL}/${slug}`),
+  ];
 
   res.setHeader("Content-Type", "text/xml");
-  // we send the XML to the browser
-  res.write(sitemap);
+  res.write(generateSiteMap(urls));
   res.end();
 
-  return {
-    props: {},
-  };
+  return { props: {} };
 }
 
 export default SiteMap;

@@ -1,7 +1,11 @@
 import Head from "next/head";
 import React from "react";
 
-const SITE_URL = process.env.SITEMAP_URL;
+// SITEMAP_URL je jedini izvor kanonskog domena. Fallback pokriva slucaj kada
+// varijabla nije postavljena (npr. lokalni build bez .env).
+const SITE_URL = (
+  process.env.SITEMAP_URL || "https://www.copywritingbyslavisa.com"
+).replace(/\/+$/, "");
 
 interface MetadataProps {
   title: string | undefined;
@@ -10,18 +14,20 @@ interface MetadataProps {
 }
 
 const Metadata = ({ title, description, path }: MetadataProps) => {
-  const pageUrl = `https://www.copywritingbyslavisa.com/${path}`;
+  const cleanPath = path.replace(/^\/+/, "");
+  const pageUrl = cleanPath ? `${SITE_URL}/${cleanPath}` : `${SITE_URL}/`;
+
   return (
     <Head>
       <title>{title}</title>
-      <link rel="icon" href="/static/favicon.ico" />
+      <link rel="icon" href="/favicon.ico" />
       <link rel="canonical" href={pageUrl} />
       <meta name="description" content={description} key="desc" />
       <meta property="og:url" content={pageUrl} />
       <meta property="og:title" content={title} />
       <meta property="og:type" content="website" />
       <meta property="og:description" content={description} />
-      <meta property="og:image" content="/placeholder.jpg" />
+      <meta property="og:image" content={`${SITE_URL}/placeholder.jpg`} />
     </Head>
   );
 };

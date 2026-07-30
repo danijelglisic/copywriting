@@ -4,7 +4,13 @@ import { client } from "@/helpers/clinet";
 import { GetStaticPaths, GetStaticProps } from "next";
 import RenderContent from "@/components/renderContent/RenderContent";
 import Metadata from "@/components/metadata/Metadata";
-import { HEADER_CONTENT_TYPE, PAGE_TYPE, PageProps } from "../index";
+import {
+  EN_HOME_SLUG,
+  EN_PREFIX,
+  HEADER_CONTENT_TYPE,
+  PAGE_TYPE,
+  PageProps,
+} from "@/helpers/contentTypes";
 
 const EnglishPage = ({ header, homepage }: PageProps) => {
   const contentSections = (homepage?.fields as any)?.contentSections;
@@ -23,8 +29,6 @@ const EnglishPage = ({ header, homepage }: PageProps) => {
 
 export default EnglishPage;
 
-const EN_PREFIX = "en/";
-
 export const getStaticPaths: GetStaticPaths = async () => {
   const pagesResponse = await client().getEntries({
     content_type: PAGE_TYPE,
@@ -38,7 +42,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   const slugs = pages
     .map((item) => (item.fields as any)?.slug as string)
-    .filter((slug) => slug?.startsWith(EN_PREFIX) && slug !== "en")
+    .filter((slug) => slug?.startsWith(EN_PREFIX) && slug !== EN_HOME_SLUG)
     .map((slug) => slug.replace(EN_PREFIX, ""));
 
   const paths = slugs.map((slug) => ({
