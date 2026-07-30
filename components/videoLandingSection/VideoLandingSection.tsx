@@ -15,7 +15,7 @@ const VideoLandingSection = ({ props }: VideoLandingSectionProps) => {
   const imageUrl = typeof image?.fields?.file?.url === "string" ? image.fields.file.url as string : undefined;
 
   return (
-    <div className="bg-dark bg-opacity-80 relative text-white">
+    <div className="bg-navy bg-opacity-80 relative text-white">
       <Image
         src="/video-landing.webp"
         alt="copywriting"

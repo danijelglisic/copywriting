@@ -11,7 +11,7 @@ const FreeConsultationBanner = ({ props }: BannerProps) => {
   const fields = props.fields as any;
   const { text, description, cta } = fields;
   return (
-    <div className="py-24 bg-dark">
+    <div className="py-24 bg-navy">
       <div className="container">
         <div className="flex flex-col items-center justify-center text-center gap-8">
           <h2 className="text-white heading-4">

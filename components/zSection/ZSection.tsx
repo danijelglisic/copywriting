@@ -14,7 +14,7 @@ const ZSection = ({ props }: ZSectionProps) => {
   const fields = props.fields as any;
   const { image, imagePosition, title, subtitle, richText, cta } = fields;
 
-  const bgColor = imagePosition ? "bg-white" : "bg-dark";
+  const bgColor = imagePosition ? "bg-white" : "bg-navy";
   const textColor = imagePosition ? "text-dark" : "text-white";
   const imageOrder = imagePosition ? "" : "order-2";
 

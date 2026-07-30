@@ -11,10 +11,15 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#4d7dff",
-        "primary-contrast": "#0038e0",
-        secondary: "#1a52ff",
-        dark: "#080d1c",
+        // Akcenat — LinkedIn plava. Dugmici, linkovi, logo, hover stanja.
+        secondary: "#0A66C2",
+        "primary-contrast": "#084E96",
+        // Svetlija plava za highlight tekst na tamnoj pozadini (kontrast na tegetu).
+        primary: "#4A90D9",
+        // Teget — glavne tamne brend povrsine (footer, hero, banner, mobilni meni).
+        navy: "#0A1F44",
+        // Skoro crna — najdublje sekcije i tamni tekst na beloj pozadini.
+        dark: "#05070D",
       },
     },
     container: {

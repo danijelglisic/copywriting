@@ -4,7 +4,7 @@ import { client } from "@/helpers/clinet";
 import { GetStaticPaths, GetStaticProps } from "next";
 import RenderContent from "@/components/renderContent/RenderContent";
 import Metadata from "@/components/metadata/Metadata";
-import { HEADER_CONTENT_TYPE } from "..";
+import { HEADER_CONTENT_TYPE } from "@/helpers/contentTypes";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -38,7 +38,7 @@ const BlogPage = ({ header, blog }: BlogPageProps) => {
         path={`blog/${fields?.slug}`}
       />
 
-      <div className="bg-dark py-16">
+      <div className="bg-navy py-16">
         <div className="container">
           <Link href="/blog" className="inline-flex items-center gap-2 text-secondary body-3 font-semibold mb-8 hover:underline">
             ← Svi blogovi

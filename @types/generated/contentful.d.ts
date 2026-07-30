@@ -321,7 +321,7 @@ export interface IVideoLandingSectionFields {
   /** Youtube video URL */
   youtubeVideoUrl?: string | undefined;
 
-  /** Image */
+  /** Image	 */
   image?: Asset | undefined;
 }
 
@@ -408,6 +408,6 @@ export type IEntry =
   | IVideoLandingSection
   | IZSection;
 
-export type LOCALE_CODE = "en-US";
+export type LOCALE_CODE = "en-US" | "sr";
 
 export type CONTENTFUL_DEFAULT_LOCALE_CODE = "en-US";

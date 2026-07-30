@@ -4,45 +4,38 @@ import { client } from "@/helpers/clinet";
 import { GetStaticProps } from "next";
 import Metadata from "@/components/metadata/Metadata";
 import HeroSection from "@/components/heroSection/HeroSection";
+import { HEADER_CONTENT_TYPE } from "@/helpers/contentTypes";
 
-export const HEADER_CONTENT_TYPE = "header";
-export const LANDING_SECTION_TYPE = "landingSection";
-export const PAGE_TYPE = "page";
-
-export const RESERVED_PAGES = ["/"];
-
-export interface PageProps {
+interface NotFoundProps {
   header: IHeader;
 }
 
-const Home = ({ header }: PageProps) => {
+const NotFound = ({ header }: NotFoundProps) => {
   return (
-    <Layout links={(header.fields as any)?.headerLinks}>
+    <Layout links={(header?.fields as any)?.headerLinks} isEnglish>
       <Metadata
-        title={"Nije pronađeno | Greška 404 | Stranica ne postoji"}
-        description={"Tražena stranica ne postoji."}
+        title={"Page Not Found | Error 404"}
+        description={"The page you are looking for does not exist."}
         path="404"
       />
       <HeroSection
-        heading="Greška 404"
-        description="Tražena stranica ne postoji."
+        heading="Error 404"
+        description="PAGE NOT FOUND"
       />
     </Layout>
   );
 };
 
-export default Home;
+export default NotFound;
 
-export const getStaticProps: GetStaticProps<any> = async (context) => {
+export const getStaticProps: GetStaticProps<any> = async () => {
   const response = await client().getEntries({
     content_type: HEADER_CONTENT_TYPE,
   });
 
-  const header = response.items[0];
-
   return {
     props: {
-      header,
+      header: response.items[0] ?? null,
     },
   };
 };

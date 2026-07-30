@@ -4,9 +4,18 @@ import { client } from "@/helpers/clinet";
 import { GetStaticPaths, GetStaticProps } from "next";
 import RenderContent from "@/components/renderContent/RenderContent";
 import Metadata from "@/components/metadata/Metadata";
-import { HEADER_CONTENT_TYPE, PAGE_TYPE, PageProps } from ".";
+import {
+  EN_HOME_SLUG,
+  EN_PREFIX,
+  HEADER_CONTENT_TYPE,
+  PAGE_TYPE,
+  PageProps,
+} from "@/helpers/contentTypes";
 
-export const RESERVED_PAGES = ["/", "en"];
+// `/` ima svoju rutu (pages/sr.tsx), `en` i sve `en/...` strane idu kroz
+// pages/en/[slug].tsx. Bez filtriranja `en/` prefiksa ova ruta bi probala da
+// generise putanju sa kosom crtom unutar jednog [slug] segmenta.
+export const RESERVED_PAGES = ["/", EN_HOME_SLUG];
 
 const GeneralPage = ({ header, homepage }: PageProps) => {
   const contentSections = (homepage.fields as any)?.contentSections;
@@ -39,7 +48,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   const slugs = pages
     .map((item) => (item.fields as any)?.slug)
-    .filter((slug) => !RESERVED_PAGES.includes(slug || ""));
+    .filter(
+      (slug) =>
+        !RESERVED_PAGES.includes(slug || "") && !slug?.startsWith(EN_PREFIX)
+    );
 
   const paths = slugs.map((slug) => ({
     params: { slug },

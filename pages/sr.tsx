@@ -1,32 +1,32 @@
-import { IHeader, IPage } from "@/@types/generated/contentful";
 import Layout from "@/components/layout/Layout";
 import { client } from "@/helpers/clinet";
 import { GetStaticProps } from "next";
 import RenderContent from "@/components/renderContent/RenderContent";
 import Metadata from "@/components/metadata/Metadata";
-import { HEADER_CONTENT_TYPE, PAGE_TYPE } from "../index";
+import {
+  HEADER_CONTENT_TYPE,
+  PAGE_TYPE,
+  PageProps,
+} from "@/helpers/contentTypes";
 
-interface EnglishPageProps {
-  header: IHeader;
-  homepage: IPage;
-}
-
-const EnglishHome = ({ header, homepage }: EnglishPageProps) => {
+// Srpska pocetna strana. Sajt je presao na englesku verziju, pa root sluzi
+// engleski sadrzaj — srpski ostaje dostupan na /sr, ali nije u navigaciji.
+const SerbianHome = ({ header, homepage }: PageProps) => {
   const contentSections = (homepage?.fields as any)?.contentSections;
 
   return (
-    <Layout links={(header.fields as any)?.headerLinks} isEnglish>
+    <Layout links={(header.fields as any)?.headerLinks}>
       <Metadata
-        title={(homepage?.fields as any)?.seoTitle ?? "Slaviša Bogdanović"}
-        description={(homepage?.fields as any)?.seoDesctiption ?? ""}
-        path="en"
+        title={(homepage?.fields as any)?.seoTitle}
+        description={(homepage?.fields as any)?.seoDesctiption}
+        path="sr"
       />
       {contentSections && <RenderContent sections={contentSections} />}
     </Layout>
   );
 };
 
-export default EnglishHome;
+export default SerbianHome;
 
 export const getStaticProps: GetStaticProps<any> = async () => {
   const response = await client().getEntries({
@@ -35,17 +35,14 @@ export const getStaticProps: GetStaticProps<any> = async () => {
 
   const homepageResponse = await client().getEntries({
     content_type: PAGE_TYPE,
-    "fields.slug": "en",
+    "fields.slug": "/",
     include: 10,
   });
 
-  const header = response.items[0];
-  const homepage = homepageResponse.items[0] ?? null;
-
   return {
     props: {
-      header,
-      homepage,
+      header: response.items[0],
+      homepage: homepageResponse.items[0] ?? null,
     },
   };
 };

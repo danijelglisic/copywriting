@@ -13,7 +13,7 @@ const HeroSection = ({
   description = "COPYWRITER",
 }: HeroSectionProps) => {
   return (
-    <div className="p-20 lg:p-40 bg-dark relative bg-opacity-70 overflow-hidden">
+    <div className="p-20 lg:p-40 bg-navy relative bg-opacity-70 overflow-hidden">
       <Image
         priority
         className="z-[-1] object-cover"
