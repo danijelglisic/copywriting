@@ -1,5 +1,6 @@
 import { IVideoLandingSection } from "@/@types/generated/contentful";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { richTextOptions } from "@/helpers/richTextOptions";
 import Image from "next/image";
 import React from "react";
 import { AnimatedText } from "@/components/ui/AnimatedText";
@@ -49,7 +50,7 @@ const VideoLandingSection = ({ props }: VideoLandingSectionProps) => {
           )}
         </div>
         <FadeUp delay={0.3} className="body-1 mt-12">
-          {description && documentToReactComponents(description)}
+          {description && documentToReactComponents(description, richTextOptions)}
         </FadeUp>
       </div>
     </div>

@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import React from "react";
 
 interface FadeUpProps {
@@ -7,14 +6,16 @@ interface FadeUpProps {
   className?: string;
 }
 
+/**
+ * Isti razlog kao kod [AnimatedText]: Framer Motion `whileInView` je krenuo od
+ * opacity 0 i umeo da se zamrzne, pa je sadrzaj ostajao nevidljiv. CSS keyframe
+ * uvek dodje do kraja i ne zavisi od IntersectionObserver-a.
+ */
 export const FadeUp = ({ children, delay = 0, className }: FadeUpProps) => (
-  <motion.div
-    initial={{ opacity: 0, y: 28 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, amount: 0.2 }}
-    transition={{ duration: 0.6, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
-    className={className}
+  <div
+    className={`animate-fade-up motion-reduce:animate-none ${className || ""}`}
+    style={delay ? { animationDelay: `${delay}s` } : undefined}
   >
     {children}
-  </motion.div>
+  </div>
 );

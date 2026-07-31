@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { richTextOptions } from "@/helpers/richTextOptions";
 import { ILandingSection } from "@/@types/generated/contentful";
 import { AnimatedText } from "@/components/ui/AnimatedText";
 import { FadeUp } from "@/components/ui/FadeUp";
@@ -29,7 +30,7 @@ const LandingSection = ({ props }: LandingSectionprops) => {
             ))}
           </ul>
           <FadeUp delay={0.2} className="body-1 p-height mt-4">
-            {fields.text && documentToReactComponents(fields.text)}
+            {fields.text && documentToReactComponents(fields.text, richTextOptions)}
           </FadeUp>
         </div>
         <FadeUp delay={0.3} className="overflow-hidden min-w-[30%]">

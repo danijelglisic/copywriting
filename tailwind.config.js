@@ -4,6 +4,9 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx}", // Note the addition of the `app` directory.
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
+    // helpers/ sadrzi richTextOptions.tsx sa Tailwind klasama. Bez ovog unosa
+    // se te klase ne generisu, pa rich text ostaje bez margina i tacaka.
+    "./helpers/**/*.{js,ts,jsx,tsx}",
 
     // Or if using `src` directory:
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -26,11 +29,16 @@ module.exports = {
           from: { transform: "translateY(-12px)" },
           to: { transform: "translateY(0)" },
         },
+        "fade-up": {
+          from: { opacity: "0", transform: "translateY(16px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
       },
       animation: {
-        // CSS animacija umesto Framer Motion: rAF-bazirane animacije su znale
-        // da se zamrznu na pola i ostave meni pomeren. CSS uvek zavrsi.
+        // CSS animacije umesto Framer Motion: rAF-bazirane animacije su znale
+        // da se zamrznu na pola i ostave sadrzaj nevidljiv. CSS uvek zavrsi.
         "menu-in": "menu-in 180ms ease-out both",
+        "fade-up": "fade-up 500ms cubic-bezier(0.21,0.47,0.32,0.98) both",
       },
     },
     container: {
