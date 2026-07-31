@@ -29,16 +29,18 @@ module.exports = {
           from: { transform: "translateY(-12px)" },
           to: { transform: "translateY(0)" },
         },
-        "fade-up": {
-          from: { opacity: "0", transform: "translateY(16px)" },
-          to: { opacity: "1", transform: "translateY(0)" },
+        // NAMERNO bez opacity. Ako se animacija ne pokrene — skriven tab,
+        // stedljivi rezim, stara masina — element ostaje na svom `from` stanju.
+        // Kad bi `from` bio opacity 0, tekst bi bio nevidljiv. Ovako je najgori
+        // ishod da sadrzaj stoji 16px nize, sto niko nece primetiti.
+        rise: {
+          from: { transform: "translateY(16px)" },
+          to: { transform: "translateY(0)" },
         },
       },
       animation: {
-        // CSS animacije umesto Framer Motion: rAF-bazirane animacije su znale
-        // da se zamrznu na pola i ostave sadrzaj nevidljiv. CSS uvek zavrsi.
         "menu-in": "menu-in 180ms ease-out both",
-        "fade-up": "fade-up 500ms cubic-bezier(0.21,0.47,0.32,0.98) both",
+        rise: "rise 500ms cubic-bezier(0.21,0.47,0.32,0.98) both",
       },
     },
     container: {
