@@ -1,4 +1,4 @@
-import { IHeader, IPage } from "@/@types/generated/contentful";
+import { IPage } from "@/@types/generated/contentful";
 import Layout from "@/components/layout/Layout";
 import { client } from "@/helpers/clinet";
 import { GetStaticPaths, GetStaticProps } from "next";
@@ -7,16 +7,15 @@ import Metadata from "@/components/metadata/Metadata";
 import {
   EN_HOME_SLUG,
   EN_PREFIX,
-  HEADER_CONTENT_TYPE,
   PAGE_TYPE,
   PageProps,
 } from "@/helpers/contentTypes";
 
-const EnglishPage = ({ header, homepage }: PageProps) => {
+const EnglishPage = ({ homepage }: PageProps) => {
   const contentSections = (homepage?.fields as any)?.contentSections;
 
   return (
-    <Layout links={(header.fields as any)?.headerLinks} isEnglish>
+    <Layout>
       <Metadata
         title={(homepage?.fields as any)?.seoTitle ?? "Slaviša Bogdanović"}
         description={(homepage?.fields as any)?.seoDesctiption ?? ""}
@@ -35,8 +34,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     include: 1,
   });
 
-  if (!pagesResponse.items.length)
-    return { paths: [], fallback: false };
+  if (!pagesResponse.items.length) return { paths: [], fallback: false };
 
   const pages: IPage[] = pagesResponse.items as IPage[];
 
@@ -55,23 +53,15 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { slug } = params as { slug: string };
 
-  const response = await client().getEntries({
-    content_type: HEADER_CONTENT_TYPE,
-  });
-
   const homepageResponse = await client().getEntries({
     content_type: PAGE_TYPE,
     "fields.slug": `en/${slug}`,
     include: 10,
   });
 
-  const header = response.items[0];
-  const homepage = homepageResponse.items[0] ?? null;
-
   return {
     props: {
-      header,
-      homepage,
+      homepage: homepageResponse.items[0] ?? null,
     },
   };
 };

@@ -1,4 +1,3 @@
-import { ICta } from "@/@types/generated/contentful";
 import Link from "next/link";
 import React, { FC, ReactElement, useEffect, useState } from "react";
 import HamburgerMenu from "../hamburgerMenu/HamburgerMenu";
@@ -6,10 +5,10 @@ import { useRouter } from "next/router";
 import ScrollProgress from "./ScrollProgress";
 import MobileMenu, { NavItem } from "./MobileMenu";
 
-// Engleska navigacija je zakucana u kodu jer u Contentfulu postoji samo
-// jedan `header` entry i on ima srpske linkove. Kada se u CMS-u napravi
-// engleski header, ovo se zamenjuje `links` propom kao na srpskoj strani.
-const EN_NAV: NavItem[] = [
+// Navigacija je zakucana u kodu jer u Contentfulu postoji samo jedan `header`
+// entry i on ima srpske linkove. Kada se u CMS-u napravi engleski header, ovo
+// se moze zameniti podacima iz njega.
+const NAV: NavItem[] = [
   { text: "Portfolio", href: "/en/portfolio" },
   { text: "Video Ads", href: "/en/video-ads" },
   { text: "Email Sequences", href: "/en/email-sequences" },
@@ -19,16 +18,9 @@ const EN_NAV: NavItem[] = [
 
 interface Props {
   children: ReactElement | ReactElement[];
-  links?: ICta[];
-  isEnglish?: boolean;
 }
 
-// Contentful CTA linkovi cuvaju slug bez vodece kose crte, ali ne uvek —
-// `/copywriting-kurs` je vec upisan sa njom. Bez ovoga se dobija `//slug`,
-// sto next/router odbija.
-const toHref = (url?: string): string => `/${(url || "").replace(/^\/+/, "")}`;
-
-const Layout: FC<Props> = ({ children, links, isEnglish }) => {
+const Layout: FC<Props> = ({ children }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [scrolled, setScrolled] = useState(false);
   const router = useRouter();
@@ -45,14 +37,7 @@ const Layout: FC<Props> = ({ children, links, isEnglish }) => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const navItems: NavItem[] = isEnglish
-    ? EN_NAV
-    : (links || []).map((link) => ({
-        text: (link.fields as any)?.text || "",
-        href: toHref((link.fields as any)?.url),
-      }));
-
-  const homeHref = isEnglish ? "/" : "/sr";
+  const navItems = NAV;
 
   return (
     <div>
@@ -63,7 +48,7 @@ const Layout: FC<Props> = ({ children, links, isEnglish }) => {
       >
         <div className="container h-full">
           <div className="flex justify-between items-center h-full">
-            <Link href={homeHref} legacyBehavior>
+            <Link href="/" legacyBehavior>
               <a>
                 <span className="text-navy heading-4">Slaviša Bogdanović</span>
               </a>
@@ -112,25 +97,16 @@ const Layout: FC<Props> = ({ children, links, isEnglish }) => {
               <p className="text-gray-400 body-3 mt-1">Copywriter</p>
             </div>
             <div className="flex flex-col sm:flex-row gap-6 text-gray-400 body-3">
-              {isEnglish ? (
-                <>
-                  <Link href="/en/privacy-policy" legacyBehavior>
-                    <a className="hover:text-white transition-colors">Privacy Policy</a>
-                  </Link>
-                  <Link href="/en/terms-of-use" legacyBehavior>
-                    <a className="hover:text-white transition-colors">Terms of Use</a>
-                  </Link>
-                </>
-              ) : (
-                <>
-                  <Link href="/politika-privatnosti" legacyBehavior>
-                    <a className="hover:text-white transition-colors">Politika privatnosti</a>
-                  </Link>
-                  <Link href="/uslovi-koriscenja-sajta" legacyBehavior>
-                    <a className="hover:text-white transition-colors">Uslovi korišćenja sajta</a>
-                  </Link>
-                </>
-              )}
+              <Link href="/en/privacy-policy" legacyBehavior>
+                <a className="hover:text-white transition-colors">
+                  Privacy Policy
+                </a>
+              </Link>
+              <Link href="/en/terms-of-use" legacyBehavior>
+                <a className="hover:text-white transition-colors">
+                  Terms of Use
+                </a>
+              </Link>
             </div>
           </div>
           <div className="border-t border-white border-opacity-10 mt-10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-gray-500 body-4">
