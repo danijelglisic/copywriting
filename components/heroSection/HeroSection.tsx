@@ -9,7 +9,7 @@ interface HeroSectionProps {
 }
 
 const HeroSection = ({
-  heading = "Slaviša Bogdanović",
+  heading = "Slavisa Bogdanovic",
   description = "COPYWRITER",
 }: HeroSectionProps) => {
   return (

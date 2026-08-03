@@ -96,7 +96,7 @@ const MobileMenu: FC<MobileMenuProps> = ({ isOpen, onClose, items }) => {
         )}
 
         <p className="mt-auto pt-10 text-white/40 body-4">
-          Slaviša Bogdanović — Copywriter
+          Slavisa Bogdanovic — Copywriter
         </p>
       </nav>
     </div>

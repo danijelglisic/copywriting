@@ -50,7 +50,7 @@ const Layout: FC<Props> = ({ children }) => {
           <div className="flex justify-between items-center h-full">
             <Link href="/" legacyBehavior>
               <a>
-                <span className="text-navy heading-4">Slaviša Bogdanović</span>
+                <span className="text-navy heading-4">Slavisa Bogdanovic</span>
               </a>
             </Link>
 
