@@ -93,7 +93,7 @@ const Layout: FC<Props> = ({ children }) => {
         <div className="container py-12">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
             <div>
-              <span className="heading-4 text-white">Slaviša Bogdanović</span>
+              <span className="heading-4 text-white">Slavisa Bogdanovic</span>
               <p className="text-gray-400 body-3 mt-1">Copywriter</p>
             </div>
             <div className="flex flex-col sm:flex-row gap-6 text-gray-400 body-3">
@@ -110,7 +110,7 @@ const Layout: FC<Props> = ({ children }) => {
             </div>
           </div>
           <div className="border-t border-white border-opacity-10 mt-10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-gray-500 body-4">
-            <p>© 2025 Slaviša Bogdanović. All Rights Reserved.</p>
+            <p>© 2025 Slavisa Bogdanovic. All Rights Reserved.</p>
             <p>
               Created by{" "}
               <a
