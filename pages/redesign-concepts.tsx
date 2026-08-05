@@ -15,6 +15,12 @@ const secondaryCta = { label: "Portfolio", href: "/en/portfolio" };
 const primaryButtonClass =
   "rounded-full bg-navy px-7 py-[0.8125rem] text-center text-sm font-semibold text-white shadow-[0_18px_38px_rgba(10,31,68,0.16)] outline-offset-4 ring-1 ring-navy/10 transition duration-300 hover:-translate-y-0.5 hover:bg-black active:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-black";
 
+const PrimaryCtaLink = ({ href, label }: { href: string; label: string }) => (
+  <Link href={href} legacyBehavior>
+    <a className={primaryButtonClass}>{label}</a>
+  </Link>
+);
+
 type NavItem = { text: string; href: string };
 
 const navItems: NavItem[] = [
@@ -351,9 +357,7 @@ const HeroCopy = ({
       transition={sharedTransition}
       className="mt-10 flex flex-col gap-3 sm:flex-row"
     >
-      <Link href={primaryCta.href} legacyBehavior>
-        <a className={primaryButtonClass}>{primaryCta.label}</a>
-      </Link>
+      <PrimaryCtaLink href={primaryCta.href} label={primaryCta.label} />
       <Link href={secondaryCta.href} legacyBehavior>
         <a className="rounded-full border border-navy/55 bg-white px-7 py-[0.8125rem] text-center text-sm font-semibold text-black/90 shadow-[0_12px_28px_rgba(10,31,68,0.08)] outline-offset-4 transition duration-300 hover:-translate-y-0.5 hover:border-navy/70 hover:bg-navy/3 active:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-black">
           {secondaryCta.label}
@@ -408,6 +412,9 @@ const QuietAuthorityHero = ({
   </section>
 );
 
+const isVideoAdsLabel = (value?: string) =>
+  value?.trim().toLowerCase() === "video ads";
+
 const MeetSarahPreview = ({
   section,
 }: {
@@ -426,9 +433,9 @@ const MeetSarahPreview = ({
             transition={sharedTransition}
             className="relative"
           >
-            <div className="absolute inset-6 rounded-[2rem] bg-navy/10 blur-3xl" />
+            <div className="absolute inset-8 rounded-[2rem] bg-navy/5 blur-3xl" />
             {section.image ? (
-              <div className="relative overflow-hidden rounded-[1.75rem] border border-navy/10 bg-white p-2 shadow-[0_24px_64px_rgba(10,31,68,0.12)] transition duration-300 hover:-translate-y-1 lg:-rotate-1">
+              <div className="relative overflow-hidden rounded-[1.75rem] border border-navy/10 bg-white p-2 shadow-[0_14px_34px_rgba(10,31,68,0.08)] transition duration-300 hover:-translate-y-1">
                 <Image
                   src={section.image.url}
                   alt={section.image.alt}
@@ -447,15 +454,23 @@ const MeetSarahPreview = ({
             transition={{ ...sharedTransition, delay: 0.08 }}
             className="max-w-3xl"
           >
-            {section.subtitle ? (
+            {isVideoAdsLabel(section.subtitle) ||
+            isVideoAdsLabel(section.title) ? (
               <p className="mb-5 inline-flex rounded-full border border-black/10 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-navy shadow-[0_8px_24px_rgba(10,31,68,0.04)]">
-                {section.subtitle}
+                {isVideoAdsLabel(section.subtitle)
+                  ? section.subtitle
+                  : section.title}
               </p>
             ) : null}
-            {section.title ? (
+            {section.title && !isVideoAdsLabel(section.title) ? (
               <h2 className="text-4xl font-semibold leading-tight tracking-[-0.045em] text-black sm:text-5xl">
                 {section.title}
               </h2>
+            ) : null}
+            {section.subtitle && !isVideoAdsLabel(section.subtitle) ? (
+              <p className="mt-5 text-xl font-medium leading-8 text-black/72">
+                {section.subtitle}
+              </p>
             ) : null}
             {section.richText ? (
               <div className="mt-7 text-lg leading-9 text-black/68 [&_p]:mb-6">
@@ -463,11 +478,12 @@ const MeetSarahPreview = ({
               </div>
             ) : null}
             {section.cta?.href && section.cta?.label ? (
-              <Link legacyBehavior href={section.cta.href}>
-                <a className={`${primaryButtonClass} mt-8 inline-block`}>
-                  {section.cta.label}
-                </a>
-              </Link>
+              <div className="mt-8">
+                <PrimaryCtaLink
+                  href={section.cta.href}
+                  label={section.cta.label}
+                />
+              </div>
             ) : null}
           </motion.div>
         </div>
