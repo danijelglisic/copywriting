@@ -64,8 +64,8 @@ const PreviewHeader = () => {
       <header
         className={`sticky top-0 z-50 border-b transition-all duration-300 ${
           scrolled
-            ? "border-navy/10 bg-white/90 shadow-[0_12px_34px_rgba(10,31,68,0.07)] backdrop-blur-2xl"
-            : "border-transparent bg-white/96 backdrop-blur-md"
+            ? "border-navy/10 bg-white/94 shadow-[0_14px_36px_rgba(10,31,68,0.055)] backdrop-blur-2xl"
+            : "border-transparent bg-white/98 backdrop-blur-lg"
         }`}
       >
         <div className="container flex h-16 items-center justify-between gap-6">
@@ -328,7 +328,7 @@ const HeroCopy = ({
         </a>
       </Link>
       <Link href={secondaryCta.href} legacyBehavior>
-        <a className="rounded-full border border-navy/40 bg-white px-7 py-3.5 text-center text-sm font-semibold text-black shadow-[0_12px_28px_rgba(10,31,68,0.08)] outline-offset-4 transition duration-300 hover:-translate-y-0.5 hover:border-navy/60 hover:bg-white active:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-black">
+        <a className="rounded-full border border-navy/55 bg-white px-7 py-3.5 text-center text-sm font-semibold text-black/90 shadow-[0_12px_28px_rgba(10,31,68,0.08)] outline-offset-4 transition duration-300 hover:-translate-y-0.5 hover:border-navy/70 hover:bg-navy/3 active:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-black">
           {secondaryCta.label}
         </a>
       </Link>
