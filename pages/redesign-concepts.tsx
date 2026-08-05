@@ -9,17 +9,19 @@ import { client } from "@/helpers/clinet";
 import { EN_HOME_SLUG, PAGE_TYPE } from "@/helpers/contentTypes";
 import { richTextOptions } from "@/helpers/richTextOptions";
 
-const primaryCta = { label: "Book a consultation", href: "/en/contact" };
-const secondaryCta = { label: "View portfolio", href: "/en/portfolio" };
+const primaryCta = { label: "Contact", href: "/en/contact" };
+const secondaryCta = { label: "Portfolio", href: "/en/portfolio" };
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 16 },
+  hidden: { opacity: 0, y: 14 },
   visible: { opacity: 1, y: 0 },
 };
 
-const sharedTransition = { duration: 0.65, ease: [0.21, 0.47, 0.32, 0.98] };
+const sharedTransition = { duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] };
 
-type ConceptProps = {
+type RedesignConceptsProps = {
+  seoTitle?: string;
+  seoDescription?: string;
   hero: {
     heading?: string;
     heading2?: string[];
@@ -50,46 +52,32 @@ const getAsset = (asset: any) => {
   };
 };
 
-const HeroCopy = ({
-  hero,
-  inverse = false,
-}: {
-  hero: ConceptProps["hero"];
-  inverse?: boolean;
-}) => (
+const HeroCopy = ({ hero }: { hero: RedesignConceptsProps["hero"] }) => (
   <motion.div
     initial="hidden"
     whileInView="visible"
     viewport={{ once: true, amount: 0.35 }}
-    transition={{ staggerChildren: 0.07 }}
+    transition={{ staggerChildren: 0.06 }}
     className="relative z-10 max-w-4xl"
   >
-    <motion.div
-      variants={fadeUp}
-      transition={sharedTransition}
-      className={`mb-6 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.28em] ${inverse ? "text-slate-400" : "text-slate-500"}`}
-    >
-      <span
-        className={`h-px w-10 ${inverse ? "bg-white/30" : "bg-slate-300"}`}
-      />
-      <span>Copywriter</span>
-    </motion.div>
-    <motion.h1
-      variants={fadeUp}
-      transition={sharedTransition}
-      className={`text-5xl font-semibold leading-[0.95] tracking-[-0.06em] sm:text-6xl lg:text-7xl ${inverse ? "text-white" : "text-slate-950"}`}
-    >
-      {hero.heading}
-    </motion.h1>
+    {hero.heading ? (
+      <motion.h1
+        variants={fadeUp}
+        transition={sharedTransition}
+        className="text-5xl font-semibold leading-[0.94] tracking-[-0.065em] text-slate-950 sm:text-6xl lg:text-7xl xl:text-8xl"
+      >
+        {hero.heading}
+      </motion.h1>
+    ) : null}
     {hero.heading2?.length ? (
       <motion.ul
         variants={fadeUp}
         transition={sharedTransition}
-        className={`mt-8 grid gap-3 text-2xl font-semibold leading-tight tracking-[-0.035em] sm:text-3xl ${inverse ? "text-slate-100" : "text-slate-800"}`}
+        className="mt-8 grid max-w-3xl gap-3 text-2xl font-semibold leading-tight tracking-[-0.035em] text-slate-800 sm:text-3xl lg:text-4xl"
       >
         {hero.heading2.map((item) => (
-          <li key={item} className="flex gap-3">
-            <span className={inverse ? "text-slate-500" : "text-slate-300"}>
+          <li key={item} className="grid grid-cols-[1.25rem_1fr] gap-3">
+            <span aria-hidden="true" className="text-slate-300">
               —
             </span>
             <span>{item}</span>
@@ -101,7 +89,7 @@ const HeroCopy = ({
       <motion.div
         variants={fadeUp}
         transition={sharedTransition}
-        className={`mt-8 max-w-3xl text-lg leading-8 sm:text-xl sm:leading-9 [&_p]:mb-4 ${inverse ? "text-slate-300" : "text-slate-600"}`}
+        className="mt-8 max-w-3xl text-lg leading-8 text-slate-600 sm:text-xl sm:leading-9 [&_a]:text-slate-950 [&_a]:underline [&_p]:mb-4"
       >
         {documentToReactComponents(hero.text, richTextOptions)}
       </motion.div>
@@ -112,16 +100,12 @@ const HeroCopy = ({
       className="mt-10 flex flex-col gap-3 sm:flex-row"
     >
       <Link href={primaryCta.href} legacyBehavior>
-        <a
-          className={`rounded-full px-6 py-3 text-center text-sm font-semibold shadow-[0_16px_40px_rgba(15,23,42,0.16)] transition duration-300 hover:-translate-y-0.5 ${inverse ? "bg-white text-slate-950 hover:bg-slate-100" : "bg-slate-950 text-white hover:bg-slate-800"}`}
-        >
+        <a className="rounded-full bg-slate-950 px-7 py-3.5 text-center text-sm font-semibold text-white shadow-[0_16px_36px_rgba(15,23,42,0.14)] outline-offset-4 transition duration-300 hover:-translate-y-0.5 hover:bg-slate-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-slate-950">
           {primaryCta.label}
         </a>
       </Link>
       <Link href={secondaryCta.href} legacyBehavior>
-        <a
-          className={`rounded-full border px-6 py-3 text-center text-sm font-semibold transition duration-300 hover:-translate-y-0.5 ${inverse ? "border-white/15 bg-white/5 text-white hover:bg-white/10" : "border-slate-200 bg-white text-slate-800 shadow-sm hover:border-slate-300"}`}
-        >
+        <a className="rounded-full border border-slate-200 bg-white px-7 py-3.5 text-center text-sm font-semibold text-slate-800 shadow-sm outline-offset-4 transition duration-300 hover:-translate-y-0.5 hover:border-slate-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-slate-950">
           {secondaryCta.label}
         </a>
       </Link>
@@ -129,26 +113,18 @@ const HeroCopy = ({
   </motion.div>
 );
 
-const Portrait = ({
-  hero,
-  inverse = false,
-}: {
-  hero: ConceptProps["hero"];
-  inverse?: boolean;
-}) => {
+const Portrait = ({ hero }: { hero: RedesignConceptsProps["hero"] }) => {
   if (!hero.image) return null;
 
   return (
     <motion.figure
-      initial={{ opacity: 0, y: 18 }}
+      initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.35 }}
-      transition={{ ...sharedTransition, delay: 0.12 }}
-      className={`relative mx-auto w-full max-w-[22rem] ${inverse ? "text-slate-400" : "text-slate-500"}`}
+      transition={{ ...sharedTransition, delay: 0.1 }}
+      className="relative mx-auto w-full max-w-[20rem] text-slate-500 lg:max-w-[22rem]"
     >
-      <div
-        className={`overflow-hidden rounded-[1.75rem] ${inverse ? "bg-white/5 ring-1 ring-white/10 shadow-[0_34px_80px_rgba(0,0,0,0.32)]" : "bg-slate-100 ring-1 ring-slate-200 shadow-[0_28px_70px_rgba(15,23,42,0.13)]"}`}
-      >
+      <div className="overflow-hidden rounded-[1.5rem] bg-slate-100 shadow-[0_24px_60px_rgba(15,23,42,0.12)] ring-1 ring-slate-200/80">
         <Image
           src={hero.image.url}
           alt={hero.image.alt || "Slavisa Bogdanovic"}
@@ -165,33 +141,17 @@ const Portrait = ({
   );
 };
 
-const ConceptA = ({ hero }: { hero: ConceptProps["hero"] }) => (
-  <section className="overflow-hidden rounded-[2rem] border border-slate-200 bg-[#fbfaf7] px-6 py-16 sm:px-10 lg:px-16 lg:py-24">
-    <div className="grid items-center gap-14 lg:grid-cols-[1.35fr_0.65fr]">
-      <HeroCopy hero={hero} />
-      <Portrait hero={hero} />
-    </div>
-  </section>
-);
-
-const ConceptB = ({ hero }: { hero: ConceptProps["hero"] }) => (
-  <section className="relative overflow-hidden rounded-[2.25rem] border border-slate-200 bg-white px-6 py-16 shadow-[0_24px_75px_rgba(15,23,42,0.07)] sm:px-10 lg:px-16 lg:py-24">
-    <div className="absolute inset-y-10 right-10 hidden w-px bg-gradient-to-b from-transparent via-slate-200 to-transparent lg:block" />
-    <div className="relative grid items-center gap-14 lg:grid-cols-[1.25fr_0.75fr]">
-      <HeroCopy hero={hero} />
-      <div className="rounded-[2.25rem] bg-slate-50 p-4 ring-1 ring-slate-100">
+const QuietAuthorityHero = ({
+  hero,
+}: {
+  hero: RedesignConceptsProps["hero"];
+}) => (
+  <section className="overflow-hidden bg-[#fbfaf7]">
+    <div className="container py-16 sm:py-20 lg:py-28">
+      <div className="grid items-center gap-14 lg:grid-cols-[minmax(0,1.45fr)_minmax(18rem,0.55fr)] lg:gap-16">
+        <HeroCopy hero={hero} />
         <Portrait hero={hero} />
       </div>
-    </div>
-  </section>
-);
-
-const ConceptC = ({ hero }: { hero: ConceptProps["hero"] }) => (
-  <section className="relative overflow-hidden rounded-[2.5rem] bg-[#080a0f] px-6 py-16 text-white shadow-[0_30px_90px_rgba(15,23,42,0.24)] sm:px-10 lg:px-16 lg:py-24">
-    <div className="absolute inset-x-8 top-8 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-    <div className="relative grid items-center gap-14 lg:grid-cols-[1.28fr_0.72fr]">
-      <HeroCopy hero={hero} inverse />
-      <Portrait hero={hero} inverse />
     </div>
   </section>
 );
@@ -199,101 +159,70 @@ const ConceptC = ({ hero }: { hero: ConceptProps["hero"] }) => (
 const SocialProofPreview = ({
   socialProof,
 }: {
-  socialProof: ConceptProps["socialProof"];
+  socialProof: RedesignConceptsProps["socialProof"];
 }) => {
   if (!socialProof?.images.length) return null;
 
   return (
-    <section className="rounded-[2rem] border border-slate-200 bg-slate-50 px-6 py-12 sm:px-10">
-      <div className="mb-8 max-w-3xl">
-        <p className="text-xs font-semibold uppercase tracking-[0.28em] text-slate-500">
-          Social proof treatment
-        </p>
-        {socialProof.title ? (
-          <h2 className="mt-3 text-3xl font-semibold tracking-[-0.04em] text-slate-950">
-            {socialProof.title}
-          </h2>
-        ) : null}
-        {socialProof.description ? (
-          <p className="mt-4 text-lg leading-8 text-slate-600">
-            {socialProof.description}
-          </p>
-        ) : null}
-      </div>
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        {socialProof.images.slice(0, 4).map((image) => (
-          <div
-            key={image.url}
-            className="overflow-hidden rounded-[1.25rem] bg-white p-2 shadow-sm ring-1 ring-slate-200"
-          >
-            <Image
-              src={image.url}
-              alt={image.alt}
-              width={300}
-              height={600}
-              className="h-auto w-full rounded-[1rem]"
-            />
-          </div>
-        ))}
+    <section className="bg-white py-16 sm:py-20">
+      <div className="container">
+        <div className="mx-auto max-w-3xl text-center">
+          {socialProof.title ? (
+            <h2 className="text-3xl font-semibold tracking-[-0.04em] text-slate-950 sm:text-4xl">
+              {socialProof.title}
+            </h2>
+          ) : null}
+          {socialProof.description ? (
+            <p className="mt-4 text-lg leading-8 text-slate-600">
+              {socialProof.description}
+            </p>
+          ) : null}
+        </div>
+        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          {socialProof.images.slice(0, 4).map((image) => (
+            <div
+              key={image.url}
+              className="overflow-hidden rounded-[1.25rem] bg-white p-2 shadow-[0_16px_44px_rgba(15,23,42,0.08)] ring-1 ring-slate-200"
+            >
+              <Image
+                src={image.url}
+                alt={image.alt}
+                width={300}
+                height={600}
+                className="h-auto w-full rounded-[1rem]"
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
 };
 
-const RedesignConcepts = ({ hero, socialProof }: ConceptProps) => {
+const RedesignConcepts = ({
+  seoTitle,
+  seoDescription,
+  hero,
+  socialProof,
+}: RedesignConceptsProps) => {
   return (
     <Layout>
       <Metadata
-        title="Hero Redesign Concepts | Slavisa Bogdanovic"
-        description="Temporary live comparison of three premium hero redesign concepts."
+        title={seoTitle ?? "Slaviša Bogdanović"}
+        description={seoDescription ?? ""}
         path="redesign-concepts"
       />
-      <div className="bg-white">
-        <div className="container py-12 sm:py-16">
-          <div className="mb-12 max-w-3xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-secondary">
-              Temporary preview
-            </p>
-            <h1 className="mt-4 text-4xl font-semibold tracking-[-0.04em] text-slate-950 sm:text-5xl">
-              Live Hero concepts
-            </h1>
-            <p className="mt-5 text-lg leading-8 text-slate-600">
-              Three responsive directions using the current Home page copy,
-              existing Contentful photograph, current navigation links, and a
-              restrained premium personal-brand presentation. The production
-              Home page is unchanged.
-            </p>
-          </div>
-          <div className="space-y-10">
-            <div>
-              <h2 className="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-slate-500">
-                Concept A — Quiet Authority
-              </h2>
-              <ConceptA hero={hero} />
-            </div>
-            <div>
-              <h2 className="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-slate-500">
-                Concept B — Balanced Premium
-              </h2>
-              <ConceptB hero={hero} />
-            </div>
-            <div>
-              <h2 className="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-slate-500">
-                Concept C — Modern Premium
-              </h2>
-              <ConceptC hero={hero} />
-            </div>
-            <SocialProofPreview socialProof={socialProof} />
-          </div>
-        </div>
-      </div>
+      <QuietAuthorityHero hero={hero} />
+      <SocialProofPreview socialProof={socialProof} />
     </Layout>
   );
 };
 
 export default RedesignConcepts;
 
-export const getStaticProps: GetStaticProps<ConceptProps> = async () => {
+export const getStaticProps: GetStaticProps<
+  RedesignConceptsProps
+> = async () => {
   const homepageResponse = await client().getEntries({
     content_type: PAGE_TYPE,
     "fields.slug": EN_HOME_SLUG,
@@ -309,15 +238,16 @@ export const getStaticProps: GetStaticProps<ConceptProps> = async () => {
   );
   const landingFields = landingSection?.fields ?? {};
   const sliderFields = photoSlider?.fields ?? {};
-  const heroImage = getAsset(landingFields.image);
 
   return {
     props: {
+      seoTitle: homepage?.fields?.seoTitle ?? null,
+      seoDescription: homepage?.fields?.seoDesctiption ?? null,
       hero: {
-        heading: landingFields.heading ?? "Slavisa Bogdanovic",
+        heading: landingFields.heading ?? null,
         heading2: landingFields.heading2 ?? [],
         text: landingFields.text ?? null,
-        image: heroImage,
+        image: getAsset(landingFields.image),
       },
       socialProof: photoSlider
         ? {
