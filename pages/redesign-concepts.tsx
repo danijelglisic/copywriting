@@ -68,15 +68,15 @@ const PreviewHeader = () => {
             : "border-transparent bg-white/92 backdrop-blur-sm"
         }`}
       >
-        <div className="container flex h-14 items-center justify-between gap-5">
+        <div className="container flex h-16 items-center justify-between gap-6">
           <Link href="/" className="group inline-flex flex-col leading-none">
-            <span className="text-base font-semibold tracking-[-0.035em] text-black transition-colors group-hover:text-navy sm:text-lg">
+            <span className="text-xl font-semibold tracking-[-0.045em] text-black transition-colors group-hover:text-navy sm:text-2xl">
               Slavisa Bogdanovic
             </span>
           </Link>
 
           <nav
-            className="hidden items-center gap-0 rounded-full border border-black/10 bg-white/80 p-1 shadow-[0_8px_24px_rgba(10,31,68,0.04)] lg:flex"
+            className="hidden items-center gap-1 rounded-full border border-black/10 bg-white/80 p-1.5 shadow-[0_8px_24px_rgba(10,31,68,0.04)] lg:flex"
             aria-label="Main"
           >
             {links.map((item) => {
@@ -86,7 +86,7 @@ const PreviewHeader = () => {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`rounded-full px-4 py-2 text-sm font-medium outline-offset-4 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-navy ${
+                  className={`rounded-full px-4.5 py-2 text-sm font-medium outline-offset-4 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-navy ${
                     isActive
                       ? "bg-navy text-white"
                       : "text-black/62 hover:bg-navy/6 hover:text-black"
@@ -101,7 +101,7 @@ const PreviewHeader = () => {
           <div className="hidden lg:block">
             <Link
               href={cta.href}
-              className="rounded-full bg-navy px-5 py-2 text-sm font-semibold text-white shadow-[0_10px_26px_rgba(10,31,68,0.14)] outline-offset-4 ring-1 ring-navy/10 transition duration-300 hover:-translate-y-0.5 hover:bg-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-navy"
+              className="rounded-full bg-navy px-5 py-2.5 text-sm font-semibold text-white shadow-[0_10px_26px_rgba(10,31,68,0.14)] outline-offset-4 ring-1 ring-navy/10 transition duration-300 hover:-translate-y-0.5 hover:bg-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-navy"
             >
               {cta.text}
             </Link>
@@ -109,7 +109,7 @@ const PreviewHeader = () => {
 
           <button
             type="button"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-black/10 bg-white text-black shadow-sm transition hover:border-navy/20 lg:hidden"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-black/10 bg-white text-black shadow-sm transition hover:border-navy/20 lg:hidden"
             onClick={() => setIsOpen((value) => !value)}
             aria-label={isOpen ? "close menu" : "toggle menu"}
             aria-expanded={isOpen}
@@ -142,9 +142,9 @@ const PreviewHeader = () => {
       {isOpen ? (
         <div
           id="redesign-mobile-menu"
-          className="fixed inset-x-0 top-14 z-40 border-b border-navy/10 bg-white/96 shadow-[0_24px_60px_rgba(10,31,68,0.12)] backdrop-blur-xl lg:hidden"
+          className="fixed inset-x-0 top-16 z-40 border-b border-navy/10 bg-white/96 shadow-[0_24px_60px_rgba(10,31,68,0.12)] backdrop-blur-xl lg:hidden"
         >
-          <nav className="container py-3" aria-label="Main">
+          <nav className="container py-4" aria-label="Main">
             <div className="grid gap-1">
               {links.map((item) => (
                 <Link
@@ -172,7 +172,7 @@ const PreviewHeader = () => {
 const PreviewFooter = () => (
   <footer className="border-t border-navy bg-navy text-white">
     <div className="container py-16 sm:py-[4.5rem]">
-      <div className="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
+      <div className="grid gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
         <div className="max-w-xl">
           <span className="text-3xl font-semibold tracking-[-0.045em] text-white sm:text-4xl">
             Slavisa Bogdanovic
@@ -201,7 +201,7 @@ const PreviewFooter = () => (
           </div>
         </div>
       </div>
-      <div className="mt-12 flex flex-col gap-4 border-t border-white/10 pt-7 text-sm leading-6 text-white/48 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mt-14 flex flex-col gap-4 border-t border-white/10 pt-7 text-sm leading-6 text-white/48 sm:flex-row sm:items-center sm:justify-between">
         <p>© 2026 Slavisa Bogdanovic. All Rights Reserved.</p>
         <p>
           Created by{" "}
@@ -323,12 +323,12 @@ const HeroCopy = ({
       className="mt-10 flex flex-col gap-3 sm:flex-row"
     >
       <Link href={primaryCta.href} legacyBehavior>
-        <a className="rounded-full bg-navy px-7 py-3.5 text-center text-sm font-semibold text-white shadow-[0_16px_36px_rgba(10,31,68,0.14)] outline-offset-4 transition duration-300 hover:-translate-y-0.5 hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-black">
+        <a className="rounded-full bg-navy px-7 py-3.5 text-center text-sm font-semibold text-white shadow-[0_18px_38px_rgba(10,31,68,0.16)] outline-offset-4 ring-1 ring-navy/10 transition duration-300 hover:-translate-y-0.5 hover:bg-black active:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-black">
           {primaryCta.label}
         </a>
       </Link>
       <Link href={secondaryCta.href} legacyBehavior>
-        <a className="rounded-full border border-navy/25 bg-white px-7 py-3.5 text-center text-sm font-semibold text-navy shadow-[0_12px_28px_rgba(10,31,68,0.07)] outline-offset-4 transition duration-300 hover:-translate-y-0.5 hover:border-navy/45 hover:bg-navy/4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-black">
+        <a className="rounded-full border border-navy/25 bg-white px-7 py-3.5 text-center text-sm font-semibold text-navy shadow-[0_12px_28px_rgba(10,31,68,0.08)] outline-offset-4 transition duration-300 hover:-translate-y-0.5 hover:border-navy/45 hover:bg-navy/4 active:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-black">
           {secondaryCta.label}
         </a>
       </Link>
@@ -345,9 +345,9 @@ const Portrait = ({ hero }: { hero: RedesignConceptsProps["hero"] }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.35 }}
       transition={{ ...sharedTransition, delay: 0.1 }}
-      className="relative mx-auto w-full max-w-[25.5rem] text-black/50 lg:max-w-[29.5rem]"
+      className="relative mx-auto w-full max-w-[26.75rem] text-black/50 lg:max-w-[31rem]"
     >
-      <div className="overflow-hidden rounded-[2rem] border border-navy/10 bg-white p-2 shadow-[0_24px_62px_rgba(10,31,68,0.12)]">
+      <div className="overflow-hidden rounded-[2rem] border border-navy/10 bg-white p-2 shadow-[0_26px_66px_rgba(10,31,68,0.12)]">
         <Image
           src={hero.image.url}
           alt={hero.image.alt || "Slavisa Bogdanovic"}
@@ -372,8 +372,8 @@ const QuietAuthorityHero = ({
   primaryCta: RedesignConceptsProps["primaryCta"];
 }) => (
   <section className="relative overflow-hidden bg-white">
-    <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_42%,rgba(10,31,68,0.075),transparent_34%),linear-gradient(180deg,rgba(10,31,68,0.035),rgba(255,255,255,0)_38%)]" />
-    <div className="container relative py-16 sm:py-20 lg:py-28">
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_40%,rgba(10,31,68,0.055),transparent_34%),linear-gradient(180deg,rgba(10,31,68,0.025),rgba(255,255,255,0)_34%)]" />
+    <div className="container relative pb-16 pt-10 sm:pb-20 sm:pt-12 lg:pb-28 lg:pt-16">
       <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.28fr)_minmax(22rem,0.72fr)] lg:gap-12">
         <HeroCopy hero={hero} primaryCta={primaryCta} />
         <Portrait hero={hero} />
