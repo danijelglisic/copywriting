@@ -433,7 +433,7 @@ const meetSarahRichTextOptions = {
 
       if (isVideoAdsLabel(text)) {
         return (
-          <p className="mb-3 mt-10 inline-flex rounded-full border border-black/10 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-navy shadow-[0_8px_24px_rgba(10,31,68,0.04)]">
+          <p className="mb-3 mt-10 text-xs font-bold uppercase tracking-[0.26em] text-black">
             {children}
           </p>
         );
@@ -496,7 +496,7 @@ const MeetSarahPreview = ({
               </p>
             ) : null}
             {isVideoAdsLabel(section.subtitle) ? (
-              <p className="mb-3 mt-10 inline-flex rounded-full border border-black/10 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-navy shadow-[0_8px_24px_rgba(10,31,68,0.04)]">
+              <p className="mb-3 mt-10 text-xs font-bold uppercase tracking-[0.26em] text-black">
                 {section.subtitle}
               </p>
             ) : null}
