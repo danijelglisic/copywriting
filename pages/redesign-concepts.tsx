@@ -4,6 +4,7 @@ import Link from "next/link";
 import { GetStaticProps } from "next";
 import { motion } from "framer-motion";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { BLOCKS } from "@contentful/rich-text-types";
 import { useRouter } from "next/router";
 import Metadata from "@/components/metadata/Metadata";
 import { client } from "@/helpers/clinet";
@@ -415,6 +416,36 @@ const QuietAuthorityHero = ({
 const isVideoAdsLabel = (value?: string) =>
   value?.trim().toLowerCase() === "video ads";
 
+const getNodeText = (node: any): string => {
+  if (!node?.content) return "";
+
+  return node.content
+    .map((child: any) => child.value ?? getNodeText(child))
+    .join("");
+};
+
+const meetSarahRichTextOptions = {
+  ...richTextOptions,
+  renderNode: {
+    ...richTextOptions.renderNode,
+    [BLOCKS.PARAGRAPH]: (node: any, children: React.ReactNode) => {
+      const text = getNodeText(node).trim();
+
+      if (isVideoAdsLabel(text)) {
+        return (
+          <p className="mb-3 mt-10 inline-flex rounded-full border border-black/10 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-navy shadow-[0_8px_24px_rgba(10,31,68,0.04)]">
+            {children}
+          </p>
+        );
+      }
+
+      if (!text) return <p className="h-4" aria-hidden="true" />;
+
+      return <p className="mb-5 last:mb-0">{children}</p>;
+    },
+  },
+};
+
 const MeetSarahPreview = ({
   section,
 }: {
@@ -454,14 +485,6 @@ const MeetSarahPreview = ({
             transition={{ ...sharedTransition, delay: 0.08 }}
             className="max-w-3xl"
           >
-            {isVideoAdsLabel(section.subtitle) ||
-            isVideoAdsLabel(section.title) ? (
-              <p className="mb-5 inline-flex rounded-full border border-black/10 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-navy shadow-[0_8px_24px_rgba(10,31,68,0.04)]">
-                {isVideoAdsLabel(section.subtitle)
-                  ? section.subtitle
-                  : section.title}
-              </p>
-            ) : null}
             {section.title && !isVideoAdsLabel(section.title) ? (
               <h2 className="text-4xl font-semibold leading-tight tracking-[-0.045em] text-black sm:text-5xl">
                 {section.title}
@@ -472,13 +495,21 @@ const MeetSarahPreview = ({
                 {section.subtitle}
               </p>
             ) : null}
+            {isVideoAdsLabel(section.subtitle) ? (
+              <p className="mb-3 mt-10 inline-flex rounded-full border border-black/10 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-navy shadow-[0_8px_24px_rgba(10,31,68,0.04)]">
+                {section.subtitle}
+              </p>
+            ) : null}
             {section.richText ? (
-              <div className="mt-7 text-lg leading-9 text-black/68 [&_p]:mb-6">
-                {documentToReactComponents(section.richText, richTextOptions)}
+              <div className="mt-0 text-lg leading-9 text-black/68">
+                {documentToReactComponents(
+                  section.richText,
+                  meetSarahRichTextOptions
+                )}
               </div>
             ) : null}
             {section.cta?.href && section.cta?.label ? (
-              <div className="mt-8">
+              <div className="mt-6">
                 <PrimaryCtaLink
                   href={section.cta.href}
                   label={section.cta.label}
