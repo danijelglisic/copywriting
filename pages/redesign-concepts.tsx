@@ -76,7 +76,7 @@ const PreviewHeader = () => {
           </Link>
 
           <nav
-            className="hidden items-center gap-1 rounded-full border border-black/10 bg-white/80 p-1.5 shadow-[0_8px_24px_rgba(10,31,68,0.04)] lg:flex"
+            className="hidden items-center gap-2 rounded-full border border-black/10 bg-white/80 p-1.5 shadow-[0_8px_24px_rgba(10,31,68,0.04)] lg:flex"
             aria-label="Main"
           >
             {links.map((item) => {
@@ -86,7 +86,7 @@ const PreviewHeader = () => {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`rounded-full px-4.5 py-2 text-sm font-medium outline-offset-4 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-navy ${
+                  className={`rounded-full px-4 py-2 text-sm font-medium outline-offset-4 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-navy ${
                     isActive
                       ? "bg-navy text-white"
                       : "text-black/62 hover:bg-navy/6 hover:text-black"
@@ -345,7 +345,7 @@ const Portrait = ({ hero }: { hero: RedesignConceptsProps["hero"] }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.35 }}
       transition={{ ...sharedTransition, delay: 0.1 }}
-      className="relative mx-auto w-full max-w-[26.75rem] text-black/50 lg:max-w-[31rem]"
+      className="relative mx-auto w-full max-w-[26.75rem] text-black/50 lg:mx-0 lg:max-w-[31rem]"
     >
       <div className="overflow-hidden rounded-[2rem] border border-navy/10 bg-white p-2 shadow-[0_26px_66px_rgba(10,31,68,0.12)]">
         <Image
@@ -373,8 +373,8 @@ const QuietAuthorityHero = ({
 }) => (
   <section className="relative overflow-hidden bg-white">
     <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_40%,rgba(10,31,68,0.055),transparent_34%),linear-gradient(180deg,rgba(10,31,68,0.025),rgba(255,255,255,0)_34%)]" />
-    <div className="container relative pb-16 pt-10 sm:pb-20 sm:pt-12 lg:pb-28 lg:pt-16">
-      <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.28fr)_minmax(22rem,0.72fr)] lg:gap-12">
+    <div className="container relative pb-16 pt-6 sm:pb-20 sm:pt-8 lg:pb-28 lg:pt-10">
+      <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.28fr)_minmax(22rem,0.72fr)] lg:gap-10">
         <HeroCopy hero={hero} primaryCta={primaryCta} />
         <Portrait hero={hero} />
       </div>
