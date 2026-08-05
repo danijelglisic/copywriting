@@ -319,10 +319,7 @@ const getContentText = (value: any): string => {
   if (typeof value === "string") return value;
   if (Array.isArray(value)) return value.map(getContentText).join(" ");
   if (typeof value === "object") {
-    return [value.value, value.fields, value.content]
-      .map(getContentText)
-      .filter(Boolean)
-      .join(" ");
+    return Object.values(value).map(getContentText).filter(Boolean).join(" ");
   }
 
   return "";
