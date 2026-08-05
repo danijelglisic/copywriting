@@ -326,12 +326,12 @@ const HeroCopy = ({
       className="mt-10 flex flex-col gap-3 sm:flex-row"
     >
       <Link href={primaryCta.href} legacyBehavior>
-        <a className="rounded-full bg-navy px-7 py-3.5 text-center text-sm font-semibold text-white shadow-[0_18px_38px_rgba(10,31,68,0.16)] outline-offset-4 ring-1 ring-navy/10 transition duration-300 hover:-translate-y-0.5 hover:bg-black active:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-black">
+        <a className="rounded-full bg-navy px-7 py-[0.8125rem] text-center text-sm font-semibold text-white shadow-[0_18px_38px_rgba(10,31,68,0.16)] outline-offset-4 ring-1 ring-navy/10 transition duration-300 hover:-translate-y-0.5 hover:bg-black active:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-black">
           {primaryCta.label}
         </a>
       </Link>
       <Link href={secondaryCta.href} legacyBehavior>
-        <a className="rounded-full border border-navy/55 bg-white px-7 py-3.5 text-center text-sm font-semibold text-black/90 shadow-[0_12px_28px_rgba(10,31,68,0.08)] outline-offset-4 transition duration-300 hover:-translate-y-0.5 hover:border-navy/70 hover:bg-navy/3 active:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-black">
+        <a className="rounded-full border border-navy/55 bg-white px-7 py-[0.8125rem] text-center text-sm font-semibold text-black/90 shadow-[0_12px_28px_rgba(10,31,68,0.08)] outline-offset-4 transition duration-300 hover:-translate-y-0.5 hover:border-navy/70 hover:bg-navy/3 active:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-black">
           {secondaryCta.label}
         </a>
       </Link>
@@ -375,7 +375,7 @@ const QuietAuthorityHero = ({
   primaryCta: RedesignConceptsProps["primaryCta"];
 }) => (
   <section className="relative overflow-hidden bg-[#F5F2EC]">
-    <div className="container relative pb-16 pt-6 sm:pb-20 sm:pt-8 lg:pb-28 lg:pt-10">
+    <div className="container relative pb-16 pt-3 sm:pb-20 sm:pt-5 lg:pb-28 lg:pt-7">
       <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.28fr)_minmax(22rem,0.72fr)] lg:gap-10">
         <HeroCopy hero={hero} primaryCta={primaryCta} />
         <Portrait hero={hero} />
