@@ -1,10 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { GetStaticProps } from "next";
 import { motion } from "framer-motion";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import Layout from "@/components/layout/Layout";
+import { useRouter } from "next/router";
 import Metadata from "@/components/metadata/Metadata";
 import { client } from "@/helpers/clinet";
 import { EN_HOME_SLUG, PAGE_TYPE } from "@/helpers/contentTypes";
@@ -12,6 +12,213 @@ import { richTextOptions } from "@/helpers/richTextOptions";
 
 const defaultPrimaryCta = { label: "Book a discovery call", href: "" };
 const secondaryCta = { label: "Portfolio", href: "/en/portfolio" };
+
+type NavItem = { text: string; href: string };
+
+const navItems: NavItem[] = [
+  { text: "Portfolio", href: "/en/portfolio" },
+  { text: "Video Ads", href: "/en/video-ads" },
+  { text: "Email Sequences", href: "/en/email-sequences" },
+  { text: "Landing Pages", href: "/en/landing-pages" },
+  { text: "Contact", href: "/en/contact" },
+];
+
+const PreviewHeader = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const router = useRouter();
+  const cta = navItems[navItems.length - 1];
+  const links = navItems.slice(0, -1);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [router.asPath]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setIsOpen(false);
+    };
+    document.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      document.body.style.overflow = previous;
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [isOpen]);
+
+  return (
+    <>
+      <header
+        className={`sticky top-0 z-50 border-b transition-all duration-300 ${
+          scrolled
+            ? "border-slate-200/80 bg-white/82 shadow-[0_8px_30px_rgba(15,23,42,0.06)] backdrop-blur-xl"
+            : "border-transparent bg-white/95 backdrop-blur-sm"
+        }`}
+      >
+        <div className="container flex h-16 items-center justify-between gap-6">
+          <Link href="/" className="group inline-flex flex-col leading-none">
+            <span className="text-lg font-semibold tracking-[-0.035em] text-slate-950 transition-colors group-hover:text-navy sm:text-xl">
+              Slavisa Bogdanovic
+            </span>
+          </Link>
+
+          <nav className="hidden items-center gap-1 lg:flex" aria-label="Main">
+            {links.map((item) => {
+              const isActive = router.pathname === item.href;
+
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+                    isActive
+                      ? "bg-navy/8 text-navy"
+                      : "text-slate-600 hover:bg-slate-100 hover:text-slate-950"
+                  }`}
+                >
+                  {item.text}
+                </Link>
+              );
+            })}
+          </nav>
+
+          <div className="hidden lg:block">
+            <Link
+              href={cta.href}
+              className="rounded-full bg-navy px-5 py-2.5 text-sm font-semibold text-white shadow-[0_14px_32px_rgba(10,31,68,0.16)] outline-offset-4 transition duration-300 hover:-translate-y-0.5 hover:bg-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-navy"
+            >
+              {cta.text}
+            </Link>
+          </div>
+
+          <button
+            type="button"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-950 shadow-sm transition hover:border-slate-300 lg:hidden"
+            onClick={() => setIsOpen((value) => !value)}
+            aria-label={isOpen ? "close menu" : "toggle menu"}
+            aria-expanded={isOpen}
+            aria-controls="redesign-mobile-menu"
+          >
+            <span className="sr-only">
+              {isOpen ? "close menu" : "toggle menu"}
+            </span>
+            <span className="relative h-4 w-5">
+              <span
+                className={`absolute left-0 top-0 h-px w-5 bg-current transition-transform ${
+                  isOpen ? "translate-y-2 rotate-45" : ""
+                }`}
+              />
+              <span
+                className={`absolute left-0 top-2 h-px w-5 bg-current transition-opacity ${
+                  isOpen ? "opacity-0" : ""
+                }`}
+              />
+              <span
+                className={`absolute bottom-0 left-0 h-px w-5 bg-current transition-transform ${
+                  isOpen ? "-translate-y-[7px] -rotate-45" : ""
+                }`}
+              />
+            </span>
+          </button>
+        </div>
+      </header>
+
+      {isOpen ? (
+        <div
+          id="redesign-mobile-menu"
+          className="fixed inset-x-0 top-16 z-40 border-b border-slate-200 bg-white/96 shadow-[0_24px_60px_rgba(15,23,42,0.12)] backdrop-blur-xl lg:hidden"
+        >
+          <nav className="container py-4" aria-label="Main">
+            <div className="grid gap-1">
+              {links.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="rounded-2xl px-4 py-4 text-lg font-medium tracking-[-0.02em] text-slate-800 transition hover:bg-slate-100 hover:text-slate-950"
+                >
+                  {item.text}
+                </Link>
+              ))}
+              <Link
+                href={cta.href}
+                className="mt-3 rounded-full bg-navy px-5 py-4 text-center text-base font-semibold text-white transition hover:bg-dark"
+              >
+                {cta.text}
+              </Link>
+            </div>
+          </nav>
+        </div>
+      ) : null}
+    </>
+  );
+};
+
+const PreviewFooter = () => (
+  <footer className="bg-navy text-white">
+    <div className="container py-14 sm:py-16">
+      <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+        <div className="max-w-xl">
+          <span className="text-3xl font-semibold tracking-[-0.04em] text-white sm:text-4xl">
+            Slavisa Bogdanovic
+          </span>
+          <p className="mt-4 text-base font-medium text-white/62">Copywriter</p>
+          <p className="mt-2 text-base font-medium italic text-white/72">
+            Human-written. AI-refined.
+          </p>
+        </div>
+        <div className="flex flex-col gap-5 lg:items-end">
+          <div className="flex flex-col gap-3 text-sm font-medium text-white/64 sm:flex-row sm:gap-6">
+            <Link
+              href="/en/privacy-policy"
+              className="transition hover:text-white"
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              href="/en/terms-of-use"
+              className="transition hover:text-white"
+            >
+              Terms of Use
+            </Link>
+          </div>
+        </div>
+      </div>
+      <div className="mt-12 flex flex-col gap-4 border-t border-white/10 pt-6 text-sm text-white/48 sm:flex-row sm:items-center sm:justify-between">
+        <p>© 2026 Slavisa Bogdanovic. All Rights Reserved.</p>
+        <p>
+          Created by{" "}
+          <a
+            href="https://www.linkedin.com/in/danijel-glisic/"
+            className="underline decoration-white/30 underline-offset-4 transition hover:text-white"
+          >
+            Danijel Glišić
+          </a>
+        </p>
+      </div>
+    </div>
+  </footer>
+);
+
+const RedesignPreviewLayout = ({ children }: { children: React.ReactNode }) => (
+  <div className="min-h-screen bg-white text-slate-950">
+    <PreviewHeader />
+    <main>{children}</main>
+    <PreviewFooter />
+  </div>
+);
 
 const fadeUp = {
   hidden: { opacity: 0, y: 14 },
@@ -219,31 +426,16 @@ const RedesignConcepts = ({
   primaryCta,
   socialProof,
 }: RedesignConceptsProps) => {
-  useEffect(() => {
-    document.body.classList.add("redesign-concepts-preview");
-
-    return () => document.body.classList.remove("redesign-concepts-preview");
-  }, []);
-
   return (
-    <Layout>
+    <RedesignPreviewLayout>
       <Metadata
         title={seoTitle ?? "Slaviša Bogdanović"}
         description={seoDescription ?? ""}
         path="redesign-concepts"
       />
-      <style jsx global>{`
-        body.redesign-concepts-preview #__next > div > div.fixed {
-          height: 64px;
-        }
-
-        body.redesign-concepts-preview #__next > div > main {
-          padding-top: 64px;
-        }
-      `}</style>
       <QuietAuthorityHero hero={hero} primaryCta={primaryCta} />
       <SocialProofPreview socialProof={socialProof} />
-    </Layout>
+    </RedesignPreviewLayout>
   );
 };
 
