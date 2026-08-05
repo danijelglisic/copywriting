@@ -64,7 +64,7 @@ const HeroCopy = ({ hero }: { hero: RedesignConceptsProps["hero"] }) => (
       <motion.h1
         variants={fadeUp}
         transition={sharedTransition}
-        className="text-5xl font-semibold leading-[0.94] tracking-[-0.065em] text-slate-950 sm:text-6xl lg:text-7xl xl:text-8xl"
+        className="text-5xl font-semibold leading-[0.98] tracking-[-0.06em] text-slate-950 sm:text-6xl lg:text-7xl xl:text-[5.5rem] xl:leading-[0.96]"
       >
         {hero.heading}
       </motion.h1>
@@ -73,7 +73,7 @@ const HeroCopy = ({ hero }: { hero: RedesignConceptsProps["hero"] }) => (
       <motion.ul
         variants={fadeUp}
         transition={sharedTransition}
-        className="mt-8 grid max-w-3xl gap-3 text-2xl font-semibold leading-tight tracking-[-0.035em] text-slate-800 sm:text-3xl lg:text-4xl"
+        className="mt-8 grid max-w-3xl gap-3 text-2xl font-semibold leading-tight tracking-[-0.035em] text-slate-800 sm:text-3xl lg:text-[2rem]"
       >
         {hero.heading2.map((item) => (
           <li key={item} className="grid grid-cols-[1.25rem_1fr] gap-3">
@@ -230,13 +230,17 @@ export const getStaticProps: GetStaticProps<
   });
   const homepage = homepageResponse.items[0] as any;
   const sections = homepage?.fields?.contentSections ?? [];
-  const landingSection = sections.find(
-    (section: any) => section?.sys?.contentType?.sys?.id === "landingSection"
-  );
+  const heroSection = sections.find((section: any) => {
+    const contentType = section?.sys?.contentType?.sys?.id;
+    return (
+      contentType === "landingSection" || contentType === "videoLandingSection"
+    );
+  });
   const photoSlider = sections.find(
     (section: any) => section?.sys?.contentType?.sys?.id === "photoSlider"
   );
-  const landingFields = landingSection?.fields ?? {};
+  const heroFields = heroSection?.fields ?? {};
+  const heroContentType = heroSection?.sys?.contentType?.sys?.id;
   const sliderFields = photoSlider?.fields ?? {};
 
   return {
@@ -244,10 +248,16 @@ export const getStaticProps: GetStaticProps<
       seoTitle: homepage?.fields?.seoTitle ?? null,
       seoDescription: homepage?.fields?.seoDesctiption ?? null,
       hero: {
-        heading: landingFields.heading ?? null,
-        heading2: landingFields.heading2 ?? [],
-        text: landingFields.text ?? null,
-        image: getAsset(landingFields.image),
+        heading:
+          heroContentType === "videoLandingSection"
+            ? (heroFields.title ?? null)
+            : (heroFields.heading ?? null),
+        heading2: heroFields.heading2 ?? [],
+        text:
+          heroContentType === "videoLandingSection"
+            ? (heroFields.description ?? null)
+            : (heroFields.text ?? null),
+        image: getAsset(heroFields.image),
       },
       socialProof: photoSlider
         ? {
