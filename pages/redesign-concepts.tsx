@@ -273,6 +273,15 @@ type RedesignConceptsProps = {
       href?: string;
     } | null;
   } | null;
+  landingPages: {
+    title?: string;
+    subtitle?: string;
+    richText?: any;
+    cta?: {
+      label?: string;
+      href?: string;
+    } | null;
+  } | null;
   socialProof: {
     title?: string;
     description?: string;
@@ -523,6 +532,58 @@ const MeetSarahPreview = ({
   );
 };
 
+const LandingPagesPreview = ({
+  section,
+}: {
+  section: RedesignConceptsProps["landingPages"];
+}) => {
+  if (!section) return null;
+
+  const label = section.subtitle ?? section.title;
+  const heading = section.subtitle ? section.title : null;
+
+  return (
+    <section className="bg-[#F9F9F7] py-16 sm:py-20 lg:py-24">
+      <div className="container">
+        <div className="grid items-start gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.9fr)] lg:gap-20">
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.35 }}
+            transition={sharedTransition}
+            className="max-w-3xl"
+          >
+            {label ? (
+              <p className="mb-7 text-xl font-bold uppercase tracking-[0.24em] text-black">
+                {label}
+              </p>
+            ) : null}
+            {heading ? (
+              <h2 className="text-4xl font-semibold leading-tight tracking-[-0.045em] text-black sm:text-5xl">
+                {heading}
+              </h2>
+            ) : null}
+            {section.richText ? (
+              <div className="mt-7 text-lg leading-9 text-black/68 [&_p]:mb-5 [&_p]:last:mb-0">
+                {documentToReactComponents(section.richText, richTextOptions)}
+              </div>
+            ) : null}
+            {section.cta?.href && section.cta?.label ? (
+              <div className="mt-8">
+                <PrimaryCtaLink
+                  href={section.cta.href}
+                  label={section.cta.label}
+                />
+              </div>
+            ) : null}
+          </motion.div>
+          <div className="hidden min-h-[22rem] lg:block" aria-hidden="true" />
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const SocialProofPreview = ({
   socialProof,
 }: {
@@ -572,6 +633,7 @@ const RedesignConcepts = ({
   hero,
   primaryCta,
   meetSarah,
+  landingPages,
   socialProof,
 }: RedesignConceptsProps) => {
   return (
@@ -583,6 +645,7 @@ const RedesignConcepts = ({
       />
       <QuietAuthorityHero hero={hero} primaryCta={primaryCta} />
       <MeetSarahPreview section={meetSarah} />
+      <LandingPagesPreview section={landingPages} />
       <SocialProofPreview socialProof={socialProof} />
     </RedesignPreviewLayout>
   );
@@ -620,6 +683,14 @@ export const getStaticProps: GetStaticProps<
     sections.find(
       (section: any) => section?.sys?.contentType?.sys?.id === "zSection"
     );
+  const landingPagesSection = sections.find(
+    (section: any) =>
+      section?.sys?.contentType?.sys?.id === "zSection" &&
+      section?.sys?.id !== meetSarahSection?.sys?.id &&
+      [section?.fields?.title, section?.fields?.subtitle]
+        .filter(Boolean)
+        .some((value: string) => value.toLowerCase().includes("landing"))
+  );
   const consultationBanner = sections.find(
     (section: any) =>
       section?.sys?.contentType?.sys?.id === "freeConsultationBanner"
@@ -627,6 +698,7 @@ export const getStaticProps: GetStaticProps<
   const heroFields = heroSection?.fields ?? {};
   const heroContentType = heroSection?.sys?.contentType?.sys?.id;
   const meetSarahFields = meetSarahSection?.fields ?? {};
+  const landingPagesFields = landingPagesSection?.fields ?? {};
   const sliderFields = photoSlider?.fields ?? {};
   const consultationCta = consultationBanner?.fields?.cta?.fields;
 
@@ -660,6 +732,19 @@ export const getStaticProps: GetStaticProps<
               ? {
                   label: meetSarahFields.cta.fields.text ?? null,
                   href: meetSarahFields.cta.fields.url ?? null,
+                }
+              : null,
+          }
+        : null,
+      landingPages: landingPagesSection
+        ? {
+            title: landingPagesFields.title ?? null,
+            subtitle: landingPagesFields.subtitle ?? null,
+            richText: landingPagesFields.richText ?? null,
+            cta: landingPagesFields.cta?.fields
+              ? {
+                  label: landingPagesFields.cta.fields.text ?? null,
+                  href: landingPagesFields.cta.fields.url ?? null,
                 }
               : null,
           }
