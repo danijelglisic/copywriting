@@ -433,7 +433,7 @@ const meetSarahRichTextOptions = {
 
       if (isVideoAdsLabel(text)) {
         return (
-          <p className="mb-3 mt-10 text-xs font-bold uppercase tracking-[0.26em] text-black">
+          <p className="mb-3 mt-10 text-xl font-bold uppercase tracking-[0.24em] text-black">
             {children}
           </p>
         );
@@ -496,7 +496,7 @@ const MeetSarahPreview = ({
               </p>
             ) : null}
             {isVideoAdsLabel(section.subtitle) ? (
-              <p className="mb-3 mt-10 text-xs font-bold uppercase tracking-[0.26em] text-black">
+              <p className="mb-3 mt-10 text-xl font-bold uppercase tracking-[0.24em] text-black">
                 {section.subtitle}
               </p>
             ) : null}
