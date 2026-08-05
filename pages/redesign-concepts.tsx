@@ -68,14 +68,17 @@ const PreviewHeader = () => {
             : "border-transparent bg-white/95 backdrop-blur-sm"
         }`}
       >
-        <div className="container flex h-16 items-center justify-between gap-6">
+        <div className="container flex h-14 items-center justify-between gap-5">
           <Link href="/" className="group inline-flex flex-col leading-none">
-            <span className="text-lg font-semibold tracking-[-0.035em] text-slate-950 transition-colors group-hover:text-navy sm:text-xl">
+            <span className="text-base font-semibold tracking-[-0.035em] text-slate-950 transition-colors group-hover:text-navy sm:text-lg">
               Slavisa Bogdanovic
             </span>
           </Link>
 
-          <nav className="hidden items-center gap-1 lg:flex" aria-label="Main">
+          <nav
+            className="hidden items-center gap-0.5 lg:flex"
+            aria-label="Main"
+          >
             {links.map((item) => {
               const isActive = router.pathname === item.href;
 
@@ -83,10 +86,10 @@ const PreviewHeader = () => {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+                  className={`rounded-full px-3.5 py-2 text-sm font-medium outline-offset-4 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-navy ${
                     isActive
-                      ? "bg-navy/8 text-navy"
-                      : "text-slate-600 hover:bg-slate-100 hover:text-slate-950"
+                      ? "bg-navy/10 text-navy"
+                      : "text-slate-600 hover:bg-slate-100/80 hover:text-slate-950"
                   }`}
                 >
                   {item.text}
@@ -98,7 +101,7 @@ const PreviewHeader = () => {
           <div className="hidden lg:block">
             <Link
               href={cta.href}
-              className="rounded-full bg-navy px-5 py-2.5 text-sm font-semibold text-white shadow-[0_14px_32px_rgba(10,31,68,0.16)] outline-offset-4 transition duration-300 hover:-translate-y-0.5 hover:bg-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-navy"
+              className="rounded-full bg-navy px-5 py-2 text-sm font-semibold text-white shadow-[0_10px_26px_rgba(10,31,68,0.14)] outline-offset-4 ring-1 ring-navy/10 transition duration-300 hover:-translate-y-0.5 hover:bg-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-navy"
             >
               {cta.text}
             </Link>
@@ -106,7 +109,7 @@ const PreviewHeader = () => {
 
           <button
             type="button"
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-950 shadow-sm transition hover:border-slate-300 lg:hidden"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-950 shadow-sm transition hover:border-slate-300 lg:hidden"
             onClick={() => setIsOpen((value) => !value)}
             aria-label={isOpen ? "close menu" : "toggle menu"}
             aria-expanded={isOpen}
@@ -139,22 +142,22 @@ const PreviewHeader = () => {
       {isOpen ? (
         <div
           id="redesign-mobile-menu"
-          className="fixed inset-x-0 top-16 z-40 border-b border-slate-200 bg-white/96 shadow-[0_24px_60px_rgba(15,23,42,0.12)] backdrop-blur-xl lg:hidden"
+          className="fixed inset-x-0 top-14 z-40 border-b border-slate-200 bg-white/96 shadow-[0_24px_60px_rgba(15,23,42,0.12)] backdrop-blur-xl lg:hidden"
         >
-          <nav className="container py-4" aria-label="Main">
+          <nav className="container py-3" aria-label="Main">
             <div className="grid gap-1">
               {links.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="rounded-2xl px-4 py-4 text-lg font-medium tracking-[-0.02em] text-slate-800 transition hover:bg-slate-100 hover:text-slate-950"
+                  className="rounded-2xl px-4 py-3.5 text-lg font-medium tracking-[-0.02em] text-slate-800 transition hover:bg-slate-100 hover:text-slate-950"
                 >
                   {item.text}
                 </Link>
               ))}
               <Link
                 href={cta.href}
-                className="mt-3 rounded-full bg-navy px-5 py-4 text-center text-base font-semibold text-white transition hover:bg-dark"
+                className="mt-3 rounded-full bg-navy px-5 py-3.5 text-center text-base font-semibold text-white shadow-[0_10px_26px_rgba(10,31,68,0.14)] transition hover:bg-dark"
               >
                 {cta.text}
               </Link>
@@ -168,19 +171,21 @@ const PreviewHeader = () => {
 
 const PreviewFooter = () => (
   <footer className="bg-navy text-white">
-    <div className="container py-14 sm:py-16">
-      <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+    <div className="container py-16 sm:py-[4.5rem]">
+      <div className="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
         <div className="max-w-xl">
-          <span className="text-3xl font-semibold tracking-[-0.04em] text-white sm:text-4xl">
+          <span className="text-3xl font-semibold tracking-[-0.045em] text-white sm:text-4xl">
             Slavisa Bogdanovic
           </span>
-          <p className="mt-4 text-base font-medium text-white/62">Copywriter</p>
-          <p className="mt-2 text-base font-medium italic text-white/72">
+          <p className="mt-5 text-sm font-medium uppercase tracking-[0.22em] text-white/55">
+            Copywriter
+          </p>
+          <p className="mt-4 text-lg font-medium italic leading-7 text-white/78">
             Human-written. AI-refined.
           </p>
         </div>
-        <div className="flex flex-col gap-5 lg:items-end">
-          <div className="flex flex-col gap-3 text-sm font-medium text-white/64 sm:flex-row sm:gap-6">
+        <div className="flex flex-col gap-5 lg:items-end lg:text-right">
+          <div className="flex flex-col gap-3 text-sm font-medium text-white/62 sm:flex-row sm:gap-6">
             <Link
               href="/en/privacy-policy"
               className="transition hover:text-white"
@@ -196,7 +201,7 @@ const PreviewFooter = () => (
           </div>
         </div>
       </div>
-      <div className="mt-12 flex flex-col gap-4 border-t border-white/10 pt-6 text-sm text-white/48 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mt-12 flex flex-col gap-4 border-t border-white/10 pt-7 text-sm leading-6 text-white/46 sm:flex-row sm:items-center sm:justify-between">
         <p>© 2026 Slavisa Bogdanovic. All Rights Reserved.</p>
         <p>
           Created by{" "}
@@ -323,7 +328,7 @@ const HeroCopy = ({
         </a>
       </Link>
       <Link href={secondaryCta.href} legacyBehavior>
-        <a className="rounded-full border border-slate-200 bg-white px-7 py-3.5 text-center text-sm font-semibold text-slate-800 shadow-sm outline-offset-4 transition duration-300 hover:-translate-y-0.5 hover:border-slate-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-slate-950">
+        <a className="rounded-full border border-navy/20 bg-white px-7 py-3.5 text-center text-sm font-semibold text-navy shadow-[0_10px_24px_rgba(10,31,68,0.06)] outline-offset-4 transition duration-300 hover:-translate-y-0.5 hover:border-navy/35 hover:bg-slate-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-slate-950">
           {secondaryCta.label}
         </a>
       </Link>
@@ -340,9 +345,9 @@ const Portrait = ({ hero }: { hero: RedesignConceptsProps["hero"] }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.35 }}
       transition={{ ...sharedTransition, delay: 0.1 }}
-      className="relative mx-auto w-full max-w-[21rem] text-slate-500 lg:max-w-[24rem]"
+      className="relative mx-auto w-full max-w-[23.5rem] text-slate-500 lg:max-w-[27rem]"
     >
-      <div className="overflow-hidden rounded-[1.5rem] bg-slate-100 shadow-[0_24px_60px_rgba(15,23,42,0.12)] ring-1 ring-slate-200/80">
+      <div className="overflow-hidden rounded-[1.75rem] bg-slate-100 shadow-[0_22px_52px_rgba(15,23,42,0.11)] ring-1 ring-slate-200/80">
         <Image
           src={hero.image.url}
           alt={hero.image.alt || "Slavisa Bogdanovic"}
@@ -368,7 +373,7 @@ const QuietAuthorityHero = ({
 }) => (
   <section className="overflow-hidden bg-[#fbfaf7]">
     <div className="container py-16 sm:py-20 lg:py-28">
-      <div className="grid items-center gap-14 lg:grid-cols-[minmax(0,1.38fr)_minmax(20rem,0.62fr)] lg:gap-16">
+      <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.34fr)_minmax(21rem,0.66fr)] lg:gap-14">
         <HeroCopy hero={hero} primaryCta={primaryCta} />
         <Portrait hero={hero} />
       </div>
