@@ -453,7 +453,7 @@ const meetSarahRichTextOptions = {
     ...richTextOptions.renderNode,
     [BLOCKS.PARAGRAPH]: (node: any, children: React.ReactNode) => {
       const text = getNodeText(node).trim();
-      const normalizedText = text.toLowerCase();
+      const normalizedText = text.toLowerCase().replace(/’/g, "'");
 
       if (isVideoAdsLabel(text)) {
         return (
@@ -463,18 +463,18 @@ const meetSarahRichTextOptions = {
         );
       }
 
-      if (!text) return <p className="h-2" aria-hidden="true" />;
+      if (!text) return null;
 
       if (normalizedText.startsWith("but she landed on a page")) {
-        return <p className="mb-4">{children}</p>;
+        return <p className="mb-12">{children}</p>;
       }
 
       if (normalizedText.startsWith("she wasn't convinced")) {
-        return <p className="mb-6">{children}</p>;
+        return <p className="mb-16">{children}</p>;
       }
 
       if (normalizedText.startsWith("if your video ad")) {
-        return <p className="mb-4">{children}</p>;
+        return <p className="mb-12">{children}</p>;
       }
 
       if (normalizedText.startsWith("let's give her a reason")) {
@@ -484,7 +484,7 @@ const meetSarahRichTextOptions = {
       return <p className="mb-5 last:mb-0">{children}</p>;
     },
     [BLOCKS.QUOTE]: (_node: any, children: React.ReactNode) => (
-      <blockquote className="mb-3 border-l-4 border-secondary pl-4 italic">
+      <blockquote className="mb-10 border-l-4 border-secondary pl-4 italic [&_p]:mb-0">
         {children}
       </blockquote>
     ),
@@ -554,7 +554,7 @@ const MeetSarahPreview = ({
               </div>
             ) : null}
             {section.cta?.href && section.cta?.label ? (
-              <div className="mt-3">
+              <div className="mt-8">
                 <PrimaryCtaLink
                   href={section.cta.href}
                   label={section.cta.label}
