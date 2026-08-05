@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { GetStaticProps } from "next";
@@ -9,7 +10,7 @@ import { client } from "@/helpers/clinet";
 import { EN_HOME_SLUG, PAGE_TYPE } from "@/helpers/contentTypes";
 import { richTextOptions } from "@/helpers/richTextOptions";
 
-const primaryCta = { label: "Contact", href: "/en/contact" };
+const defaultPrimaryCta = { label: "Book a discovery call", href: "" };
 const secondaryCta = { label: "Portfolio", href: "/en/portfolio" };
 
 const fadeUp = {
@@ -30,6 +31,10 @@ type RedesignConceptsProps = {
       url: string;
       alt: string;
     } | null;
+  };
+  primaryCta: {
+    label: string;
+    href: string;
   };
   socialProof: {
     title?: string;
@@ -52,7 +57,13 @@ const getAsset = (asset: any) => {
   };
 };
 
-const HeroCopy = ({ hero }: { hero: RedesignConceptsProps["hero"] }) => (
+const HeroCopy = ({
+  hero,
+  primaryCta,
+}: {
+  hero: RedesignConceptsProps["hero"];
+  primaryCta: RedesignConceptsProps["primaryCta"];
+}) => (
   <motion.div
     initial="hidden"
     whileInView="visible"
@@ -122,7 +133,7 @@ const Portrait = ({ hero }: { hero: RedesignConceptsProps["hero"] }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.35 }}
       transition={{ ...sharedTransition, delay: 0.1 }}
-      className="relative mx-auto w-full max-w-[20rem] text-slate-500 lg:max-w-[22rem]"
+      className="relative mx-auto w-full max-w-[21rem] text-slate-500 lg:max-w-[24rem]"
     >
       <div className="overflow-hidden rounded-[1.5rem] bg-slate-100 shadow-[0_24px_60px_rgba(15,23,42,0.12)] ring-1 ring-slate-200/80">
         <Image
@@ -143,13 +154,15 @@ const Portrait = ({ hero }: { hero: RedesignConceptsProps["hero"] }) => {
 
 const QuietAuthorityHero = ({
   hero,
+  primaryCta,
 }: {
   hero: RedesignConceptsProps["hero"];
+  primaryCta: RedesignConceptsProps["primaryCta"];
 }) => (
   <section className="overflow-hidden bg-[#fbfaf7]">
     <div className="container py-16 sm:py-20 lg:py-28">
-      <div className="grid items-center gap-14 lg:grid-cols-[minmax(0,1.45fr)_minmax(18rem,0.55fr)] lg:gap-16">
-        <HeroCopy hero={hero} />
+      <div className="grid items-center gap-14 lg:grid-cols-[minmax(0,1.38fr)_minmax(20rem,0.62fr)] lg:gap-16">
+        <HeroCopy hero={hero} primaryCta={primaryCta} />
         <Portrait hero={hero} />
       </div>
     </div>
@@ -203,8 +216,15 @@ const RedesignConcepts = ({
   seoTitle,
   seoDescription,
   hero,
+  primaryCta,
   socialProof,
 }: RedesignConceptsProps) => {
+  useEffect(() => {
+    document.body.classList.add("redesign-concepts-preview");
+
+    return () => document.body.classList.remove("redesign-concepts-preview");
+  }, []);
+
   return (
     <Layout>
       <Metadata
@@ -212,7 +232,16 @@ const RedesignConcepts = ({
         description={seoDescription ?? ""}
         path="redesign-concepts"
       />
-      <QuietAuthorityHero hero={hero} />
+      <style jsx global>{`
+        body.redesign-concepts-preview #__next > div > div.fixed {
+          height: 64px;
+        }
+
+        body.redesign-concepts-preview #__next > div > main {
+          padding-top: 64px;
+        }
+      `}</style>
+      <QuietAuthorityHero hero={hero} primaryCta={primaryCta} />
       <SocialProofPreview socialProof={socialProof} />
     </Layout>
   );
@@ -239,9 +268,14 @@ export const getStaticProps: GetStaticProps<
   const photoSlider = sections.find(
     (section: any) => section?.sys?.contentType?.sys?.id === "photoSlider"
   );
+  const consultationBanner = sections.find(
+    (section: any) =>
+      section?.sys?.contentType?.sys?.id === "freeConsultationBanner"
+  );
   const heroFields = heroSection?.fields ?? {};
   const heroContentType = heroSection?.sys?.contentType?.sys?.id;
   const sliderFields = photoSlider?.fields ?? {};
+  const consultationCta = consultationBanner?.fields?.cta?.fields;
 
   return {
     props: {
@@ -258,6 +292,10 @@ export const getStaticProps: GetStaticProps<
             ? (heroFields.description ?? null)
             : (heroFields.text ?? null),
         image: getAsset(heroFields.image),
+      },
+      primaryCta: {
+        label: "Book a discovery call",
+        href: consultationCta?.url ?? defaultPrimaryCta.href,
       },
       socialProof: photoSlider
         ? {
