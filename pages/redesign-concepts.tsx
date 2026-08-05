@@ -12,6 +12,8 @@ import { richTextOptions } from "@/helpers/richTextOptions";
 
 const defaultPrimaryCta = { label: "Book a discovery call", href: "" };
 const secondaryCta = { label: "Portfolio", href: "/en/portfolio" };
+const primaryButtonClass =
+  "rounded-full bg-navy px-7 py-[0.8125rem] text-center text-sm font-semibold text-white shadow-[0_18px_38px_rgba(10,31,68,0.16)] outline-offset-4 ring-1 ring-navy/10 transition duration-300 hover:-translate-y-0.5 hover:bg-black active:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-black";
 
 type NavItem = { text: string; href: string };
 
@@ -251,6 +253,19 @@ type RedesignConceptsProps = {
     label: string;
     href: string;
   };
+  meetSarah: {
+    title?: string;
+    subtitle?: string;
+    richText?: any;
+    image?: {
+      url: string;
+      alt: string;
+    } | null;
+    cta?: {
+      label?: string;
+      href?: string;
+    } | null;
+  } | null;
   socialProof: {
     title?: string;
     description?: string;
@@ -269,6 +284,17 @@ const getAsset = (asset: any) => {
   return {
     url: fileUrl.startsWith("http") ? fileUrl : `https:${fileUrl}`,
     alt: asset?.fields?.description || asset?.fields?.title || "",
+  };
+};
+
+const getImageContentAsset = (image: any) => {
+  const asset = getAsset(image?.fields?.image);
+
+  if (!asset) return null;
+
+  return {
+    ...asset,
+    alt: image?.fields?.imageDescription || asset.alt,
   };
 };
 
@@ -326,9 +352,7 @@ const HeroCopy = ({
       className="mt-10 flex flex-col gap-3 sm:flex-row"
     >
       <Link href={primaryCta.href} legacyBehavior>
-        <a className="rounded-full bg-navy px-7 py-[0.8125rem] text-center text-sm font-semibold text-white shadow-[0_18px_38px_rgba(10,31,68,0.16)] outline-offset-4 ring-1 ring-navy/10 transition duration-300 hover:-translate-y-0.5 hover:bg-black active:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-black">
-          {primaryCta.label}
-        </a>
+        <a className={primaryButtonClass}>{primaryCta.label}</a>
       </Link>
       <Link href={secondaryCta.href} legacyBehavior>
         <a className="rounded-full border border-navy/55 bg-white px-7 py-[0.8125rem] text-center text-sm font-semibold text-black/90 shadow-[0_12px_28px_rgba(10,31,68,0.08)] outline-offset-4 transition duration-300 hover:-translate-y-0.5 hover:border-navy/70 hover:bg-navy/3 active:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-black">
@@ -384,6 +408,74 @@ const QuietAuthorityHero = ({
   </section>
 );
 
+const MeetSarahPreview = ({
+  section,
+}: {
+  section: RedesignConceptsProps["meetSarah"];
+}) => {
+  if (!section) return null;
+
+  return (
+    <section className="bg-white py-16 sm:py-20 lg:py-24">
+      <div className="container">
+        <div className="grid items-center gap-14 lg:grid-cols-[minmax(18rem,0.95fr)_minmax(0,1.05fr)] lg:gap-20">
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.35 }}
+            transition={sharedTransition}
+            className="relative"
+          >
+            <div className="absolute inset-6 rounded-[2rem] bg-navy/10 blur-3xl" />
+            {section.image ? (
+              <div className="relative overflow-hidden rounded-[1.75rem] border border-navy/10 bg-white p-2 shadow-[0_24px_64px_rgba(10,31,68,0.12)] transition duration-300 hover:-translate-y-1 lg:-rotate-1">
+                <Image
+                  src={section.image.url}
+                  alt={section.image.alt}
+                  width={520}
+                  height={640}
+                  className="h-auto w-full rounded-[1.35rem]"
+                />
+              </div>
+            ) : null}
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.35 }}
+            transition={{ ...sharedTransition, delay: 0.08 }}
+            className="max-w-3xl"
+          >
+            {section.subtitle ? (
+              <p className="mb-5 inline-flex rounded-full border border-black/10 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-navy shadow-[0_8px_24px_rgba(10,31,68,0.04)]">
+                {section.subtitle}
+              </p>
+            ) : null}
+            {section.title ? (
+              <h2 className="text-4xl font-semibold leading-tight tracking-[-0.045em] text-black sm:text-5xl">
+                {section.title}
+              </h2>
+            ) : null}
+            {section.richText ? (
+              <div className="mt-7 text-lg leading-9 text-black/68 [&_p]:mb-6">
+                {documentToReactComponents(section.richText, richTextOptions)}
+              </div>
+            ) : null}
+            {section.cta?.href && section.cta?.label ? (
+              <Link legacyBehavior href={section.cta.href}>
+                <a className={`${primaryButtonClass} mt-8 inline-block`}>
+                  {section.cta.label}
+                </a>
+              </Link>
+            ) : null}
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const SocialProofPreview = ({
   socialProof,
 }: {
@@ -432,6 +524,7 @@ const RedesignConcepts = ({
   seoDescription,
   hero,
   primaryCta,
+  meetSarah,
   socialProof,
 }: RedesignConceptsProps) => {
   return (
@@ -442,6 +535,7 @@ const RedesignConcepts = ({
         path="redesign-concepts"
       />
       <QuietAuthorityHero hero={hero} primaryCta={primaryCta} />
+      <MeetSarahPreview section={meetSarah} />
       <SocialProofPreview socialProof={socialProof} />
     </RedesignPreviewLayout>
   );
@@ -468,12 +562,24 @@ export const getStaticProps: GetStaticProps<
   const photoSlider = sections.find(
     (section: any) => section?.sys?.contentType?.sys?.id === "photoSlider"
   );
+  const meetSarahSection =
+    sections.find(
+      (section: any) =>
+        section?.sys?.contentType?.sys?.id === "zSection" &&
+        [section?.fields?.title, section?.fields?.subtitle]
+          .filter(Boolean)
+          .some((value: string) => value.toLowerCase().includes("sarah"))
+    ) ??
+    sections.find(
+      (section: any) => section?.sys?.contentType?.sys?.id === "zSection"
+    );
   const consultationBanner = sections.find(
     (section: any) =>
       section?.sys?.contentType?.sys?.id === "freeConsultationBanner"
   );
   const heroFields = heroSection?.fields ?? {};
   const heroContentType = heroSection?.sys?.contentType?.sys?.id;
+  const meetSarahFields = meetSarahSection?.fields ?? {};
   const sliderFields = photoSlider?.fields ?? {};
   const consultationCta = consultationBanner?.fields?.cta?.fields;
 
@@ -497,6 +603,20 @@ export const getStaticProps: GetStaticProps<
         label: "Book a discovery call",
         href: consultationCta?.url ?? defaultPrimaryCta.href,
       },
+      meetSarah: meetSarahSection
+        ? {
+            title: meetSarahFields.title ?? null,
+            subtitle: meetSarahFields.subtitle ?? null,
+            richText: meetSarahFields.richText ?? null,
+            image: getImageContentAsset(meetSarahFields.image),
+            cta: meetSarahFields.cta?.fields
+              ? {
+                  label: meetSarahFields.cta.fields.text ?? null,
+                  href: meetSarahFields.cta.fields.url ?? null,
+                }
+              : null,
+          }
+        : null,
       socialProof: photoSlider
         ? {
             title: sliderFields.title ?? null,
