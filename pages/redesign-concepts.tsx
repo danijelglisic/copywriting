@@ -69,8 +69,11 @@ const PreviewHeader = () => {
         }`}
       >
         <div className="container flex h-16 items-center justify-between gap-6">
-          <Link href="/" className="group inline-flex flex-col leading-none">
-            <span className="text-xl font-semibold tracking-[-0.045em] text-black transition-colors group-hover:text-navy sm:text-2xl">
+          <Link
+            href="/"
+            className="group inline-flex translate-y-px flex-col pl-0.5 leading-none"
+          >
+            <span className="text-xl font-bold tracking-[-0.045em] text-black transition-colors group-hover:text-navy sm:text-2xl">
               Slavisa Bogdanovic
             </span>
           </Link>
@@ -312,7 +315,7 @@ const HeroCopy = ({
       <motion.div
         variants={fadeUp}
         transition={sharedTransition}
-        className="mt-8 max-w-3xl text-lg leading-8 text-black/62 sm:text-xl sm:leading-9 [&_a]:text-black [&_a]:underline [&_p]:mb-4"
+        className="mt-8 max-w-3xl text-lg leading-8 text-black/68 sm:text-xl sm:leading-9 [&_a]:text-black [&_a]:underline [&_p]:mb-4"
       >
         {documentToReactComponents(hero.text, richTextOptions)}
       </motion.div>
@@ -371,7 +374,7 @@ const QuietAuthorityHero = ({
   hero: RedesignConceptsProps["hero"];
   primaryCta: RedesignConceptsProps["primaryCta"];
 }) => (
-  <section className="relative overflow-hidden bg-[#F7F9FC]">
+  <section className="relative overflow-hidden bg-[#F5F2EC]">
     <div className="container relative pb-16 pt-6 sm:pb-20 sm:pt-8 lg:pb-28 lg:pt-10">
       <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.28fr)_minmax(22rem,0.72fr)] lg:gap-10">
         <HeroCopy hero={hero} primaryCta={primaryCta} />
