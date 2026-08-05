@@ -606,10 +606,7 @@ const LandingPagesPreview = ({
             ) : null}
             {section.cta?.href && section.cta?.label ? (
               <div className="mt-8">
-                <PrimaryCtaLink
-                  href={section.cta.href}
-                  label={section.cta.label}
-                />
+                <PrimaryCtaLink href={section.cta.href} label="TEST BUTTON" />
               </div>
             ) : null}
           </motion.div>
