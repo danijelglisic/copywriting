@@ -403,7 +403,7 @@ const QuietAuthorityHero = ({
   hero: RedesignConceptsProps["hero"];
   primaryCta: RedesignConceptsProps["primaryCta"];
 }) => (
-  <section className="relative overflow-hidden bg-[#F5F2EC]">
+  <section className="relative overflow-hidden bg-[#F9F9F7]">
     <div className="container relative pb-16 pt-3 sm:pb-20 sm:pt-5 lg:pb-28 lg:pt-7">
       <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.28fr)_minmax(22rem,0.72fr)] lg:gap-10">
         <HeroCopy hero={hero} primaryCta={primaryCta} />
@@ -433,7 +433,7 @@ const meetSarahRichTextOptions = {
 
       if (isVideoAdsLabel(text)) {
         return (
-          <p className="mb-3 mt-10 text-xl font-bold uppercase tracking-[0.24em] text-black">
+          <p className="mb-7 mt-10 text-xl font-bold uppercase tracking-[0.24em] text-black">
             {children}
           </p>
         );
@@ -496,7 +496,7 @@ const MeetSarahPreview = ({
               </p>
             ) : null}
             {isVideoAdsLabel(section.subtitle) ? (
-              <p className="mb-3 mt-10 text-xl font-bold uppercase tracking-[0.24em] text-black">
+              <p className="mb-7 mt-10 text-xl font-bold uppercase tracking-[0.24em] text-black">
                 {section.subtitle}
               </p>
             ) : null}
