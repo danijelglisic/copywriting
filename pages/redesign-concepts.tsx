@@ -64,8 +64,8 @@ const PreviewHeader = () => {
       <header
         className={`sticky top-0 z-50 border-b transition-all duration-300 ${
           scrolled
-            ? "border-navy/10 bg-white/86 shadow-[0_10px_32px_rgba(10,31,68,0.05)] backdrop-blur-xl"
-            : "border-transparent bg-white/92 backdrop-blur-sm"
+            ? "border-navy/10 bg-white/90 shadow-[0_12px_34px_rgba(10,31,68,0.07)] backdrop-blur-2xl"
+            : "border-transparent bg-white/96 backdrop-blur-md"
         }`}
       >
         <div className="container flex h-16 items-center justify-between gap-6">
@@ -328,7 +328,7 @@ const HeroCopy = ({
         </a>
       </Link>
       <Link href={secondaryCta.href} legacyBehavior>
-        <a className="rounded-full border border-navy/25 bg-white px-7 py-3.5 text-center text-sm font-semibold text-navy shadow-[0_12px_28px_rgba(10,31,68,0.08)] outline-offset-4 transition duration-300 hover:-translate-y-0.5 hover:border-navy/45 hover:bg-navy/4 active:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-black">
+        <a className="rounded-full border border-navy/40 bg-white px-7 py-3.5 text-center text-sm font-semibold text-black shadow-[0_12px_28px_rgba(10,31,68,0.08)] outline-offset-4 transition duration-300 hover:-translate-y-0.5 hover:border-navy/60 hover:bg-white active:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-black">
           {secondaryCta.label}
         </a>
       </Link>
@@ -345,7 +345,7 @@ const Portrait = ({ hero }: { hero: RedesignConceptsProps["hero"] }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.35 }}
       transition={{ ...sharedTransition, delay: 0.1 }}
-      className="relative mx-auto w-full max-w-[26.75rem] text-black/50 lg:mx-0 lg:max-w-[31rem]"
+      className="relative mx-auto w-full max-w-[26.75rem] text-black/50 lg:mx-0 lg:max-w-[31rem] lg:-translate-x-3"
     >
       <div className="overflow-hidden rounded-[2rem] border border-navy/10 bg-white p-2 shadow-[0_26px_66px_rgba(10,31,68,0.12)]">
         <Image
@@ -371,8 +371,7 @@ const QuietAuthorityHero = ({
   hero: RedesignConceptsProps["hero"];
   primaryCta: RedesignConceptsProps["primaryCta"];
 }) => (
-  <section className="relative overflow-hidden bg-white">
-    <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_40%,rgba(10,31,68,0.055),transparent_34%),linear-gradient(180deg,rgba(10,31,68,0.025),rgba(255,255,255,0)_34%)]" />
+  <section className="relative overflow-hidden bg-[#F7F9FC]">
     <div className="container relative pb-16 pt-6 sm:pb-20 sm:pt-8 lg:pb-28 lg:pt-10">
       <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.28fr)_minmax(22rem,0.72fr)] lg:gap-10">
         <HeroCopy hero={hero} primaryCta={primaryCta} />
