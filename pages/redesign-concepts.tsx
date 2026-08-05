@@ -314,6 +314,23 @@ const getImageContentAsset = (image: any) => {
   };
 };
 
+const getContentText = (value: any): string => {
+  if (!value) return "";
+  if (typeof value === "string") return value;
+  if (Array.isArray(value)) return value.map(getContentText).join(" ");
+  if (typeof value === "object") {
+    return [value.value, value.fields, value.content]
+      .map(getContentText)
+      .filter(Boolean)
+      .join(" ");
+  }
+
+  return "";
+};
+
+const sectionIncludes = (section: any, text: string) =>
+  getContentText(section?.fields).toLowerCase().includes(text);
+
 const HeroCopy = ({
   hero,
   primaryCta,
@@ -672,25 +689,22 @@ export const getStaticProps: GetStaticProps<
   const photoSlider = sections.find(
     (section: any) => section?.sys?.contentType?.sys?.id === "photoSlider"
   );
-  const meetSarahSection =
-    sections.find(
-      (section: any) =>
-        section?.sys?.contentType?.sys?.id === "zSection" &&
-        [section?.fields?.title, section?.fields?.subtitle]
-          .filter(Boolean)
-          .some((value: string) => value.toLowerCase().includes("sarah"))
-    ) ??
-    sections.find(
-      (section: any) => section?.sys?.contentType?.sys?.id === "zSection"
-    );
-  const landingPagesSection = sections.find(
-    (section: any) =>
-      section?.sys?.contentType?.sys?.id === "zSection" &&
-      section?.sys?.id !== meetSarahSection?.sys?.id &&
-      [section?.fields?.title, section?.fields?.subtitle]
-        .filter(Boolean)
-        .some((value: string) => value.toLowerCase().includes("landing"))
+  const zSections = sections.filter(
+    (section: any) => section?.sys?.contentType?.sys?.id === "zSection"
   );
+  const landingPagesSection = zSections.find((section: any) =>
+    sectionIncludes(section, "landing")
+  );
+  const meetSarahSection =
+    zSections.find((section: any) => sectionIncludes(section, "sarah")) ??
+    zSections.find(
+      (section: any) =>
+        sectionIncludes(section, "video ads") &&
+        section?.sys?.id !== landingPagesSection?.sys?.id
+    ) ??
+    zSections.find(
+      (section: any) => section?.sys?.id !== landingPagesSection?.sys?.id
+    );
   const consultationBanner = sections.find(
     (section: any) =>
       section?.sys?.contentType?.sys?.id === "freeConsultationBanner"
