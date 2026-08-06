@@ -389,7 +389,7 @@ const HeroCopy = ({
       <motion.h1
         variants={fadeUp}
         transition={sharedTransition}
-        className="text-5xl font-semibold leading-[0.98] tracking-[-0.06em] text-black sm:text-6xl lg:text-7xl xl:text-[5.5rem] xl:leading-[0.96]"
+        className="text-5xl font-semibold leading-[0.98] tracking-[-0.045em] text-black [font-kerning:normal] sm:text-6xl lg:text-7xl xl:text-[5.5rem] xl:leading-[0.96]"
       >
         {hero.heading}
       </motion.h1>
@@ -498,14 +498,6 @@ const meetSarahRichTextOptions = {
       const text = getNodeText(node).trim();
       const normalizedText = text.toLowerCase().replace(/’/g, "'");
 
-      if (isVideoAdsLabel(text)) {
-        return (
-          <p className="mb-7 mt-10 text-xl font-bold uppercase tracking-[0.24em] text-black">
-            {children}
-          </p>
-        );
-      }
-
       if (!text) return null;
 
       if (normalizedText.startsWith("but she landed on a page")) {
@@ -545,15 +537,15 @@ const landingPagesRichTextOptions = {
       if (!text) return null;
 
       if (normalizedText.startsWith("but she landed on a page")) {
-        return <p className="mb-10">{children}</p>;
+        return <p className="mb-5">{children}</p>;
       }
 
       if (normalizedText.startsWith("she wasn't convinced")) {
-        return <p className="mb-14">{children}</p>;
+        return <p className="mb-8">{children}</p>;
       }
 
       if (normalizedText.startsWith("if your video ad sends people")) {
-        return <p className="mb-10">{children}</p>;
+        return <p className="mb-5">{children}</p>;
       }
 
       if (normalizedText.startsWith("let's give her a reason")) {
@@ -580,10 +572,8 @@ const emailSequencesRichTextOptions = {
 
       if (!text) return null;
 
-      if (
-        normalizedText.startsWith("let's turn sarah into a repeat customer")
-      ) {
-        return <p className="mb-0 mt-14">{children}</p>;
+      if (normalizedText.startsWith("she wasn't")) {
+        return <p className="mb-10">{children}</p>;
       }
 
       return <p className="mb-5 last:mb-0">{children}</p>;
@@ -622,73 +612,116 @@ const MeetSarahPreview = ({
 }) => {
   if (!section) return null;
 
-  return (
-    <section className="bg-white py-16 sm:py-20 lg:py-24">
-      <div className="container">
-        <div className="grid items-center gap-14 lg:grid-cols-[minmax(18rem,0.95fr)_minmax(0,1.05fr)] lg:gap-20">
-          <motion.div
-            initial={{ opacity: 0, y: 18 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.35 }}
-            transition={sharedTransition}
-            className="relative"
-          >
-            <div className="absolute inset-8 rounded-[2rem] bg-navy/5 blur-3xl" />
-            {section.image ? (
-              <div className="relative overflow-hidden rounded-[1.75rem] border border-navy/10 bg-white p-2 shadow-[0_14px_34px_rgba(10,31,68,0.08)] transition duration-300 hover:-translate-y-1">
-                <Image
-                  src={section.image.url}
-                  alt={section.image.alt}
-                  width={520}
-                  height={640}
-                  className="h-auto w-full rounded-[1.35rem]"
-                />
-              </div>
-            ) : null}
-          </motion.div>
+  const richTextContent = section.richText?.content ?? [];
+  const videoAdsIndex = richTextContent.findIndex((node: any) =>
+    isVideoAdsLabel(getNodeText(node))
+  );
+  const videoAdsLabel =
+    videoAdsIndex >= 0
+      ? getNodeText(richTextContent[videoAdsIndex]).trim()
+      : isVideoAdsLabel(section.subtitle)
+        ? section.subtitle
+        : isVideoAdsLabel(section.title)
+          ? section.title
+          : null;
+  const introRichText =
+    videoAdsIndex > 0
+      ? {
+          ...section.richText,
+          content: richTextContent.slice(0, videoAdsIndex),
+        }
+      : null;
+  const videoAdsRichText = section.richText
+    ? {
+        ...section.richText,
+        content:
+          videoAdsIndex >= 0
+            ? richTextContent.slice(videoAdsIndex + 1)
+            : richTextContent,
+      }
+    : null;
 
-          <motion.div
-            initial={{ opacity: 0, y: 18 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.35 }}
-            transition={{ ...sharedTransition, delay: 0.08 }}
-            className="max-w-3xl"
-          >
+  return (
+    <>
+      <section className="bg-white py-16 sm:py-20">
+        <div className="container">
+          <div className="max-w-3xl">
             {section.title && !isVideoAdsLabel(section.title) ? (
               <h2 className="text-4xl font-semibold leading-tight tracking-[-0.045em] text-black sm:text-5xl">
                 {section.title}
               </h2>
             ) : null}
             {section.subtitle && !isVideoAdsLabel(section.subtitle) ? (
-              <p className="mt-5 text-xl font-medium leading-8 text-black/72">
+              <p className="mt-7 text-xl font-medium leading-8 text-black/72">
                 {section.subtitle}
               </p>
             ) : null}
-            {isVideoAdsLabel(section.subtitle) ? (
-              <p className="mb-7 mt-10 text-xl font-bold uppercase tracking-[0.24em] text-black">
-                {section.subtitle}
-              </p>
-            ) : null}
-            {section.richText ? (
-              <div className="mt-0 text-lg leading-9 text-black/68">
-                {documentToReactComponents(
-                  section.richText,
-                  meetSarahRichTextOptions
-                )}
+            {introRichText ? (
+              <div className="mt-5 text-lg leading-9 text-black/68">
+                {documentToReactComponents(introRichText, richTextOptions)}
               </div>
             ) : null}
-            {section.cta?.href && section.cta?.label ? (
-              <div className="mt-8">
-                <PrimaryCtaLink
-                  href={section.cta.href}
-                  label={section.cta.label}
-                />
-              </div>
-            ) : null}
-          </motion.div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <section className="bg-[#F9F9F7] py-16 sm:py-20 lg:py-24">
+        <div className="container">
+          <div className="grid items-start gap-14 lg:grid-cols-[minmax(18rem,0.95fr)_minmax(0,1.05fr)] lg:gap-20">
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.35 }}
+              transition={sharedTransition}
+              className="relative"
+            >
+              <div className="absolute inset-8 rounded-[2rem] bg-navy/5 blur-3xl" />
+              {section.image ? (
+                <div className="relative overflow-hidden rounded-[1.75rem] border border-navy/10 bg-white p-2 shadow-[0_14px_34px_rgba(10,31,68,0.08)] transition duration-300 hover:-translate-y-1">
+                  <Image
+                    src={section.image.url}
+                    alt={section.image.alt}
+                    width={520}
+                    height={640}
+                    className="h-auto w-full rounded-[1.35rem]"
+                  />
+                </div>
+              ) : null}
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.35 }}
+              transition={{ ...sharedTransition, delay: 0.08 }}
+              className="max-w-3xl"
+            >
+              {videoAdsLabel ? (
+                <p className="mb-7 text-xl font-bold uppercase text-black">
+                  {videoAdsLabel}
+                </p>
+              ) : null}
+              {videoAdsRichText ? (
+                <div className="text-lg leading-9 text-black/68">
+                  {documentToReactComponents(
+                    videoAdsRichText,
+                    meetSarahRichTextOptions
+                  )}
+                </div>
+              ) : null}
+              {section.cta?.href && section.cta?.label ? (
+                <div className="mt-8">
+                  <PrimaryCtaLink
+                    href={section.cta.href}
+                    label={section.cta.label}
+                  />
+                </div>
+              ) : null}
+            </motion.div>
+          </div>
+        </div>
+      </section>
+    </>
   );
 };
 
@@ -703,7 +736,7 @@ const LandingPagesPreview = ({
   const heading = section.subtitle ? section.title : null;
 
   return (
-    <section className="bg-[#F9F9F7] py-16 sm:py-20 lg:py-24">
+    <section className="bg-white py-16 sm:py-20 lg:py-24">
       <div className="container">
         <div className="grid items-start gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.9fr)] lg:gap-20">
           <motion.div
@@ -714,7 +747,7 @@ const LandingPagesPreview = ({
             className="max-w-3xl"
           >
             {label ? (
-              <p className="mb-7 text-xl font-bold uppercase tracking-[0.24em] text-black">
+              <p className="mb-7 text-xl font-bold uppercase text-black">
                 {label}
               </p>
             ) : null}
@@ -724,7 +757,7 @@ const LandingPagesPreview = ({
               </h2>
             ) : null}
             {section.richText ? (
-              <div className="mt-7 text-lg leading-9 text-black/68">
+              <div className="mt-16 text-lg leading-9 text-black/68">
                 {documentToReactComponents(
                   section.richText,
                   landingPagesRichTextOptions
@@ -786,12 +819,10 @@ const EmailSequencesPreview = ({
             className="max-w-3xl"
           >
             {label ? (
-              <p className="text-xl font-bold uppercase tracking-[0.24em] text-black">
-                {label}
-              </p>
+              <p className="text-xl font-bold uppercase text-black">{label}</p>
             ) : null}
             {section.richText ? (
-              <div className="mt-7 text-lg leading-9 text-black/68">
+              <div className="mt-16 text-lg leading-9 text-black/68">
                 {documentToReactComponents(
                   section.richText,
                   emailSequencesRichTextOptions
@@ -830,14 +861,14 @@ const TransitionPreview = ({
   return (
     <section className="bg-dark py-16 text-white sm:py-20">
       <div className="container">
-        <div className="max-w-3xl">
+        <div className="mx-auto max-w-4xl text-center">
           {section.headline ? (
             <h2 className="text-4xl font-semibold leading-tight tracking-[-0.045em] text-white sm:text-5xl">
               {section.headline}
             </h2>
           ) : null}
           {precedingBlocks?.length ? (
-            <div className="mt-7 space-y-5 text-lg leading-9 text-white/72">
+            <div className="mx-auto mt-7 max-w-3xl space-y-5 text-lg leading-9 text-white/72">
               {precedingBlocks.map((block) => (
                 <p key={block}>{block}</p>
               ))}
@@ -845,7 +876,7 @@ const TransitionPreview = ({
           ) : null}
           {finalBlock ? (
             <p
-              className={`text-lg leading-9 text-white/72 ${
+              className={`mx-auto max-w-3xl text-lg leading-9 text-white/72 ${
                 precedingBlocks?.length ? "mt-10" : "mt-7"
               }`}
             >
@@ -889,7 +920,7 @@ const WhatToExpectPreview = ({
                 {section.title}
               </p>
             ) : null}
-            <div className="mt-7 text-lg leading-9 text-black/68">
+            <div className="mt-16 text-lg leading-9 text-black/68">
               {section.subtitle ? (
                 <p className="mb-5">{section.subtitle}</p>
               ) : null}
@@ -941,7 +972,6 @@ const SocialProofPreview = ({
   socialProof: RedesignConceptsProps["socialProof"];
 }) => {
   const sliderRef = useRef<Slider>(null);
-  const [currentSlide, setCurrentSlide] = useState(0);
 
   if (!socialProof?.images.length) return null;
 
@@ -956,7 +986,6 @@ const SocialProofPreview = ({
     slidesToScroll: 1,
     swipe: true,
     swipeToSlide: true,
-    beforeChange: (_current: number, next: number) => setCurrentSlide(next),
     responsive: [
       {
         breakpoint: 1024,
@@ -1001,7 +1030,7 @@ const SocialProofPreview = ({
             ))}
           </Slider>
         </div>
-        <div className="mt-5 flex items-center justify-center gap-5">
+        <div className="mt-5 flex items-center justify-center gap-3">
           <button
             type="button"
             onClick={() => sliderRef.current?.slickPrev()}
@@ -1010,16 +1039,10 @@ const SocialProofPreview = ({
           >
             <span aria-hidden="true">←</span>
           </button>
-          <p
-            className="min-w-16 text-center text-sm font-medium tabular-nums text-black/58"
-            aria-live="polite"
-          >
-            {currentSlide + 1} / {socialProof.images.length}
-          </p>
           <button
             type="button"
             onClick={() => sliderRef.current?.slickNext()}
-            className="hidden h-11 w-11 items-center justify-center rounded-full border border-navy/20 bg-white text-navy outline-offset-4 transition hover:border-navy/40 hover:bg-navy/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-navy sm:inline-flex"
+            className="hidden h-11 w-11 items-center justify-center rounded-full border border-navy bg-navy text-white shadow-[0_10px_24px_rgba(10,31,68,0.16)] outline-offset-4 transition hover:-translate-y-0.5 hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-navy sm:inline-flex"
             aria-label="Next testimonial"
           >
             <span aria-hidden="true">→</span>
@@ -1149,9 +1172,15 @@ export const getStaticProps: GetStaticProps<
     (section: any) =>
       section?.sys?.contentType?.sys?.id === "freeConsultationBanner"
   );
-  const transitionBanner = consultationBanners[0];
+  const transitionBanner =
+    consultationBanners.find((section: any) =>
+      sectionIncludes(section, "imaginary")
+    ) ?? consultationBanners[0];
   const finalCtaBanner =
-    consultationBanners.length > 1 ? consultationBanners.at(-1) : null;
+    [...consultationBanners]
+      .reverse()
+      .find((section: any) => section?.sys?.id !== transitionBanner?.sys?.id) ??
+    null;
   const heroFields = heroSection?.fields ?? {};
   const heroContentType = heroSection?.sys?.contentType?.sys?.id;
   const meetSarahFields = meetSarahSection?.fields ?? {};
