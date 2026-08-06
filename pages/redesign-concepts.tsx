@@ -17,7 +17,7 @@ const secondaryCta = { label: "Portfolio", href: "/en/portfolio" };
 const primaryButtonClass =
   "rounded-full bg-navy px-7 py-[0.8125rem] text-center text-sm font-semibold text-white shadow-[0_18px_38px_rgba(10,31,68,0.16)] outline-offset-4 ring-1 ring-navy/10 transition duration-300 hover:-translate-y-0.5 hover:bg-black active:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-black";
 const serviceTitleClass = "text-xl font-bold uppercase text-black";
-const serviceBodyClass = "mt-7 text-lg leading-9 text-black/68";
+const serviceBodyClass = "mt-10 text-lg leading-9 text-black/68";
 
 const PrimaryCtaLink = ({ href, label }: { href: string; label: string }) => (
   <Link href={href} legacyBehavior>
@@ -28,8 +28,8 @@ const PrimaryCtaLink = ({ href, label }: { href: string; label: string }) => (
 const renderHeroHeading = (heading: string) =>
   heading.split(/(Converting)/g).map((part, index) =>
     part === "Converting" ? (
-      <span key={`${part}-${index}`}>
-        Conve<span className="mr-[0.035em] inline-block">r</span>ting
+      <span key={`${part}-${index}`} className="inline-block whitespace-nowrap">
+        Conve<span className="mr-[0.012em] inline-block">r</span>ting
       </span>
     ) : (
       part
@@ -678,7 +678,7 @@ const MeetSarahPreview = ({
         </div>
       </section>
 
-      <section className="bg-[#F9F9F7] py-16 sm:py-20 lg:pb-16 lg:pt-24">
+      <section className="bg-[#F9F9F7] py-16 sm:py-20 lg:py-16">
         <div className="container">
           <div className="grid items-start gap-14 lg:grid-cols-[minmax(18rem,0.95fr)_minmax(0,1.05fr)] lg:gap-20">
             <motion.div
@@ -856,43 +856,25 @@ const TransitionPreview = ({
 }) => {
   if (!section) return null;
 
-  const descriptionBlocks = section.description
-    ?.split(/\n+/)
-    .map((block) => block.trim())
-    .filter(Boolean);
-  const finalBlock = descriptionBlocks?.at(-1);
-  const precedingBlocks = descriptionBlocks?.slice(0, -1);
-
   return (
     <section className="bg-dark py-16 text-white sm:py-20">
       <div className="container">
         <div className="mx-auto max-w-4xl text-center">
-          {section.headline ? (
-            <h2 className="text-4xl font-semibold leading-tight tracking-[-0.045em] text-white sm:text-5xl">
-              {section.headline}
-            </h2>
-          ) : null}
-          {precedingBlocks?.length ? (
-            <div className="mx-auto mt-7 max-w-3xl space-y-5 text-lg leading-9 text-white/72">
-              {precedingBlocks.map((block) => (
-                <p key={block}>{block}</p>
-              ))}
-            </div>
-          ) : null}
-          {finalBlock ? (
-            <p
-              className={`mx-auto max-w-3xl text-lg leading-9 text-white/72 ${
-                precedingBlocks?.length ? "mt-10" : "mt-7"
-              }`}
-            >
-              {finalBlock}
+          <h2 className="text-4xl font-semibold leading-tight tracking-[-0.045em] text-white sm:text-5xl">
+            {"Sarah isn't imaginary."}
+          </h2>
+          <div className="mx-auto mt-7 max-w-3xl space-y-5 text-lg leading-9 text-white/72">
+            <p>
+              Someone like her clicks on your ads and visits your website every
+              day.
             </p>
-          ) : null}
-          {section.cta?.href && section.cta?.label ? (
+            <p>{"Don't lose her because of a copy."}</p>
+          </div>
+          {section.cta?.href ? (
             <div className="mt-8">
               <PrimaryCtaLink
                 href={section.cta.href}
-                label={section.cta.label}
+                label="Book a discovery call"
               />
             </div>
           ) : null}
@@ -921,9 +903,11 @@ const WhatToExpectPreview = ({
             className="max-w-3xl"
           >
             {section.title ? (
-              <p className={serviceTitleClass}>{section.title}</p>
+              <p className="text-xl font-extrabold uppercase text-black">
+                {section.title}
+              </p>
             ) : null}
-            <div className={serviceBodyClass}>
+            <div className="mt-12 text-lg leading-9 text-black/68">
               {section.subtitle ? (
                 <p className="mb-5">{section.subtitle}</p>
               ) : null}
@@ -1045,7 +1029,7 @@ const SocialProofPreview = ({
           <button
             type="button"
             onClick={() => sliderRef.current?.slickNext()}
-            className="hidden h-11 w-11 items-center justify-center rounded-full border border-navy/30 bg-white text-navy outline-offset-4 ring-2 ring-navy/35 ring-offset-2 ring-offset-[#F9F9F7] transition hover:-translate-y-0.5 hover:border-navy/50 hover:bg-navy/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-navy sm:inline-flex"
+            className="hidden h-11 w-11 items-center justify-center rounded-full border-2 border-navy bg-white text-navy outline-offset-4 ring-2 ring-navy ring-offset-2 ring-offset-[#F9F9F7] transition hover:-translate-y-0.5 hover:bg-navy/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-navy sm:inline-flex"
             aria-label="Next testimonial"
           >
             <span aria-hidden="true">→</span>
