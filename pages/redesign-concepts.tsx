@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { GetStaticProps } from "next";
 import { motion } from "framer-motion";
+import Slider from "react-slick";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { BLOCKS } from "@contentful/rich-text-types";
 import { useRouter } from "next/router";
@@ -931,7 +932,34 @@ const SocialProofPreview = ({
 }: {
   socialProof: RedesignConceptsProps["socialProof"];
 }) => {
+  const sliderRef = useRef<Slider>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
   if (!socialProof?.images.length) return null;
+
+  const sliderSettings = {
+    accessibility: true,
+    arrows: false,
+    autoplay: false,
+    dots: false,
+    infinite: true,
+    speed: 350,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    swipe: true,
+    swipeToSlide: true,
+    beforeChange: (_current: number, next: number) => setCurrentSlide(next),
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: { slidesToShow: 2, slidesToScroll: 1 },
+      },
+      {
+        breakpoint: 640,
+        settings: { slidesToShow: 1, slidesToScroll: 1 },
+      },
+    ],
+  };
 
   return (
     <section className="bg-white py-16 sm:py-20">
@@ -948,21 +976,46 @@ const SocialProofPreview = ({
             </p>
           ) : null}
         </div>
-        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          {socialProof.images.slice(0, 4).map((image) => (
-            <div
-              key={image.url}
-              className="overflow-hidden rounded-[1.25rem] bg-white p-2 shadow-[0_16px_44px_rgba(10,31,68,0.08)] ring-1 ring-navy/10"
-            >
-              <Image
-                src={image.url}
-                alt={image.alt}
-                width={300}
-                height={600}
-                className="h-auto w-full rounded-[1rem]"
-              />
-            </div>
-          ))}
+        <div className="mt-10 overflow-hidden">
+          <Slider ref={sliderRef} {...sliderSettings}>
+            {socialProof.images.map((image) => (
+              <div key={image.url} className="px-2 pb-5">
+                <div className="overflow-hidden rounded-[1.25rem] bg-white p-2 shadow-[0_16px_44px_rgba(10,31,68,0.08)] ring-1 ring-navy/10">
+                  <Image
+                    src={image.url}
+                    alt={image.alt}
+                    width={360}
+                    height={720}
+                    className="h-auto w-full rounded-[1rem]"
+                  />
+                </div>
+              </div>
+            ))}
+          </Slider>
+        </div>
+        <div className="mt-5 flex items-center justify-center gap-5">
+          <button
+            type="button"
+            onClick={() => sliderRef.current?.slickPrev()}
+            className="hidden h-11 w-11 items-center justify-center rounded-full border border-navy/20 bg-white text-navy outline-offset-4 transition hover:border-navy/40 hover:bg-navy/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-navy sm:inline-flex"
+            aria-label="Previous testimonial"
+          >
+            <span aria-hidden="true">←</span>
+          </button>
+          <p
+            className="min-w-16 text-center text-sm font-medium tabular-nums text-black/58"
+            aria-live="polite"
+          >
+            {currentSlide + 1} / {socialProof.images.length}
+          </p>
+          <button
+            type="button"
+            onClick={() => sliderRef.current?.slickNext()}
+            className="hidden h-11 w-11 items-center justify-center rounded-full border border-navy/20 bg-white text-navy outline-offset-4 transition hover:border-navy/40 hover:bg-navy/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-navy sm:inline-flex"
+            aria-label="Next testimonial"
+          >
+            <span aria-hidden="true">→</span>
+          </button>
         </div>
       </div>
     </section>
