@@ -295,6 +295,14 @@ type RedesignConceptsProps = {
       href?: string;
     } | null;
   } | null;
+  transition: {
+    headline?: string;
+    description?: string;
+    cta?: {
+      label?: string;
+      href?: string;
+    } | null;
+  } | null;
   socialProof: {
     title?: string;
     description?: string;
@@ -764,6 +772,59 @@ const EmailSequencesPreview = ({
   );
 };
 
+const TransitionPreview = ({
+  section,
+}: {
+  section: RedesignConceptsProps["transition"];
+}) => {
+  if (!section) return null;
+
+  const descriptionBlocks = section.description
+    ?.split(/\n+/)
+    .map((block) => block.trim())
+    .filter(Boolean);
+  const finalBlock = descriptionBlocks?.at(-1);
+  const precedingBlocks = descriptionBlocks?.slice(0, -1);
+
+  return (
+    <section className="bg-dark py-16 text-white sm:py-20">
+      <div className="container">
+        <div className="max-w-3xl">
+          {section.headline ? (
+            <h2 className="text-4xl font-semibold leading-tight tracking-[-0.045em] text-white sm:text-5xl">
+              {section.headline}
+            </h2>
+          ) : null}
+          {precedingBlocks?.length ? (
+            <div className="mt-7 space-y-5 text-lg leading-9 text-white/72">
+              {precedingBlocks.map((block) => (
+                <p key={block}>{block}</p>
+              ))}
+            </div>
+          ) : null}
+          {finalBlock ? (
+            <p
+              className={`text-lg leading-9 text-white/72 ${
+                precedingBlocks?.length ? "mt-10" : "mt-7"
+              }`}
+            >
+              {finalBlock}
+            </p>
+          ) : null}
+          {section.cta?.href && section.cta?.label ? (
+            <div className="mt-8">
+              <PrimaryCtaLink
+                href={section.cta.href}
+                label={section.cta.label}
+              />
+            </div>
+          ) : null}
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const SocialProofPreview = ({
   socialProof,
 }: {
@@ -815,6 +876,7 @@ const RedesignConcepts = ({
   meetSarah,
   landingPages,
   emailSequences,
+  transition,
   socialProof,
 }: RedesignConceptsProps) => {
   return (
@@ -828,6 +890,7 @@ const RedesignConcepts = ({
       <MeetSarahPreview section={meetSarah} />
       <LandingPagesPreview section={landingPages} />
       <EmailSequencesPreview section={emailSequences} />
+      <TransitionPreview section={transition} />
       <SocialProofPreview socialProof={socialProof} />
     </RedesignPreviewLayout>
   );
@@ -945,6 +1008,18 @@ export const getStaticProps: GetStaticProps<
               ? {
                   label: emailSequencesFields.cta.fields.text ?? null,
                   href: emailSequencesFields.cta.fields.url ?? null,
+                }
+              : null,
+          }
+        : null,
+      transition: consultationBanner
+        ? {
+            headline: consultationBanner.fields?.text ?? null,
+            description: consultationBanner.fields?.description ?? null,
+            cta: consultationCta
+              ? {
+                  label: consultationCta.text ?? null,
+                  href: consultationCta.url ?? null,
                 }
               : null,
           }
