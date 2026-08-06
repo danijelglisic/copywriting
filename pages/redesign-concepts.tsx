@@ -303,6 +303,19 @@ type RedesignConceptsProps = {
       href?: string;
     } | null;
   } | null;
+  whatToExpect: {
+    title?: string;
+    subtitle?: string;
+    richText?: any;
+    image?: {
+      url: string;
+      alt: string;
+    } | null;
+    cta?: {
+      label?: string;
+      href?: string;
+    } | null;
+  } | null;
   socialProof: {
     title?: string;
     description?: string;
@@ -574,6 +587,25 @@ const emailSequencesRichTextOptions = {
   },
 };
 
+const whatToExpectRichTextOptions = {
+  ...richTextOptions,
+  renderNode: {
+    ...richTextOptions.renderNode,
+    [BLOCKS.PARAGRAPH]: (node: any, children: React.ReactNode) => {
+      const text = getNodeText(node).trim();
+      const normalizedText = text.toLowerCase().replace(/’/g, "'");
+
+      if (!text) return null;
+
+      if (normalizedText.startsWith("if your hook")) {
+        return <p className="mb-5 mt-10">{children}</p>;
+      }
+
+      return <p className="mb-5 last:mb-0">{children}</p>;
+    },
+  },
+};
+
 const MeetSarahPreview = ({
   section,
 }: {
@@ -825,6 +857,75 @@ const TransitionPreview = ({
   );
 };
 
+const WhatToExpectPreview = ({
+  section,
+}: {
+  section: RedesignConceptsProps["whatToExpect"];
+}) => {
+  if (!section) return null;
+
+  return (
+    <section className="bg-[#F9F9F7] py-16 sm:py-20 lg:py-24">
+      <div className="container">
+        <div className="grid items-start gap-14 lg:grid-cols-[minmax(0,1.05fr)_minmax(18rem,0.95fr)] lg:gap-16">
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.35 }}
+            transition={sharedTransition}
+            className="max-w-3xl"
+          >
+            {section.title ? (
+              <p className="text-xl font-bold uppercase tracking-[0.24em] text-black">
+                {section.title}
+              </p>
+            ) : null}
+            <div className="mt-7 text-lg leading-9 text-black/68">
+              {section.subtitle ? (
+                <p className="mb-5">{section.subtitle}</p>
+              ) : null}
+              {section.richText
+                ? documentToReactComponents(
+                    section.richText,
+                    whatToExpectRichTextOptions
+                  )
+                : null}
+            </div>
+            {section.cta?.href && section.cta?.label ? (
+              <div className="mt-8">
+                <PrimaryCtaLink
+                  href={section.cta.href}
+                  label={section.cta.label}
+                />
+              </div>
+            ) : null}
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.35 }}
+            transition={{ ...sharedTransition, delay: 0.08 }}
+            className="mx-auto w-full max-w-[28rem] lg:mx-0 lg:pt-14"
+          >
+            {section.image ? (
+              <div className="overflow-hidden rounded-[1.75rem] border border-navy/10 bg-white p-2 shadow-[0_14px_34px_rgba(10,31,68,0.08)]">
+                <Image
+                  src={section.image.url}
+                  alt={section.image.alt}
+                  width={520}
+                  height={640}
+                  className="h-auto w-full rounded-[1.35rem]"
+                />
+              </div>
+            ) : null}
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const SocialProofPreview = ({
   socialProof,
 }: {
@@ -877,6 +978,7 @@ const RedesignConcepts = ({
   landingPages,
   emailSequences,
   transition,
+  whatToExpect,
   socialProof,
 }: RedesignConceptsProps) => {
   return (
@@ -891,6 +993,7 @@ const RedesignConcepts = ({
       <LandingPagesPreview section={landingPages} />
       <EmailSequencesPreview section={emailSequences} />
       <TransitionPreview section={transition} />
+      <WhatToExpectPreview section={whatToExpect} />
       <SocialProofPreview socialProof={socialProof} />
     </RedesignPreviewLayout>
   );
@@ -926,18 +1029,23 @@ export const getStaticProps: GetStaticProps<
   const emailSequencesSection = zSections.find((section: any) =>
     sectionIncludes(section, "email sequences")
   );
+  const whatToExpectSection = zSections.find((section: any) =>
+    sectionIncludes(section, "what you can expect")
+  );
   const meetSarahSection =
     zSections.find((section: any) => sectionIncludes(section, "sarah")) ??
     zSections.find(
       (section: any) =>
         sectionIncludes(section, "video ads") &&
         section?.sys?.id !== landingPagesSection?.sys?.id &&
-        section?.sys?.id !== emailSequencesSection?.sys?.id
+        section?.sys?.id !== emailSequencesSection?.sys?.id &&
+        section?.sys?.id !== whatToExpectSection?.sys?.id
     ) ??
     zSections.find(
       (section: any) =>
         section?.sys?.id !== landingPagesSection?.sys?.id &&
-        section?.sys?.id !== emailSequencesSection?.sys?.id
+        section?.sys?.id !== emailSequencesSection?.sys?.id &&
+        section?.sys?.id !== whatToExpectSection?.sys?.id
     );
   const consultationBanner = sections.find(
     (section: any) =>
@@ -948,6 +1056,7 @@ export const getStaticProps: GetStaticProps<
   const meetSarahFields = meetSarahSection?.fields ?? {};
   const landingPagesFields = landingPagesSection?.fields ?? {};
   const emailSequencesFields = emailSequencesSection?.fields ?? {};
+  const whatToExpectFields = whatToExpectSection?.fields ?? {};
   const sliderFields = photoSlider?.fields ?? {};
   const consultationCta = consultationBanner?.fields?.cta?.fields;
 
@@ -1020,6 +1129,20 @@ export const getStaticProps: GetStaticProps<
               ? {
                   label: consultationCta.text ?? null,
                   href: consultationCta.url ?? null,
+                }
+              : null,
+          }
+        : null,
+      whatToExpect: whatToExpectSection
+        ? {
+            title: whatToExpectFields.title ?? null,
+            subtitle: whatToExpectFields.subtitle ?? null,
+            richText: whatToExpectFields.richText ?? null,
+            image: getImageContentAsset(whatToExpectFields.image),
+            cta: whatToExpectFields.cta?.fields
+              ? {
+                  label: whatToExpectFields.cta.fields.text ?? null,
+                  href: whatToExpectFields.cta.fields.url ?? null,
                 }
               : null,
           }
