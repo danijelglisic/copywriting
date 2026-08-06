@@ -16,12 +16,25 @@ const defaultPrimaryCta = { label: "Book a discovery call", href: "" };
 const secondaryCta = { label: "Portfolio", href: "/en/portfolio" };
 const primaryButtonClass =
   "rounded-full bg-navy px-7 py-[0.8125rem] text-center text-sm font-semibold text-white shadow-[0_18px_38px_rgba(10,31,68,0.16)] outline-offset-4 ring-1 ring-navy/10 transition duration-300 hover:-translate-y-0.5 hover:bg-black active:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-black";
+const serviceTitleClass = "text-xl font-bold uppercase text-black";
+const serviceBodyClass = "mt-7 text-lg leading-9 text-black/68";
 
 const PrimaryCtaLink = ({ href, label }: { href: string; label: string }) => (
   <Link href={href} legacyBehavior>
     <a className={primaryButtonClass}>{label}</a>
   </Link>
 );
+
+const renderHeroHeading = (heading: string) =>
+  heading.split(/(Converting)/g).map((part, index) =>
+    part === "Converting" ? (
+      <span key={`${part}-${index}`}>
+        Conve<span className="mr-[0.035em] inline-block">r</span>ting
+      </span>
+    ) : (
+      part
+    )
+  );
 
 type NavItem = { text: string; href: string };
 
@@ -391,7 +404,7 @@ const HeroCopy = ({
         transition={sharedTransition}
         className="text-5xl font-semibold leading-[0.98] tracking-[-0.045em] text-black [font-kerning:normal] sm:text-6xl lg:text-7xl xl:text-[5.5rem] xl:leading-[0.96]"
       >
-        {hero.heading}
+        {renderHeroHeading(hero.heading)}
       </motion.h1>
     ) : null}
     {hero.heading2?.length ? (
@@ -665,7 +678,7 @@ const MeetSarahPreview = ({
         </div>
       </section>
 
-      <section className="bg-[#F9F9F7] py-16 sm:py-20 lg:py-24">
+      <section className="bg-[#F9F9F7] py-16 sm:py-20 lg:pb-16 lg:pt-24">
         <div className="container">
           <div className="grid items-start gap-14 lg:grid-cols-[minmax(18rem,0.95fr)_minmax(0,1.05fr)] lg:gap-20">
             <motion.div
@@ -697,12 +710,10 @@ const MeetSarahPreview = ({
               className="max-w-3xl"
             >
               {videoAdsLabel ? (
-                <p className="mb-7 text-xl font-bold uppercase text-black">
-                  {videoAdsLabel}
-                </p>
+                <p className={serviceTitleClass}>{videoAdsLabel}</p>
               ) : null}
               {videoAdsRichText ? (
-                <div className="text-lg leading-9 text-black/68">
+                <div className={serviceBodyClass}>
                   {documentToReactComponents(
                     videoAdsRichText,
                     meetSarahRichTextOptions
@@ -736,7 +747,7 @@ const LandingPagesPreview = ({
   const heading = section.subtitle ? section.title : null;
 
   return (
-    <section className="bg-white py-16 sm:py-20 lg:py-24">
+    <section className="bg-white py-16 sm:py-20 lg:pb-24 lg:pt-16">
       <div className="container">
         <div className="grid items-start gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.9fr)] lg:gap-20">
           <motion.div
@@ -746,18 +757,14 @@ const LandingPagesPreview = ({
             transition={sharedTransition}
             className="max-w-3xl"
           >
-            {label ? (
-              <p className="mb-7 text-xl font-bold uppercase text-black">
-                {label}
-              </p>
-            ) : null}
+            {label ? <p className={serviceTitleClass}>{label}</p> : null}
             {heading ? (
               <h2 className="text-4xl font-semibold leading-tight tracking-[-0.045em] text-black sm:text-5xl">
                 {heading}
               </h2>
             ) : null}
             {section.richText ? (
-              <div className="mt-16 text-lg leading-9 text-black/68">
+              <div className={serviceBodyClass}>
                 {documentToReactComponents(
                   section.richText,
                   landingPagesRichTextOptions
@@ -818,11 +825,9 @@ const EmailSequencesPreview = ({
             transition={{ ...sharedTransition, delay: 0.08 }}
             className="max-w-3xl"
           >
-            {label ? (
-              <p className="text-xl font-bold uppercase text-black">{label}</p>
-            ) : null}
+            {label ? <p className={serviceTitleClass}>{label}</p> : null}
             {section.richText ? (
-              <div className="mt-16 text-lg leading-9 text-black/68">
+              <div className={serviceBodyClass}>
                 {documentToReactComponents(
                   section.richText,
                   emailSequencesRichTextOptions
@@ -905,7 +910,7 @@ const WhatToExpectPreview = ({
   if (!section) return null;
 
   return (
-    <section className="bg-[#F9F9F7] py-16 sm:py-20 lg:py-24">
+    <section className="bg-white py-16 sm:py-20 lg:py-24">
       <div className="container">
         <div className="grid items-start gap-14 lg:grid-cols-[minmax(0,1.05fr)_minmax(18rem,0.95fr)] lg:gap-16">
           <motion.div
@@ -916,11 +921,9 @@ const WhatToExpectPreview = ({
             className="max-w-3xl"
           >
             {section.title ? (
-              <p className="text-xl font-bold uppercase tracking-[0.24em] text-black">
-                {section.title}
-              </p>
+              <p className={serviceTitleClass}>{section.title}</p>
             ) : null}
-            <div className="mt-16 text-lg leading-9 text-black/68">
+            <div className={serviceBodyClass}>
               {section.subtitle ? (
                 <p className="mb-5">{section.subtitle}</p>
               ) : null}
@@ -999,7 +1002,7 @@ const SocialProofPreview = ({
   };
 
   return (
-    <section className="bg-white py-16 sm:py-20">
+    <section className="bg-[#F9F9F7] py-16 sm:py-20">
       <div className="container">
         <div className="mx-auto max-w-3xl text-center">
           {socialProof.title ? (
@@ -1042,7 +1045,7 @@ const SocialProofPreview = ({
           <button
             type="button"
             onClick={() => sliderRef.current?.slickNext()}
-            className="hidden h-11 w-11 items-center justify-center rounded-full border border-navy bg-navy text-white shadow-[0_10px_24px_rgba(10,31,68,0.16)] outline-offset-4 transition hover:-translate-y-0.5 hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-navy sm:inline-flex"
+            className="hidden h-11 w-11 items-center justify-center rounded-full border border-navy/30 bg-white text-navy outline-offset-4 ring-2 ring-navy/35 ring-offset-2 ring-offset-[#F9F9F7] transition hover:-translate-y-0.5 hover:border-navy/50 hover:bg-navy/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-navy sm:inline-flex"
             aria-label="Next testimonial"
           >
             <span aria-hidden="true">→</span>
