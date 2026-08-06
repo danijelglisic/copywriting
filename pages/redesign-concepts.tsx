@@ -28,8 +28,11 @@ const PrimaryCtaLink = ({ href, label }: { href: string; label: string }) => (
 const renderHeroHeading = (heading: string) =>
   heading.split(/(Converting)/g).map((part, index) =>
     part === "Converting" ? (
-      <span key={`${part}-${index}`} className="inline-block whitespace-nowrap">
-        Conve<span className="mr-[0.012em] inline-block">r</span>ting
+      <span
+        key={`${part}-${index}`}
+        className="inline-block whitespace-nowrap [font-kerning:none] [font-variant-ligatures:none]"
+      >
+        Converting
       </span>
     ) : (
       part
@@ -758,17 +761,21 @@ const LandingPagesPreview = ({
             className="max-w-3xl"
           >
             {label ? <p className={serviceTitleClass}>{label}</p> : null}
-            {heading ? (
-              <h2 className="text-4xl font-semibold leading-tight tracking-[-0.045em] text-black sm:text-5xl">
-                {heading}
-              </h2>
-            ) : null}
-            {section.richText ? (
+            {heading || section.richText ? (
               <div className={serviceBodyClass}>
-                {documentToReactComponents(
-                  section.richText,
-                  landingPagesRichTextOptions
-                )}
+                {heading ? (
+                  <h2 className="text-4xl font-semibold leading-tight tracking-[-0.045em] text-black sm:text-5xl">
+                    {heading}
+                  </h2>
+                ) : null}
+                {section.richText ? (
+                  <div className={heading ? "mt-5" : undefined}>
+                    {documentToReactComponents(
+                      section.richText,
+                      landingPagesRichTextOptions
+                    )}
+                  </div>
+                ) : null}
               </div>
             ) : null}
             {section.cta?.href && section.cta?.label ? (
@@ -903,11 +910,11 @@ const WhatToExpectPreview = ({
             className="max-w-3xl"
           >
             {section.title ? (
-              <p className="text-xl font-extrabold uppercase text-black">
+              <p className="text-xl font-black uppercase text-black">
                 {section.title}
               </p>
             ) : null}
-            <div className="mt-12 text-lg leading-9 text-black/68">
+            <div className="mt-16 text-lg leading-9 text-black/68">
               {section.subtitle ? (
                 <p className="mb-5">{section.subtitle}</p>
               ) : null}
@@ -1029,7 +1036,7 @@ const SocialProofPreview = ({
           <button
             type="button"
             onClick={() => sliderRef.current?.slickNext()}
-            className="hidden h-11 w-11 items-center justify-center rounded-full border-2 border-navy bg-white text-navy outline-offset-4 ring-2 ring-navy ring-offset-2 ring-offset-[#F9F9F7] transition hover:-translate-y-0.5 hover:bg-navy/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-navy sm:inline-flex"
+            className="hidden h-11 w-11 items-center justify-center rounded-full border border-navy/60 bg-white text-navy outline-offset-4 transition hover:-translate-y-0.5 hover:border-navy hover:bg-navy/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-navy sm:inline-flex"
             aria-label="Next testimonial"
           >
             <span aria-hidden="true">→</span>
