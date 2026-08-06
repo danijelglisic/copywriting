@@ -1,8 +1,0 @@
-Common base commit: f772765f5c866b3e0e40e9f2f14cb2f345a68125
-Included commits (chronological order):
-- da027811e773fc2102159f48d6ca6a843bc04022 Add Contentful-driven redesign preview page (`/redesign-concepts`)
-Current branch: feature/full-redesign
-Current HEAD hash at recovery capture: da027811e773fc2102159f48d6ca6a843bc04022
-Uncommitted tracked changes included: No (none existed at capture time)
-Temporary DEPLOYMENT TEST 8642 marker introduced by included commit: da027811e773fc2102159f48d6ca6a843bc04022
-Historical note: old_work-1786008796 is not present in this rehydrated checkout; the reflog shows the replacement work branch was created from FETCH_HEAD at f772765f5c866b3e0e40e9f2f14cb2f345a68125, which is also the parent and common base of the current redesign commit.
