@@ -325,6 +325,14 @@ type RedesignConceptsProps = {
       alt: string;
     }[];
   } | null;
+  finalCta: {
+    headline?: string;
+    description?: string;
+    cta?: {
+      label?: string;
+      href?: string;
+    } | null;
+  } | null;
 };
 
 const getAsset = (asset: any) => {
@@ -1022,6 +1030,41 @@ const SocialProofPreview = ({
   );
 };
 
+const FinalCtaPreview = ({
+  section,
+}: {
+  section: RedesignConceptsProps["finalCta"];
+}) => {
+  if (!section) return null;
+
+  return (
+    <section className="bg-dark py-16 text-white sm:py-20">
+      <div className="container">
+        <div className="mx-auto max-w-4xl text-center">
+          {section.headline ? (
+            <h2 className="text-4xl font-semibold leading-tight tracking-[-0.045em] text-white sm:text-5xl">
+              {section.headline}
+            </h2>
+          ) : null}
+          {section.description ? (
+            <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-white/72">
+              {section.description}
+            </p>
+          ) : null}
+          {section.cta?.href && section.cta?.label ? (
+            <div className="mt-6">
+              <PrimaryCtaLink
+                href={section.cta.href}
+                label={section.cta.label}
+              />
+            </div>
+          ) : null}
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const RedesignConcepts = ({
   seoTitle,
   seoDescription,
@@ -1033,6 +1076,7 @@ const RedesignConcepts = ({
   transition,
   whatToExpect,
   socialProof,
+  finalCta,
 }: RedesignConceptsProps) => {
   return (
     <RedesignPreviewLayout>
@@ -1048,6 +1092,7 @@ const RedesignConcepts = ({
       <TransitionPreview section={transition} />
       <WhatToExpectPreview section={whatToExpect} />
       <SocialProofPreview socialProof={socialProof} />
+      <FinalCtaPreview section={finalCta} />
     </RedesignPreviewLayout>
   );
 };
@@ -1100,10 +1145,13 @@ export const getStaticProps: GetStaticProps<
         section?.sys?.id !== emailSequencesSection?.sys?.id &&
         section?.sys?.id !== whatToExpectSection?.sys?.id
     );
-  const consultationBanner = sections.find(
+  const consultationBanners = sections.filter(
     (section: any) =>
       section?.sys?.contentType?.sys?.id === "freeConsultationBanner"
   );
+  const transitionBanner = consultationBanners[0];
+  const finalCtaBanner =
+    consultationBanners.length > 1 ? consultationBanners.at(-1) : null;
   const heroFields = heroSection?.fields ?? {};
   const heroContentType = heroSection?.sys?.contentType?.sys?.id;
   const meetSarahFields = meetSarahSection?.fields ?? {};
@@ -1111,7 +1159,8 @@ export const getStaticProps: GetStaticProps<
   const emailSequencesFields = emailSequencesSection?.fields ?? {};
   const whatToExpectFields = whatToExpectSection?.fields ?? {};
   const sliderFields = photoSlider?.fields ?? {};
-  const consultationCta = consultationBanner?.fields?.cta?.fields;
+  const consultationCta = transitionBanner?.fields?.cta?.fields;
+  const finalCta = finalCtaBanner?.fields?.cta?.fields;
 
   return {
     props: {
@@ -1174,10 +1223,10 @@ export const getStaticProps: GetStaticProps<
               : null,
           }
         : null,
-      transition: consultationBanner
+      transition: transitionBanner
         ? {
-            headline: consultationBanner.fields?.text ?? null,
-            description: consultationBanner.fields?.description ?? null,
+            headline: transitionBanner.fields?.text ?? null,
+            description: transitionBanner.fields?.description ?? null,
             cta: consultationCta
               ? {
                   label: consultationCta.text ?? null,
@@ -1208,6 +1257,18 @@ export const getStaticProps: GetStaticProps<
               sliderFields.images
                 ?.map((item: any) => getAsset(item?.fields?.image))
                 .filter(Boolean) ?? [],
+          }
+        : null,
+      finalCta: finalCtaBanner
+        ? {
+            headline: finalCtaBanner.fields?.text ?? null,
+            description: finalCtaBanner.fields?.description ?? null,
+            cta: finalCta
+              ? {
+                  label: finalCta.text ?? null,
+                  href: finalCta.url ?? null,
+                }
+              : null,
           }
         : null,
     },
