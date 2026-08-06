@@ -907,9 +907,11 @@ const WhatToExpectPreview = ({
             className="max-w-3xl"
           >
             {section.title ? (
-              <p className={serviceTitleClass}>{section.title}</p>
+              <p className={`${serviceTitleClass} font-extrabold`}>
+                {section.title}
+              </p>
             ) : null}
-            <div className="pt-16 text-lg leading-9 text-black/68">
+            <div className="pt-20 text-lg leading-9 text-black/68">
               {section.subtitle ? (
                 <p className="mb-5">{section.subtitle}</p>
               ) : null}
