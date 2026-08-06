@@ -26,6 +26,8 @@ const ZSection = ({ props, isDark }: ZSectionProps) => {
   const textColor = isDark ? "text-white" : "text-dark";
   const imageOrder = imagePosition ? "" : "order-2";
 
+  console.info("ZSection Contentful title:", JSON.stringify(title));
+
   return (
     <div className={bgColor + " py-20 " + textColor}>
       <div className="container">
@@ -41,7 +43,10 @@ const ZSection = ({ props, isDark }: ZSectionProps) => {
             )}
           </FadeUp>
           <div className="lg:max-w-[50%] flex flex-col gap-4">
-            <p className="heading-4">
+            <p
+              className="heading-4"
+              style={{ fontWeight: 800, marginBottom: "48px" }}
+            >
               {title && <AnimatedText text={title} />}
             </p>
             <FadeUp delay={0.15}>
