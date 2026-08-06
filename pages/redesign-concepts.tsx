@@ -25,19 +25,6 @@ const PrimaryCtaLink = ({ href, label }: { href: string; label: string }) => (
   </Link>
 );
 
-const ServiceTextBlock = ({
-  label,
-  children,
-}: {
-  label: string;
-  children: React.ReactNode;
-}) => (
-  <>
-    <p className={serviceTitleClass}>{label}</p>
-    <div className={serviceBodyClass}>{children}</div>
-  </>
-);
-
 const renderHeroHeading = (heading: string) =>
   heading.split(/(Converting)/g).map((part, index) =>
     part === "Converting" ? (
@@ -722,13 +709,16 @@ const MeetSarahPreview = ({
               transition={{ ...sharedTransition, delay: 0.08 }}
               className="max-w-3xl"
             >
-              {videoAdsLabel && videoAdsRichText ? (
-                <ServiceTextBlock label={videoAdsLabel}>
+              {videoAdsLabel ? (
+                <p className={serviceTitleClass}>{videoAdsLabel}</p>
+              ) : null}
+              {videoAdsRichText ? (
+                <div className={serviceBodyClass}>
                   {documentToReactComponents(
                     videoAdsRichText,
                     meetSarahRichTextOptions
                   )}
-                </ServiceTextBlock>
+                </div>
               ) : null}
               {section.cta?.href && section.cta?.label ? (
                 <div className="mt-8">
@@ -767,8 +757,9 @@ const LandingPagesPreview = ({
             transition={sharedTransition}
             className="max-w-3xl"
           >
-            {label && (heading || section.richText) ? (
-              <ServiceTextBlock label={label}>
+            {label ? <p className={serviceTitleClass}>{label}</p> : null}
+            {heading || section.richText ? (
+              <div className={serviceBodyClass}>
                 {heading ? (
                   <h2 className="text-4xl font-semibold leading-tight tracking-[-0.045em] text-black sm:text-5xl">
                     {heading}
@@ -782,7 +773,7 @@ const LandingPagesPreview = ({
                     )}
                   </div>
                 ) : null}
-              </ServiceTextBlock>
+              </div>
             ) : null}
             {section.cta?.href && section.cta?.label ? (
               <div className="mt-8">
@@ -838,13 +829,14 @@ const EmailSequencesPreview = ({
             transition={{ ...sharedTransition, delay: 0.08 }}
             className="max-w-3xl"
           >
-            {label && section.richText ? (
-              <ServiceTextBlock label={label}>
+            {label ? <p className={serviceTitleClass}>{label}</p> : null}
+            {section.richText ? (
+              <div className={serviceBodyClass}>
                 {documentToReactComponents(
                   section.richText,
                   emailSequencesRichTextOptions
                 )}
-              </ServiceTextBlock>
+              </div>
             ) : null}
             {section.cta?.href && section.cta?.label ? (
               <div className="mt-8">
@@ -915,14 +907,11 @@ const WhatToExpectPreview = ({
             className="max-w-3xl"
           >
             {section.title ? (
-              <h2
-                className="text-xl uppercase text-black"
-                style={{ fontWeight: 800, marginBottom: "48px" }}
-              >
+              <p className="text-xl font-extrabold uppercase text-black [font-weight:800]">
                 {section.title}
-              </h2>
+              </p>
             ) : null}
-            <div className="text-lg leading-9 text-black/68">
+            <div className="pt-12 text-lg leading-9 text-black/68">
               {section.subtitle ? (
                 <p className="mb-5">{section.subtitle}</p>
               ) : null}
@@ -1044,8 +1033,7 @@ const SocialProofPreview = ({
           <button
             type="button"
             onClick={() => sliderRef.current?.slickNext()}
-            className="hidden h-11 w-11 items-center justify-center rounded-full border bg-white text-navy shadow-none outline-offset-4 ring-0 transition hover:-translate-y-0.5 hover:bg-navy/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-navy sm:inline-flex"
-            style={{ borderColor: "#0A1F44" }}
+            className="hidden h-11 w-11 items-center justify-center rounded-full border border-navy bg-white text-navy outline-offset-4 transition hover:-translate-y-0.5 hover:bg-navy/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-navy sm:inline-flex"
             aria-label="Next testimonial"
           >
             <span aria-hidden="true">→</span>
