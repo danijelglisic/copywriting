@@ -907,7 +907,7 @@ const WhatToExpectPreview = ({
             className="max-w-3xl"
           >
             {section.title ? (
-              <p className={`${serviceTitleClass} font-extrabold`}>
+              <p className={serviceTitleClass} style={{ fontWeight: 800 }}>
                 {section.title}
               </p>
             ) : null}
