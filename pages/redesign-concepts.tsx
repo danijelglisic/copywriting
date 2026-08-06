@@ -906,21 +906,23 @@ const WhatToExpectPreview = ({
             transition={sharedTransition}
             className="max-w-3xl"
           >
-            {section.title ? (
-              <p className={`${serviceTitleClass} font-extrabold`}>
-                {section.title}
-              </p>
-            ) : null}
-            <div className="pt-16 text-lg leading-9 text-black/68">
-              {section.subtitle ? (
-                <p className="mb-5">{section.subtitle}</p>
+            <div className={section.title ? "space-y-16" : undefined}>
+              {section.title ? (
+                <h2 className="text-xl font-extrabold uppercase text-black">
+                  {section.title}
+                </h2>
               ) : null}
-              {section.richText
-                ? documentToReactComponents(
-                    section.richText,
-                    whatToExpectRichTextOptions
-                  )
-                : null}
+              <div className="text-lg leading-9 text-black/68">
+                {section.subtitle ? (
+                  <p className="mb-5">{section.subtitle}</p>
+                ) : null}
+                {section.richText
+                  ? documentToReactComponents(
+                      section.richText,
+                      whatToExpectRichTextOptions
+                    )
+                  : null}
+              </div>
             </div>
             {section.cta?.href && section.cta?.label ? (
               <div className="mt-8">
