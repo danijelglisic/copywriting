@@ -282,6 +282,19 @@ type RedesignConceptsProps = {
       href?: string;
     } | null;
   } | null;
+  emailSequences: {
+    title?: string;
+    subtitle?: string;
+    richText?: any;
+    image?: {
+      url: string;
+      alt: string;
+    } | null;
+    cta?: {
+      label?: string;
+      href?: string;
+    } | null;
+  } | null;
   socialProof: {
     title?: string;
     description?: string;
@@ -527,6 +540,32 @@ const landingPagesRichTextOptions = {
   },
 };
 
+const emailSequencesRichTextOptions = {
+  ...richTextOptions,
+  renderNode: {
+    ...richTextOptions.renderNode,
+    [BLOCKS.PARAGRAPH]: (node: any, children: React.ReactNode) => {
+      const text = getNodeText(node).trim();
+      const normalizedText = text.toLowerCase().replace(/’/g, "'");
+
+      if (!text) return null;
+
+      if (
+        normalizedText.startsWith("let's turn sarah into a repeat customer")
+      ) {
+        return <p className="mb-0 mt-14">{children}</p>;
+      }
+
+      return <p className="mb-5 last:mb-0">{children}</p>;
+    },
+    [BLOCKS.QUOTE]: (_node: any, children: React.ReactNode) => (
+      <blockquote className="my-10 border-l-4 border-secondary pl-4 italic [&_p]:mb-0">
+        {children}
+      </blockquote>
+    ),
+  },
+};
+
 const MeetSarahPreview = ({
   section,
 }: {
@@ -656,6 +695,75 @@ const LandingPagesPreview = ({
   );
 };
 
+const EmailSequencesPreview = ({
+  section,
+}: {
+  section: RedesignConceptsProps["emailSequences"];
+}) => {
+  if (!section) return null;
+
+  const label = section.title ?? section.subtitle;
+
+  return (
+    <section className="bg-[#F9F9F7] py-16 sm:py-20 lg:py-24">
+      <div className="container">
+        <div className="grid items-center gap-14 lg:grid-cols-[minmax(18rem,0.95fr)_minmax(0,1.05fr)] lg:gap-20">
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.35 }}
+            transition={sharedTransition}
+            className="relative"
+          >
+            <div className="absolute inset-8 rounded-[2rem] bg-navy/5 blur-3xl" />
+            {section.image ? (
+              <div className="relative overflow-hidden rounded-[1.75rem] border border-navy/10 bg-white p-2 shadow-[0_14px_34px_rgba(10,31,68,0.08)] transition duration-300 hover:-translate-y-1">
+                <Image
+                  src={section.image.url}
+                  alt={section.image.alt}
+                  width={520}
+                  height={640}
+                  className="h-auto w-full rounded-[1.35rem]"
+                />
+              </div>
+            ) : null}
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.35 }}
+            transition={{ ...sharedTransition, delay: 0.08 }}
+            className="max-w-3xl"
+          >
+            {label ? (
+              <p className="text-xl font-bold uppercase tracking-[0.24em] text-black">
+                {label}
+              </p>
+            ) : null}
+            {section.richText ? (
+              <div className="mt-7 text-lg leading-9 text-black/68">
+                {documentToReactComponents(
+                  section.richText,
+                  emailSequencesRichTextOptions
+                )}
+              </div>
+            ) : null}
+            {section.cta?.href && section.cta?.label ? (
+              <div className="mt-8">
+                <PrimaryCtaLink
+                  href={section.cta.href}
+                  label={section.cta.label}
+                />
+              </div>
+            ) : null}
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const SocialProofPreview = ({
   socialProof,
 }: {
@@ -706,6 +814,7 @@ const RedesignConcepts = ({
   primaryCta,
   meetSarah,
   landingPages,
+  emailSequences,
   socialProof,
 }: RedesignConceptsProps) => {
   return (
@@ -718,6 +827,7 @@ const RedesignConcepts = ({
       <QuietAuthorityHero hero={hero} primaryCta={primaryCta} />
       <MeetSarahPreview section={meetSarah} />
       <LandingPagesPreview section={landingPages} />
+      <EmailSequencesPreview section={emailSequences} />
       <SocialProofPreview socialProof={socialProof} />
     </RedesignPreviewLayout>
   );
@@ -750,15 +860,21 @@ export const getStaticProps: GetStaticProps<
   const landingPagesSection = zSections.find((section: any) =>
     sectionIncludes(section, "landing")
   );
+  const emailSequencesSection = zSections.find((section: any) =>
+    sectionIncludes(section, "email sequences")
+  );
   const meetSarahSection =
     zSections.find((section: any) => sectionIncludes(section, "sarah")) ??
     zSections.find(
       (section: any) =>
         sectionIncludes(section, "video ads") &&
-        section?.sys?.id !== landingPagesSection?.sys?.id
+        section?.sys?.id !== landingPagesSection?.sys?.id &&
+        section?.sys?.id !== emailSequencesSection?.sys?.id
     ) ??
     zSections.find(
-      (section: any) => section?.sys?.id !== landingPagesSection?.sys?.id
+      (section: any) =>
+        section?.sys?.id !== landingPagesSection?.sys?.id &&
+        section?.sys?.id !== emailSequencesSection?.sys?.id
     );
   const consultationBanner = sections.find(
     (section: any) =>
@@ -768,6 +884,7 @@ export const getStaticProps: GetStaticProps<
   const heroContentType = heroSection?.sys?.contentType?.sys?.id;
   const meetSarahFields = meetSarahSection?.fields ?? {};
   const landingPagesFields = landingPagesSection?.fields ?? {};
+  const emailSequencesFields = emailSequencesSection?.fields ?? {};
   const sliderFields = photoSlider?.fields ?? {};
   const consultationCta = consultationBanner?.fields?.cta?.fields;
 
@@ -814,6 +931,20 @@ export const getStaticProps: GetStaticProps<
               ? {
                   label: landingPagesFields.cta.fields.text ?? null,
                   href: landingPagesFields.cta.fields.url ?? null,
+                }
+              : null,
+          }
+        : null,
+      emailSequences: emailSequencesSection
+        ? {
+            title: emailSequencesFields.title ?? null,
+            subtitle: emailSequencesFields.subtitle ?? null,
+            richText: emailSequencesFields.richText ?? null,
+            image: getImageContentAsset(emailSequencesFields.image),
+            cta: emailSequencesFields.cta?.fields
+              ? {
+                  label: emailSequencesFields.cta.fields.text ?? null,
+                  href: emailSequencesFields.cta.fields.url ?? null,
                 }
               : null,
           }
