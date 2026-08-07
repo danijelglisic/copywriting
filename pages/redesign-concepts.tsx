@@ -1180,6 +1180,13 @@ export const getStaticProps: GetStaticProps<
   const landingPagesFields = landingPagesSection?.fields ?? {};
   const emailSequencesFields = emailSequencesSection?.fields ?? {};
   const whatToExpectFields = whatToExpectSection?.fields ?? {};
+
+  console.log({
+    CONTENTFUL_SPACE_ID: process.env.CONTENTFUL_SPACE_ID,
+    CONTENTFUL_ENVIRONMENT: process.env.CONTENTFUL_ENVIRONMENT,
+    title: whatToExpectFields.title,
+    subtitle: whatToExpectFields.subtitle,
+  });
   const sliderFields = photoSlider?.fields ?? {};
   const consultationCta = transitionBanner?.fields?.cta?.fields;
   const finalCta = finalCtaBanner?.fields?.cta?.fields;
