@@ -909,7 +909,7 @@ const WhatToExpectPreview = ({
             <div className="space-y-20">
               {section.title ? (
                 <h2 className="text-xl font-black uppercase text-black">
-                  CODEX CONNECTION TEST 2026
+                  CODEX REPO TRANSFER TEST
                 </h2>
               ) : null}
               <div className="text-lg leading-9 text-black/68">
