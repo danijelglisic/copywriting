@@ -1146,6 +1146,22 @@ export const getStaticProps: GetStaticProps<
   const whatToExpectSection = zSections.find((section: any) =>
     sectionIncludes(section, "what you can expect")
   );
+  console.log({
+    id: whatToExpectSection?.sys?.id,
+    title: whatToExpectSection?.fields?.title,
+    subtitle: whatToExpectSection?.fields?.subtitle,
+  });
+  console.log(
+    zSections
+      .filter((section: any) =>
+        sectionIncludes(section, "what you can expect")
+      )
+      .map((section: any) => ({
+        id: section?.sys?.id,
+        title: section?.fields?.title,
+        subtitle: section?.fields?.subtitle,
+      }))
+  );
   const meetSarahSection =
     zSections.find((section: any) => sectionIncludes(section, "sarah")) ??
     zSections.find(
