@@ -908,7 +908,7 @@ const WhatToExpectPreview = ({
           >
             <div className="space-y-20">
               {section.title ? (
-                <h2 className="text-xl font-black uppercase text-black">
+                <h2 data-testid="what-to-expect-title" className="text-xl font-black uppercase text-black">
                   {section.title}
                 </h2>
               ) : null}
