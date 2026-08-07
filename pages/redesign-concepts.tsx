@@ -909,7 +909,7 @@ const WhatToExpectPreview = ({
             <div className="space-y-20">
               {section.title ? (
                 <h2 className="text-xl font-black uppercase text-black">
-                  CODEX CONNECTION TEST 2026
+                  {section.title}
                 </h2>
               ) : null}
               <div className="text-lg leading-9 text-black/68">
@@ -1180,6 +1180,13 @@ export const getStaticProps: GetStaticProps<
   const landingPagesFields = landingPagesSection?.fields ?? {};
   const emailSequencesFields = emailSequencesSection?.fields ?? {};
   const whatToExpectFields = whatToExpectSection?.fields ?? {};
+
+  console.log({
+    CONTENTFUL_SPACE_ID: process.env.CONTENTFUL_SPACE_ID,
+    CONTENTFUL_ENVIRONMENT: process.env.CONTENTFUL_ENVIRONMENT,
+    title: whatToExpectFields.title,
+    subtitle: whatToExpectFields.subtitle,
+  });
   const sliderFields = photoSlider?.fields ?? {};
   const consultationCta = transitionBanner?.fields?.cta?.fields;
   const finalCta = finalCtaBanner?.fields?.cta?.fields;
