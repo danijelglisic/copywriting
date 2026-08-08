@@ -910,9 +910,9 @@ const WhatToExpectPreview = ({
             transition={sharedTransition}
             className="max-w-3xl"
           >
-            <div className="space-y-24">
+            <div className="space-y-28">
               {section.title ? (
-                <h2 className="text-xl font-[950] uppercase text-black">
+                <h2 className="text-xl font-black uppercase text-black [-webkit-text-stroke:0.35px_currentColor]">
                   WHAT YOU CAN EXPECT TEST
                 </h2>
               ) : null}
