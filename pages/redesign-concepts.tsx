@@ -613,6 +613,10 @@ const whatToExpectRichTextOptions = {
 
       if (!text) return null;
 
+      if (normalizedText === "what you can expect") {
+        return <p className="mb-12 font-bold">{children}</p>;
+      }
+
       if (normalizedText.startsWith("if your hook")) {
         return <p className="mb-5 mt-10">{children}</p>;
       }
