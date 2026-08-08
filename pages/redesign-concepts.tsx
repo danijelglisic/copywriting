@@ -766,7 +766,7 @@ const LandingPagesPreview = ({
                   </h2>
                 ) : null}
                 {section.richText ? (
-                  <div className={heading ? "mt-5" : undefined}>
+                  <div className={heading ? "mt-32 border-4 border-red-500" : undefined}>
                     {documentToReactComponents(
                       section.richText,
                       landingPagesRichTextOptions
