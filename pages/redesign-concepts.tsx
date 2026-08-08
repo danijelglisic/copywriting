@@ -757,7 +757,7 @@ const LandingPagesPreview = ({
             transition={sharedTransition}
             className="max-w-3xl"
           >
-            {label ? <p className={serviceTitleClass}>{label}</p> : null}
+            {label ? <p className={`${serviceTitleClass} mb-12`}>{label}</p> : null}
             {heading || section.richText ? (
               <div className={`${serviceBodyClass} pt-20`}>
                 {heading ? (
