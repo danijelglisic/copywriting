@@ -661,7 +661,7 @@ const MeetSarahPreview = ({
           <div className="max-w-3xl">
             {section.title && !isVideoAdsLabel(section.title) ? (
               <h2 className="text-4xl font-semibold leading-tight tracking-[-0.045em] text-black sm:text-5xl">
-                CODEX REPO TRANSFER TEST
+                {section.title}
               </h2>
             ) : null}
             {section.subtitle && !isVideoAdsLabel(section.subtitle) ? (
@@ -906,10 +906,10 @@ const WhatToExpectPreview = ({
             transition={sharedTransition}
             className="max-w-3xl"
           >
-            <div className="space-y-20">
+            <div className="space-y-24">
               {section.title ? (
-                <h2 className="text-xl font-black uppercase text-black">
-                  {section.title}
+                <h2 className="text-xl font-[950] uppercase text-black">
+                  WHAT YOU CAN EXPECT TEST
                 </h2>
               ) : null}
               <div className="text-lg leading-9 text-black/68">
@@ -1146,22 +1146,6 @@ export const getStaticProps: GetStaticProps<
   const whatToExpectSection = zSections.find((section: any) =>
     sectionIncludes(section, "what you can expect")
   );
-  console.log({
-    id: whatToExpectSection?.sys?.id,
-    title: whatToExpectSection?.fields?.title,
-    subtitle: whatToExpectSection?.fields?.subtitle,
-  });
-  console.log(
-    zSections
-      .filter((section: any) =>
-        sectionIncludes(section, "what you can expect")
-      )
-      .map((section: any) => ({
-        id: section?.sys?.id,
-        title: section?.fields?.title,
-        subtitle: section?.fields?.subtitle,
-      }))
-  );
   const meetSarahSection =
     zSections.find((section: any) => sectionIncludes(section, "sarah")) ??
     zSections.find(
@@ -1197,12 +1181,6 @@ export const getStaticProps: GetStaticProps<
   const emailSequencesFields = emailSequencesSection?.fields ?? {};
   const whatToExpectFields = whatToExpectSection?.fields ?? {};
 
-  console.log({
-    CONTENTFUL_SPACE_ID: process.env.CONTENTFUL_SPACE_ID,
-    CONTENTFUL_ENVIRONMENT: process.env.CONTENTFUL_ENVIRONMENT,
-    title: whatToExpectFields.title,
-    subtitle: whatToExpectFields.subtitle,
-  });
   const sliderFields = photoSlider?.fields ?? {};
   const consultationCta = transitionBanner?.fields?.cta?.fields;
   const finalCta = finalCtaBanner?.fields?.cta?.fields;
