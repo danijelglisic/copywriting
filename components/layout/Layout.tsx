@@ -120,7 +120,7 @@ const Layout: FC<Props> = ({ children }) => {
                 href="https://www.linkedin.com/in/danijel-glisic/"
                 className="hover:text-white transition-colors underline"
               >
-                Danijel Glišić
+                Website TEST 123
               </a>
             </p>
           </div>
