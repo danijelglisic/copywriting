@@ -909,7 +909,7 @@ const WhatToExpectPreview = ({
             <div className="space-y-24">
               {section.title ? (
                 <h2 className="text-xl font-[950] uppercase text-black">
-                  {section.title}
+                  WHAT YOU CAN EXPECT TEST
                 </h2>
               ) : null}
               <div className="text-lg leading-9 text-black/68">
