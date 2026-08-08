@@ -549,6 +549,10 @@ const landingPagesRichTextOptions = {
 
       if (!text) return null;
 
+      if (normalizedText === "landing pages") {
+        return <p className="mb-12">{children}</p>;
+      }
+
       if (normalizedText.startsWith("but she landed on a page")) {
         return <p className="mb-5">{children}</p>;
       }
