@@ -549,6 +549,10 @@ const landingPagesRichTextOptions = {
 
       if (!text) return null;
 
+      if (normalizedText === "landing pages") {
+        return <p className="mb-12">{children}</p>;
+      }
+
       if (normalizedText.startsWith("but she landed on a page")) {
         return <p className="mb-5">{children}</p>;
       }
@@ -757,9 +761,9 @@ const LandingPagesPreview = ({
             transition={sharedTransition}
             className="max-w-3xl"
           >
-            {label ? <p className={serviceTitleClass}>{label}</p> : null}
+            {label ? <p className={`${serviceTitleClass} mb-12`}>{label}</p> : null}
             {heading || section.richText ? (
-              <div className={`${serviceBodyClass} pt-14`}>
+              <div className={`${serviceBodyClass} pt-20`}>
                 {heading ? (
                   <h2 className="text-4xl font-semibold leading-tight tracking-[-0.045em] text-black sm:text-5xl">
                     {heading}
@@ -906,9 +910,9 @@ const WhatToExpectPreview = ({
             transition={sharedTransition}
             className="max-w-3xl"
           >
-            <div className="space-y-24">
+            <div className="space-y-28">
               {section.title ? (
-                <h2 className="text-xl font-[950] uppercase text-black">
+                <h2 className="text-xl font-black uppercase text-black [-webkit-text-stroke:0.35px_currentColor]">
                   WHAT YOU CAN EXPECT TEST
                 </h2>
               ) : null}
