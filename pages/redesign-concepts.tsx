@@ -759,7 +759,7 @@ const LandingPagesPreview = ({
           >
             {label ? <p className={serviceTitleClass}>{label}</p> : null}
             {heading || section.richText ? (
-              <div className={serviceBodyClass}>
+              <div className={`${serviceBodyClass} pt-14`}>
                 {heading ? (
                   <h2 className="text-4xl font-semibold leading-tight tracking-[-0.045em] text-black sm:text-5xl">
                     {heading}
