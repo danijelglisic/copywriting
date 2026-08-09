@@ -27,7 +27,7 @@ const ZSection = ({ props, isDark }: ZSectionProps) => {
   const imageOrder = imagePosition ? "" : "order-2";
 
   return (
-    <div className={bgColor + " py-20 " + textColor}>
+    <div className={"z-section " + bgColor + " py-20 " + textColor}>
       <div className="container">
         <div className="flex flex-col justify-between items-center lg:flex-row gap-6">
           <FadeUp delay={0.1} className={`z-section-visual ${imageOrder}`}>
@@ -41,13 +41,13 @@ const ZSection = ({ props, isDark }: ZSectionProps) => {
             )}
           </FadeUp>
           <div className="lg:max-w-[50%] flex flex-col gap-4">
-            <p className="heading-4">
+            <p className="z-section-title heading-4">
               {title && <AnimatedText text={title} />}
             </p>
             <FadeUp delay={0.15}>
-              <p className="subtitle-2">{subtitle}</p>
+              <p className="z-section-subtitle subtitle-2">{subtitle}</p>
             </FadeUp>
-            <FadeUp delay={0.25} className="regular-1 p-height">
+            <FadeUp delay={0.25} className="z-section-body regular-1 p-height">
               {richText && documentToReactComponents(richText, richTextOptions)}
             </FadeUp>
             {cta?.fields.url && cta?.fields.text && (
