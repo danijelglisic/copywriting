@@ -613,6 +613,10 @@ const whatToExpectRichTextOptions = {
 
       if (!text) return null;
 
+      if (normalizedText === "what you can expect") {
+        return <p className="mb-12 font-bold">{children}</p>;
+      }
+
       if (normalizedText.startsWith("if your hook")) {
         return <p className="mb-5 mt-10">{children}</p>;
       }
@@ -918,7 +922,7 @@ const WhatToExpectPreview = ({
               ) : null}
               <div className="text-lg leading-9 text-black/68">
                 {section.subtitle ? (
-                  <p className="mb-5">{section.subtitle}</p>
+                  <p className="mb-12 font-bold">{section.subtitle}</p>
                 ) : null}
                 {section.richText
                   ? documentToReactComponents(
@@ -1039,10 +1043,10 @@ const SocialProofPreview = ({
           <button
             type="button"
             onClick={() => sliderRef.current?.slickNext()}
-            className="hidden h-11 w-11 items-center justify-center rounded-full border border-navy bg-white text-navy outline-offset-4 transition hover:-translate-y-0.5 hover:bg-navy/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-navy sm:inline-flex"
+            className="hidden h-11 w-11 items-center justify-center rounded-full border-2 border-navy bg-white text-navy outline-offset-4 transition hover:-translate-y-0.5 hover:bg-navy/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-navy sm:inline-flex"
             aria-label="Next testimonial"
           >
-            <span aria-hidden="true">→</span>
+            <span className="font-bold text-navy" aria-hidden="true">→</span>
           </button>
         </div>
       </div>

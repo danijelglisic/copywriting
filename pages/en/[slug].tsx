@@ -13,6 +13,7 @@ import {
 
 const EnglishPage = ({ homepage }: PageProps) => {
   const contentSections = (homepage?.fields as any)?.contentSections;
+  const isPortfolio = (homepage?.fields as any)?.slug === "en/portfolio";
 
   return (
     <Layout>
@@ -21,7 +22,17 @@ const EnglishPage = ({ homepage }: PageProps) => {
         description={(homepage?.fields as any)?.seoDesctiption ?? ""}
         path={(homepage?.fields as any)?.slug ?? ""}
       />
-      {contentSections && <RenderContent sections={contentSections} />}
+      {contentSections && (
+        <div
+          className={
+            isPortfolio
+              ? "[&>div>div:nth-child(odd)]:!bg-[#F9F9F7] [&>div>div:nth-child(even)]:!bg-white"
+              : undefined
+          }
+        >
+          <RenderContent sections={contentSections} />
+        </div>
+      )}
     </Layout>
   );
 };
