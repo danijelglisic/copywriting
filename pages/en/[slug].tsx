@@ -28,7 +28,7 @@ const EnglishPage = ({ homepage }: PageProps) => {
         <div
           className={
             isPortfolio
-              ? "[&_.z-section-cta]:mt-2 [&_.z-section-visual]:overflow-hidden [&_.z-section-visual]:rounded-[1.75rem] [&_.z-section-visual]:border [&_.z-section-visual]:border-navy/10 [&_.z-section-visual]:bg-white [&_.z-section-visual]:p-2 [&_.z-section-visual]:shadow-[0_14px_34px_rgba(10,31,68,0.08)] [&_.z-section-visual_img]:h-auto [&_.z-section-visual_img]:w-full [&_.z-section-visual_img]:rounded-[1.35rem] [&>div>div:nth-child(1)]:!bg-[#F9F9F7] [&>div>div:nth-child(1)]:!text-dark [&>div>div:nth-child(2)]:!bg-white [&>div>div:nth-child(3)]:!bg-[#F9F9F7] [&>div>div:nth-child(3)]:!text-dark [&>div>div:nth-child(4)]:!bg-white"
+              ? "[&_.z-section-cta]:mt-2 [&_.z-section-visual]:relative [&_.z-section-visual]:overflow-hidden [&_.z-section-visual]:rounded-[1.75rem] [&_.z-section-visual]:border [&_.z-section-visual]:border-navy/10 [&_.z-section-visual]:bg-white [&_.z-section-visual]:p-2 [&_.z-section-visual]:shadow-[0_14px_34px_rgba(10,31,68,0.08)] [&_.z-section-visual]:transition [&_.z-section-visual]:duration-300 [&_.z-section-visual]:hover:-translate-y-1 [&_.z-section-visual_img]:h-auto [&_.z-section-visual_img]:w-full [&_.z-section-visual_img]:rounded-[1.35rem] [&>div>div:nth-child(1)]:!bg-[#F9F9F7] [&>div>div:nth-child(1)]:!text-dark [&>div>div:nth-child(2)]:!bg-white [&>div>div:nth-child(3)]:!bg-[#F9F9F7] [&>div>div:nth-child(3)]:!text-dark [&>div>div:nth-child(4)]:!bg-white"
               : undefined
           }
         >
