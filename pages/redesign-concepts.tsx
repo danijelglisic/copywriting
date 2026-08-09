@@ -151,7 +151,7 @@ const PreviewHeader = () => {
                 }`}
               />
               <span
-                className={`absolute left-0 top-2 h-px w-5 bg-current transition-opacity ${
+                className={`absolute left-0 top-1/2 h-px w-5 -translate-y-1/2 bg-current transition-opacity ${
                   isOpen ? "opacity-0" : ""
                 }`}
               />
@@ -243,7 +243,11 @@ export const PreviewFooter = () => (
   </footer>
 );
 
-export const RedesignPreviewLayout = ({ children }: { children: React.ReactNode }) => (
+export const RedesignPreviewLayout = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => (
   <div className="min-h-screen bg-white text-black">
     <PreviewHeader />
     <main>{children}</main>
@@ -765,7 +769,9 @@ const LandingPagesPreview = ({
             transition={sharedTransition}
             className="max-w-3xl"
           >
-            {label ? <p className={`${serviceTitleClass} mb-12`}>{label}</p> : null}
+            {label ? (
+              <p className={`${serviceTitleClass} mb-12`}>{label}</p>
+            ) : null}
             {heading || section.richText ? (
               <div className={`${serviceBodyClass} pt-20`}>
                 {heading ? (
@@ -774,7 +780,11 @@ const LandingPagesPreview = ({
                   </h2>
                 ) : null}
                 {section.richText ? (
-                  <div className={heading ? "mt-32 border-4 border-red-500" : undefined}>
+                  <div
+                    className={
+                      heading ? "mt-32 border-4 border-red-500" : undefined
+                    }
+                  >
                     {documentToReactComponents(
                       section.richText,
                       landingPagesRichTextOptions
@@ -785,7 +795,18 @@ const LandingPagesPreview = ({
             ) : null}
             {section.cta?.href && section.cta?.label ? (
               <div className="mt-8">
-                <PrimaryCtaLink href={section.cta.href} label="Landing pages" />
+                <div className="sm:hidden">
+                  <PrimaryCtaLink
+                    href="/en/landing-pages"
+                    label="Landing pages"
+                  />
+                </div>
+                <div className="hidden sm:block">
+                  <PrimaryCtaLink
+                    href={section.cta.href}
+                    label="Landing pages"
+                  />
+                </div>
               </div>
             ) : null}
           </motion.div>
@@ -848,10 +869,18 @@ const EmailSequencesPreview = ({
             ) : null}
             {section.cta?.href && section.cta?.label ? (
               <div className="mt-8">
-                <PrimaryCtaLink
-                  href={section.cta.href}
-                  label={section.cta.label}
-                />
+                <div className="sm:hidden">
+                  <PrimaryCtaLink
+                    href="/en/email-sequences"
+                    label={section.cta.label}
+                  />
+                </div>
+                <div className="hidden sm:block">
+                  <PrimaryCtaLink
+                    href={section.cta.href}
+                    label={section.cta.label}
+                  />
+                </div>
               </div>
             ) : null}
           </motion.div>
@@ -1035,7 +1064,7 @@ const SocialProofPreview = ({
           <button
             type="button"
             onClick={() => sliderRef.current?.slickPrev()}
-            className="hidden h-11 w-11 items-center justify-center rounded-full border border-navy/20 bg-white text-navy outline-offset-4 transition hover:border-navy/40 hover:bg-navy/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-navy sm:inline-flex"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-navy/20 bg-white text-navy outline-offset-4 transition hover:border-navy/40 hover:bg-navy/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-navy"
             aria-label="Previous testimonial"
           >
             <span aria-hidden="true">←</span>
@@ -1043,10 +1072,12 @@ const SocialProofPreview = ({
           <button
             type="button"
             onClick={() => sliderRef.current?.slickNext()}
-            className="hidden h-11 w-11 items-center justify-center rounded-full border-2 border-navy bg-white text-navy outline-offset-4 transition hover:-translate-y-0.5 hover:bg-navy/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-navy sm:inline-flex"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border-2 border-navy bg-white text-navy outline-offset-4 transition hover:-translate-y-0.5 hover:bg-navy/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-navy"
             aria-label="Next testimonial"
           >
-            <span className="font-bold text-navy" aria-hidden="true">→</span>
+            <span className="font-bold text-navy" aria-hidden="true">
+              →
+            </span>
           </button>
         </div>
       </div>
