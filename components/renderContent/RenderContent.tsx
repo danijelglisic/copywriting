@@ -58,7 +58,7 @@ const RenderContent = ({
         const backgroundClass =
           regularSectionIndex % 2 === 0
             ? "[&>*]:!bg-[#F9F9F7] [&>*]:!text-dark"
-            : "[&>*]:!bg-white";
+            : "[&>*]:!bg-white [&_.rich-text-content]:!mx-0";
         const renderVideoAdsSection = (content: React.ReactNode) => {
           if (!useVideoAdsRedesign || isConsultationBanner) return content;
 
