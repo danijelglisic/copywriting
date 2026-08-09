@@ -51,7 +51,7 @@ const ZSection = ({ props, isDark }: ZSectionProps) => {
               {richText && documentToReactComponents(richText, richTextOptions)}
             </FadeUp>
             {cta?.fields.url && cta?.fields.text && (
-              <FadeUp delay={0.35}>
+              <FadeUp delay={0.35} className="z-section-cta">
                 <Link legacyBehavior href={cta.fields.url}>
                   <a className="inline-block p-4 font-bold bg-secondary text-white w-fit">
                     {cta.fields.text}
