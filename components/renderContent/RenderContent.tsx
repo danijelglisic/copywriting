@@ -22,6 +22,7 @@ const Reels = dynamic(() => import("../reels/Reels"), {
 });
 
 interface RenderComponentProps {
+  isPortfolio?: boolean;
   sections:
     | (
         | IFreeConsultationBanner
@@ -34,7 +35,7 @@ interface RenderComponentProps {
       )[]
     | undefined;
 }
-const RenderContent = ({ sections }: RenderComponentProps) => {
+const RenderContent = ({ sections, isPortfolio }: RenderComponentProps) => {
   if (!sections) return <div></div>;
 
   const render = () => {
@@ -65,13 +66,26 @@ const RenderContent = ({ sections }: RenderComponentProps) => {
           // Baner je uvek crn, ali i dalje broji kao tamna sekcija da sledeca
           // Z sekcija ispadne svetla.
           lastDark = true;
-          return <FreeConsultationBanner key={id} props={consultationBanner} />;
+          return (
+            <FreeConsultationBanner
+              key={id}
+              props={consultationBanner}
+              useHomeStyle={isPortfolio}
+            />
+          );
         }
         if (section.sys.contentType.sys.id === "zSection") {
           const zSection = section as IZSection;
           const isDark = !lastDark;
           lastDark = isDark;
-          return <ZSection key={id} props={zSection} isDark={isDark} />;
+          return (
+            <ZSection
+              key={id}
+              props={zSection}
+              isDark={isDark}
+              useHomeCta={isPortfolio}
+            />
+          );
         }
         if (section.sys.contentType.sys.id === "reels") {
           const reels = section as IReels;
