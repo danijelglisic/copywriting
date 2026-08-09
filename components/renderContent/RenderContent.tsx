@@ -24,6 +24,7 @@ const Reels = dynamic(() => import("../reels/Reels"), {
 
 interface RenderComponentProps {
   useRedesignFinalCta?: boolean;
+  useVideoAdsRedesign?: boolean;
   sections:
     | (
         | IFreeConsultationBanner
@@ -36,38 +37,69 @@ interface RenderComponentProps {
       )[]
     | undefined;
 }
-const RenderContent = ({ sections, useRedesignFinalCta }: RenderComponentProps) => {
+const RenderContent = ({
+  sections,
+  useRedesignFinalCta,
+  useVideoAdsRedesign,
+}: RenderComponentProps) => {
   if (!sections) return <div></div>;
 
   const render = () => {
     // Prati da li je prethodna sekcija bila tamna, pa se sledeca postavlja
     // suprotno. Bez ovoga dve uzastopne tamne sekcije izgledaju kao jedna.
     let lastDark = false;
+    let regularSectionIndex = 0;
 
     return sections
       .filter((section) => section?.sys?.contentType)
       .map((section, id) => {
-        if (section.sys.contentType.sys.id === "landingSection") {
+        const contentType = section.sys.contentType.sys.id;
+        const isConsultationBanner = contentType === "freeConsultationBanner";
+        const backgroundClass =
+          regularSectionIndex % 2 === 0
+            ? "[&>*]:!bg-[#F9F9F7] [&>*]:!text-dark"
+            : "[&>*]:!bg-white";
+        const renderVideoAdsSection = (content: React.ReactNode) => {
+          if (!useVideoAdsRedesign || isConsultationBanner) return content;
+
+          regularSectionIndex += 1;
+          return (
+            <div key={id} className={backgroundClass}>
+              {content}
+            </div>
+          );
+        };
+
+        if (contentType === "landingSection") {
           const landingSection = section as ILandingSection;
           lastDark = true;
-          return <LandingSection key={id} props={landingSection} />;
+          return renderVideoAdsSection(
+            <LandingSection key={id} props={landingSection} />
+          );
         }
-        if (section.sys.contentType.sys.id === "richTextSection") {
+        if (contentType === "richTextSection") {
           const richTextSection = section as IRichTextSection;
           lastDark = false;
-          return <RichTextSection key={id} props={richTextSection} />;
+          return renderVideoAdsSection(
+            <RichTextSection key={id} props={richTextSection} />
+          );
         }
         if (section.sys.contentType.sys.id === "photoSlider") {
           const photoSlider = section as IPhotoSlider;
           lastDark = false;
-          return <Carousel key={id} props={photoSlider} />;
+          return renderVideoAdsSection(
+            <Carousel key={id} props={photoSlider} />
+          );
         }
         if (section.sys.contentType.sys.id === "freeConsultationBanner") {
           const consultationBanner = section as IFreeConsultationBanner;
           // Baner je uvek crn, ali i dalje broji kao tamna sekcija da sledeca
           // Z sekcija ispadne svetla.
           lastDark = true;
-          if (useRedesignFinalCta && id === sections.length - 1) {
+          if (
+            useVideoAdsRedesign ||
+            (useRedesignFinalCta && id === sections.length - 1)
+          ) {
             const fields = consultationBanner.fields as any;
             return (
               <FinalCtaPreview
@@ -91,16 +123,20 @@ const RenderContent = ({ sections, useRedesignFinalCta }: RenderComponentProps) 
           const zSection = section as IZSection;
           const isDark = !lastDark;
           lastDark = isDark;
-          return <ZSection key={id} props={zSection} isDark={isDark} />;
+          return renderVideoAdsSection(
+            <ZSection key={id} props={zSection} isDark={isDark} />
+          );
         }
         if (section.sys.contentType.sys.id === "reels") {
           const reels = section as IReels;
-          return <Reels key={id} reels={reels} />;
+          return renderVideoAdsSection(<Reels key={id} reels={reels} />);
         }
         if (section.sys.contentType.sys.id === "videoLandingSection") {
           const reels = section as IVideoLandingSection;
           lastDark = true;
-          return <VideoLandingSection key={id} props={reels} />;
+          return renderVideoAdsSection(
+            <VideoLandingSection key={id} props={reels} />
+          );
         }
       });
   };
