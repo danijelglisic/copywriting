@@ -16,12 +16,14 @@ import FreeConsultationBanner from "../freeConsultationBanner/FreeConsultationBa
 import ZSection from "../zSection/ZSection";
 import VideoLandingSection from "../videoLandingSection/VideoLandingSection";
 import dynamic from "next/dynamic";
+import { FinalCtaPreview } from "@/pages/redesign-concepts";
 
 const Reels = dynamic(() => import("../reels/Reels"), {
   ssr: false,
 });
 
 interface RenderComponentProps {
+  useRedesignFinalCta?: boolean;
   sections:
     | (
         | IFreeConsultationBanner
@@ -34,7 +36,7 @@ interface RenderComponentProps {
       )[]
     | undefined;
 }
-const RenderContent = ({ sections }: RenderComponentProps) => {
+const RenderContent = ({ sections, useRedesignFinalCta }: RenderComponentProps) => {
   if (!sections) return <div></div>;
 
   const render = () => {
@@ -65,6 +67,24 @@ const RenderContent = ({ sections }: RenderComponentProps) => {
           // Baner je uvek crn, ali i dalje broji kao tamna sekcija da sledeca
           // Z sekcija ispadne svetla.
           lastDark = true;
+          if (useRedesignFinalCta && id === sections.length - 1) {
+            const fields = consultationBanner.fields as any;
+            return (
+              <FinalCtaPreview
+                key={id}
+                section={{
+                  headline: fields.text ?? null,
+                  description: fields.description ?? null,
+                  cta: fields.cta?.fields
+                    ? {
+                        label: fields.cta.fields.text ?? null,
+                        href: fields.cta.fields.url ?? null,
+                      }
+                    : null,
+                }}
+              />
+            );
+          }
           return <FreeConsultationBanner key={id} props={consultationBanner} />;
         }
         if (section.sys.contentType.sys.id === "zSection") {
