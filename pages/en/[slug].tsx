@@ -34,7 +34,7 @@ const EnglishPage = ({ homepage }: PageProps) => {
             isPortfolio
               ? `[&_.z-section]:py-16 sm:[&_.z-section]:py-20 [&_.z-section-title]:!text-xl [&_.z-section-title]:!font-bold [&_.z-section-title]:uppercase [&_.z-section-title]:!leading-normal [&_.z-section-title]:!tracking-normal [&_.z-section-subtitle]:!text-xl [&_.z-section-subtitle]:!font-medium [&_.z-section-subtitle]:!leading-8 [&_.z-section-body]:!text-lg [&_.z-section-body]:!font-normal [&_.z-section-body]:!leading-9 [&_.z-section.bg-white_.z-section-subtitle]:!text-black/72 [&_.z-section.bg-white_.z-section-body]:!text-black/68 [&_.z-section.bg-navy_.z-section-subtitle]:!text-white/72 [&_.z-section.bg-navy_.z-section-body]:!text-white/72 [&_.z-section-cta]:mt-2 ${approvedVisualWrapper} [&>div>div:nth-child(1)]:!bg-[#F9F9F7] [&>div>div:nth-child(1)]:!text-dark [&>div>div:nth-child(2)]:!bg-white [&>div>div:nth-child(3)]:!bg-[#F9F9F7] [&>div>div:nth-child(3)]:!text-dark [&>div>div:nth-child(4)]:!bg-white`
               : isVideoAds
-                ? `${approvedVisualWrapper} [&_.rich-text-content>h2:first-child]:!mb-4`
+                ? `${approvedVisualWrapper} [&_.rich-text-content>h2:first-child.text-secondary]:!mb-16 [&_.rich-text-content>h2:first-child:not(.text-secondary)]:!mb-4`
                 : undefined
           }
         >
