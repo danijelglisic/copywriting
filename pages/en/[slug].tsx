@@ -24,7 +24,7 @@ const EnglishPage = ({ homepage }: PageProps) => {
     (homepage?.fields as any)?.slug === "en/email-sequences" ||
     (homepage?.fields as any)?.slug === "en/landing-pages";
   const PageLayout =
-    (isPortfolio || isVideoAds || isContact
+    (isPortfolio || isVideoAds || isContact || usesRedesignedFooter
       ? RedesignPreviewLayout
       : Layout) as typeof Layout;
 
