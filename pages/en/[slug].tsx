@@ -20,7 +20,8 @@ const EnglishPage = ({ homepage }: PageProps) => {
   const isPortfolio = (homepage?.fields as any)?.slug === "en/portfolio";
   const isVideoAds = (homepage?.fields as any)?.slug === "en/video-ads";
   const isContact = (homepage?.fields as any)?.slug === "en/contact";
-  const PageLayout = isPortfolio || isVideoAds ? RedesignPreviewLayout : Layout;
+  const PageLayout =
+    isPortfolio || isVideoAds || isContact ? RedesignPreviewLayout : Layout;
 
   return (
     <PageLayout>
