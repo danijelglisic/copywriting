@@ -8,22 +8,15 @@ import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { BLOCKS } from "@contentful/rich-text-types";
 import { useRouter } from "next/router";
 import Metadata from "@/components/metadata/Metadata";
+import PrimaryCtaLink from "@/components/ui/PrimaryCtaLink";
 import { client } from "@/helpers/clinet";
 import { EN_HOME_SLUG, PAGE_TYPE } from "@/helpers/contentTypes";
 import { richTextOptions } from "@/helpers/richTextOptions";
 
 const defaultPrimaryCta = { label: "Book a discovery call", href: "" };
 const secondaryCta = { label: "Portfolio", href: "/en/portfolio" };
-const primaryButtonClass =
-  "rounded-full bg-navy px-7 py-[0.8125rem] text-center text-sm font-semibold text-white shadow-[0_18px_38px_rgba(10,31,68,0.16)] outline-offset-4 ring-1 ring-navy/10 transition duration-300 hover:-translate-y-0.5 hover:bg-black active:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-black";
 const serviceTitleClass = "text-xl font-bold uppercase text-black";
 const serviceBodyClass = "pt-10 text-lg leading-9 text-black/68";
-
-const PrimaryCtaLink = ({ href, label }: { href: string; label: string }) => (
-  <Link href={href} legacyBehavior>
-    <a className={primaryButtonClass}>{label}</a>
-  </Link>
-);
 
 const renderHeroHeading = (heading: string) =>
   heading.split(/(Converting)/g).map((part, index) =>
