@@ -4,7 +4,7 @@ import { client } from "@/helpers/clinet";
 import { GetStaticPaths, GetStaticProps } from "next";
 import RenderContent from "@/components/renderContent/RenderContent";
 import Metadata from "@/components/metadata/Metadata";
-import { RedesignPreviewLayout } from "../redesign-concepts";
+import { PreviewFooter, RedesignPreviewLayout } from "../redesign-concepts";
 import {
   EN_HOME_SLUG,
   EN_PREFIX,
@@ -20,11 +20,16 @@ const EnglishPage = ({ homepage }: PageProps) => {
   const isPortfolio = (homepage?.fields as any)?.slug === "en/portfolio";
   const isVideoAds = (homepage?.fields as any)?.slug === "en/video-ads";
   const isContact = (homepage?.fields as any)?.slug === "en/contact";
+  const usesRedesignedFooter =
+    (homepage?.fields as any)?.slug === "en/email-sequences" ||
+    (homepage?.fields as any)?.slug === "en/landing-pages";
   const PageLayout =
-    isPortfolio || isVideoAds || isContact ? RedesignPreviewLayout : Layout;
+    (isPortfolio || isVideoAds || isContact
+      ? RedesignPreviewLayout
+      : Layout) as typeof Layout;
 
   return (
-    <PageLayout>
+    <PageLayout footer={usesRedesignedFooter ? <PreviewFooter /> : undefined}>
       <Metadata
         title={(homepage?.fields as any)?.seoTitle ?? "Slaviša Bogdanović"}
         description={(homepage?.fields as any)?.seoDesctiption ?? ""}
