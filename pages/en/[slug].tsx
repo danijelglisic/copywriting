@@ -15,6 +15,7 @@ import {
 const EnglishPage = ({ homepage }: PageProps) => {
   const contentSections = (homepage?.fields as any)?.contentSections;
   const isPortfolio = (homepage?.fields as any)?.slug === "en/portfolio";
+  const isVideoAds = (homepage?.fields as any)?.slug === "en/video-ads";
   const PageLayout = isPortfolio ? RedesignPreviewLayout : Layout;
 
   return (
@@ -35,6 +36,7 @@ const EnglishPage = ({ homepage }: PageProps) => {
           <RenderContent
             sections={contentSections}
             useRedesignFinalCta={isPortfolio}
+            useVideoAdsRedesign={isVideoAds}
           />
         </div>
       )}
