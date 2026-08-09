@@ -1054,7 +1054,7 @@ const SocialProofPreview = ({
   );
 };
 
-const FinalCtaPreview = ({
+export const FinalCtaPreview = ({
   section,
 }: {
   section: RedesignConceptsProps["finalCta"];

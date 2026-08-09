@@ -32,7 +32,10 @@ const EnglishPage = ({ homepage }: PageProps) => {
               : undefined
           }
         >
-          <RenderContent sections={contentSections} />
+          <RenderContent
+            sections={contentSections}
+            redesignedFinalCta={isPortfolio}
+          />
         </div>
       )}
     </PageLayout>
