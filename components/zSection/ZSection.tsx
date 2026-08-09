@@ -53,7 +53,7 @@ const ZSection = ({ props, isDark }: ZSectionProps) => {
             {cta?.fields.url && cta?.fields.text && (
               <FadeUp delay={0.35} className="z-section-cta">
                 <Link legacyBehavior href={cta.fields.url}>
-                  <a className="inline-block p-4 font-bold bg-secondary text-white w-fit">
+                  <a className="rounded-full bg-navy px-7 py-[0.8125rem] text-center text-sm font-semibold text-white shadow-[0_18px_38px_rgba(10,31,68,0.16)] outline-offset-4 ring-1 ring-navy/10 transition duration-300 hover:-translate-y-0.5 hover:bg-black active:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-black">
                     {cta.fields.text}
                   </a>
                 </Link>
