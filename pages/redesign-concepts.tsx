@@ -157,10 +157,8 @@ const PreviewHeader = () => {
                 }`}
               />
               <span
-                className={`${hamburgerLineClass} transition-transform ${
-                  isOpen
-                    ? "bottom-0 -translate-y-[7px] -rotate-45"
-                    : "top-[14px]"
+                className={`${hamburgerLineClass} top-[14px] transition-transform ${
+                  isOpen ? "-translate-y-1.5 -rotate-45" : ""
                 }`}
               />
             </span>
@@ -343,6 +341,8 @@ type RedesignConceptsProps = {
     images: {
       url: string;
       alt: string;
+      width?: number;
+      height?: number;
     }[];
   } | null;
   finalCta: {
@@ -357,12 +357,15 @@ type RedesignConceptsProps = {
 
 const getAsset = (asset: any) => {
   const fileUrl = asset?.fields?.file?.url;
+  const dimensions = asset?.fields?.file?.details?.image;
 
   if (!fileUrl) return null;
 
   return {
     url: fileUrl.startsWith("http") ? fileUrl : `https:${fileUrl}`,
     alt: asset?.fields?.description || asset?.fields?.title || "",
+    width: dimensions?.width,
+    height: dimensions?.height,
   };
 };
 
@@ -1057,9 +1060,16 @@ const SocialProofPreview = ({
                   <Image
                     src={image.url}
                     alt={image.alt}
+                    width={image.width ?? 360}
+                    height={image.height ?? 720}
+                    className="h-auto w-full rounded-[1rem] sm:hidden"
+                  />
+                  <Image
+                    src={image.url}
+                    alt={image.alt}
                     width={360}
                     height={720}
-                    className="h-auto w-full rounded-[1rem]"
+                    className="hidden h-auto w-full rounded-[1rem] sm:block"
                   />
                 </div>
               </div>
@@ -1078,7 +1088,7 @@ const SocialProofPreview = ({
           <button
             type="button"
             onClick={() => sliderRef.current?.slickPrev()}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full border-2 border-navy bg-white text-navy outline-offset-4 transition hover:-translate-y-0.5 hover:bg-navy/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-navy sm:hidden"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border-2 border-navy bg-white text-navy outline-offset-4 transition hover:-translate-y-0.5 hover:bg-navy/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-navy max-sm:hover:translate-y-0 sm:hidden"
             aria-label="Previous testimonial"
           >
             <span
@@ -1091,7 +1101,7 @@ const SocialProofPreview = ({
           <button
             type="button"
             onClick={() => sliderRef.current?.slickNext()}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full border-2 border-navy bg-white text-navy outline-offset-4 transition hover:-translate-y-0.5 hover:bg-navy/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-navy"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border-2 border-navy bg-white text-navy outline-offset-4 transition hover:-translate-y-0.5 hover:bg-navy/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-navy max-sm:hover:translate-y-0"
             aria-label="Next testimonial"
           >
             <span className="font-bold text-navy" aria-hidden="true">
