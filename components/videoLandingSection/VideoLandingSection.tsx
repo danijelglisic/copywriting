@@ -31,7 +31,7 @@ const VideoLandingSection = ({ props }: VideoLandingSectionProps) => {
             </h1>
           </div>
           {(imageUrl || youtubeVideoUrl) && (
-            <FadeUp delay={0.2} className="relative overflow-hidden w-full items-center aspect-video">
+            <FadeUp delay={0.2} className="z-section-visual relative overflow-hidden w-full items-center aspect-video">
               {imageUrl ? (
                 <Image
                   src={`https:${imageUrl}`}
