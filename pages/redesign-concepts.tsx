@@ -195,7 +195,7 @@ const PreviewHeader = () => {
   );
 };
 
-const PreviewFooter = () => (
+export const PreviewFooter = () => (
   <footer className="border-t border-navy bg-navy text-white">
     <div className="container py-16 sm:py-[4.5rem]">
       <div className="grid gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
