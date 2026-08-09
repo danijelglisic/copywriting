@@ -153,7 +153,7 @@ const PreviewHeader = () => {
               {hamburgerLines.map((line, index) => (
                 <span
                   key={line.top}
-                  className={`absolute left-0 h-px w-5 transition-[transform,opacity] ${
+                  className={`absolute left-0 h-px w-5 transform-gpu transition-[transform,opacity] ${
                     isOpen ? line.openClass : ""
                   }`}
                   style={{
