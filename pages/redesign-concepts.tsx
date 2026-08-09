@@ -156,10 +156,10 @@ const PreviewHeader = () => {
                 }`}
               />
               <span
-                className={`absolute left-0 h-px w-5 bg-black opacity-100 transition-transform ${
+                className={`absolute left-0 h-px w-5 bg-current transition-transform ${
                   isOpen
                     ? "bottom-0 -translate-y-[7px] -rotate-45"
-                    : "bottom-px"
+                    : "top-[14px]"
                 }`}
               />
             </span>
@@ -1025,7 +1025,11 @@ const SocialProofPreview = ({
       },
       {
         breakpoint: 640,
-        settings: { slidesToShow: 1, slidesToScroll: 1 },
+        settings: {
+          adaptiveHeight: true,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
       },
     ],
   };
@@ -1077,8 +1081,11 @@ const SocialProofPreview = ({
             className="inline-flex h-11 w-11 items-center justify-center rounded-full border-2 border-navy bg-white text-navy outline-offset-4 transition hover:-translate-y-0.5 hover:bg-navy/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-navy sm:hidden"
             aria-label="Previous testimonial"
           >
-            <span className="font-bold text-navy" aria-hidden="true">
-              ←
+            <span
+              className="inline-block rotate-180 font-bold text-navy"
+              aria-hidden="true"
+            >
+              →
             </span>
           </button>
           <button
