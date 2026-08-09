@@ -18,12 +18,6 @@ const primaryButtonClass =
   "rounded-full bg-navy px-7 py-[0.8125rem] text-center text-sm font-semibold text-white shadow-[0_18px_38px_rgba(10,31,68,0.16)] outline-offset-4 ring-1 ring-navy/10 transition duration-300 hover:-translate-y-0.5 hover:bg-black active:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-black";
 const serviceTitleClass = "text-xl font-bold uppercase text-black";
 const serviceBodyClass = "pt-10 text-lg leading-9 text-black/68";
-const hamburgerLines = [
-  { top: 0, openClass: "translate-y-2 rotate-45" },
-  { top: 7, openClass: "" },
-  { top: 14, openClass: "-translate-y-1.5 -rotate-45" },
-];
-
 const PrimaryCtaLink = ({ href, label }: { href: string; label: string }) => (
   <Link href={href} legacyBehavior>
     <a className={primaryButtonClass}>{label}</a>
@@ -149,21 +143,41 @@ const PreviewHeader = () => {
             <span className="sr-only">
               {isOpen ? "close menu" : "toggle menu"}
             </span>
-            <span className="relative h-4 w-5">
-              {hamburgerLines.map((line, index) => (
-                <span
-                  key={line.top}
-                  className={`absolute left-0 h-px w-5 transform-gpu transition-[transform,opacity] ${
-                    isOpen ? line.openClass : ""
-                  }`}
-                  style={{
-                    top: line.top,
-                    backgroundColor: "currentColor",
-                    opacity: isOpen && index === 1 ? 0 : 1,
-                  }}
-                />
-              ))}
-            </span>
+            <svg
+              viewBox="0 0 20 16"
+              className="h-4 w-5"
+              aria-hidden="true"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1"
+              strokeLinecap="butt"
+            >
+              <line
+                x1="0"
+                y1="0.5"
+                x2="20"
+                y2="0.5"
+                className={`origin-center [transform-box:fill-box] transition-transform ${
+                  isOpen ? "translate-y-[7px] rotate-45" : ""
+                }`}
+              />
+              <line
+                x1="0"
+                y1="7.5"
+                x2="20"
+                y2="7.5"
+                className={`transition-opacity ${isOpen ? "opacity-0" : ""}`}
+              />
+              <line
+                x1="0"
+                y1="14.5"
+                x2="20"
+                y2="14.5"
+                className={`origin-center [transform-box:fill-box] transition-transform ${
+                  isOpen ? "-translate-y-[7px] -rotate-45" : ""
+                }`}
+              />
+            </svg>
           </button>
         </div>
       </header>
