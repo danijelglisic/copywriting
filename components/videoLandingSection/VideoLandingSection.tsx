@@ -31,21 +31,23 @@ const VideoLandingSection = ({ props }: VideoLandingSectionProps) => {
             </h1>
           </div>
           {(imageUrl || youtubeVideoUrl) && (
-            <FadeUp delay={0.2} className="z-section-visual relative overflow-hidden w-full items-center aspect-video">
-              {imageUrl ? (
-                <Image
-                  src={`https:${imageUrl}`}
-                  alt={image?.fields?.title || title || ""}
-                  fill
-                  className="object-cover"
-                />
-              ) : (
-                <iframe
-                  title="Copywriting video"
-                  src={youtubeVideoUrl}
-                  className="absolute w-full h-full top-0 bottom-0 left-0 right-0"
-                />
-              )}
+            <FadeUp delay={0.2} className="z-section-visual w-full items-center">
+              <div className="relative overflow-hidden w-full aspect-video rounded-[1.35rem]">
+                {imageUrl ? (
+                  <Image
+                    src={`https:${imageUrl}`}
+                    alt={image?.fields?.title || title || ""}
+                    fill
+                    className="object-cover"
+                  />
+                ) : (
+                  <iframe
+                    title="Copywriting video"
+                    src={youtubeVideoUrl}
+                    className="absolute w-full h-full top-0 bottom-0 left-0 right-0"
+                  />
+                )}
+              </div>
             </FadeUp>
           )}
         </div>
