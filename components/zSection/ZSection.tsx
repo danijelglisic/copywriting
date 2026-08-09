@@ -55,7 +55,7 @@ const ZSection = ({ props, isDark, useHomeCta }: ZSectionProps) => {
               {richText && documentToReactComponents(richText, richTextOptions)}
             </FadeUp>
             {cta?.fields.url && cta?.fields.text && (
-              <FadeUp delay={0.35}>
+              <FadeUp delay={0.35} className={useHomeCta ? "mt-4" : undefined}>
                 {useHomeCta ? (
                   <PrimaryCtaLink
                     href={cta.fields.url}
