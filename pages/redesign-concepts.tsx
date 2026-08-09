@@ -243,7 +243,7 @@ const PreviewFooter = () => (
   </footer>
 );
 
-const RedesignPreviewLayout = ({ children }: { children: React.ReactNode }) => (
+export const RedesignPreviewLayout = ({ children }: { children: React.ReactNode }) => (
   <div className="min-h-screen bg-white text-black">
     <PreviewHeader />
     <main>{children}</main>

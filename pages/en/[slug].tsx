@@ -4,6 +4,7 @@ import { client } from "@/helpers/clinet";
 import { GetStaticPaths, GetStaticProps } from "next";
 import RenderContent from "@/components/renderContent/RenderContent";
 import Metadata from "@/components/metadata/Metadata";
+import { RedesignPreviewLayout } from "../redesign-concepts";
 import {
   EN_HOME_SLUG,
   EN_PREFIX,
@@ -14,9 +15,10 @@ import {
 const EnglishPage = ({ homepage }: PageProps) => {
   const contentSections = (homepage?.fields as any)?.contentSections;
   const isPortfolio = (homepage?.fields as any)?.slug === "en/portfolio";
+  const PageLayout = isPortfolio ? RedesignPreviewLayout : Layout;
 
   return (
-    <Layout>
+    <PageLayout>
       <Metadata
         title={(homepage?.fields as any)?.seoTitle ?? "Slaviša Bogdanović"}
         description={(homepage?.fields as any)?.seoDesctiption ?? ""}
@@ -33,7 +35,7 @@ const EnglishPage = ({ homepage }: PageProps) => {
           <RenderContent sections={contentSections} />
         </div>
       )}
-    </Layout>
+    </PageLayout>
   );
 };
 
