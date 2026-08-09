@@ -151,13 +151,15 @@ const PreviewHeader = () => {
                 }`}
               />
               <span
-                className={`absolute left-0 top-1/2 h-px w-5 -translate-y-1/2 bg-current transition-opacity ${
+                className={`absolute left-0 top-[7px] h-px w-5 bg-current transition-opacity ${
                   isOpen ? "opacity-0" : ""
                 }`}
               />
               <span
-                className={`absolute bottom-0 left-0 h-px w-5 bg-current transition-transform ${
-                  isOpen ? "-translate-y-[7px] -rotate-45" : ""
+                className={`absolute left-0 h-px w-5 bg-current transition-transform ${
+                  isOpen
+                    ? "bottom-0 -translate-y-[7px] -rotate-45"
+                    : "bottom-px"
                 }`}
               />
             </span>
@@ -1048,13 +1050,15 @@ const SocialProofPreview = ({
             {socialProof.images.map((image) => (
               <div key={image.url} className="px-2 pb-5">
                 <div className="overflow-hidden rounded-[1.25rem] bg-white p-2 shadow-[0_16px_44px_rgba(10,31,68,0.08)] ring-1 ring-navy/10">
-                  <Image
-                    src={image.url}
-                    alt={image.alt}
-                    width={360}
-                    height={720}
-                    className="h-auto w-full rounded-[1rem]"
-                  />
+                  <div className="max-sm:aspect-[1/2]">
+                    <Image
+                      src={image.url}
+                      alt={image.alt}
+                      width={360}
+                      height={720}
+                      className="h-auto w-full rounded-[1rem] max-sm:h-full max-sm:object-contain"
+                    />
+                  </div>
                 </div>
               </div>
             ))}
@@ -1064,10 +1068,15 @@ const SocialProofPreview = ({
           <button
             type="button"
             onClick={() => sliderRef.current?.slickPrev()}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-navy/20 bg-white text-navy outline-offset-4 transition hover:border-navy/40 hover:bg-navy/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-navy"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-navy/20 bg-white text-navy outline-offset-4 transition hover:border-navy/40 hover:bg-navy/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-navy max-sm:border-2 max-sm:border-navy"
             aria-label="Previous testimonial"
           >
-            <span aria-hidden="true">←</span>
+            <span
+              className="max-sm:font-bold max-sm:leading-none"
+              aria-hidden="true"
+            >
+              ←
+            </span>
           </button>
           <button
             type="button"
@@ -1075,7 +1084,10 @@ const SocialProofPreview = ({
             className="inline-flex h-11 w-11 items-center justify-center rounded-full border-2 border-navy bg-white text-navy outline-offset-4 transition hover:-translate-y-0.5 hover:bg-navy/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-navy"
             aria-label="Next testimonial"
           >
-            <span className="font-bold text-navy" aria-hidden="true">
+            <span
+              className="font-bold text-navy max-sm:leading-none"
+              aria-hidden="true"
+            >
               →
             </span>
           </button>
