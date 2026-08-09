@@ -30,13 +30,14 @@ const ZSection = ({ props, isDark }: ZSectionProps) => {
     <div className={bgColor + " py-20 " + textColor}>
       <div className="container">
         <div className="flex flex-col justify-between items-center lg:flex-row gap-6">
-          <FadeUp delay={0.1} className={imageOrder}>
+          <FadeUp delay={0.1} className={`z-section-image ${imageOrder}`}>
             {image?.fields.image?.fields.file.url && (
               <Image
                 src={"https:" + image.fields.image.fields.file.url}
                 alt={image?.fields.imageDescription || ""}
                 width={450}
                 height={300}
+                className="z-section-image-asset"
               />
             )}
           </FadeUp>

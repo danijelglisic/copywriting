@@ -28,7 +28,7 @@ const EnglishPage = ({ homepage }: PageProps) => {
         <div
           className={
             isPortfolio
-              ? "[&_.z-section-cta]:mt-2 [&>div>div:nth-child(1)]:!bg-[#F9F9F7] [&>div>div:nth-child(1)]:!text-dark [&>div>div:nth-child(2)]:!bg-white [&>div>div:nth-child(3)]:!bg-[#F9F9F7] [&>div>div:nth-child(3)]:!text-dark [&>div>div:nth-child(4)]:!bg-white"
+              ? "[&_.z-section-image]:overflow-hidden [&_.z-section-image]:rounded-[1.75rem] [&_.z-section-image]:border [&_.z-section-image]:border-navy/10 [&_.z-section-image]:bg-white [&_.z-section-image]:p-2 [&_.z-section-image]:shadow-[0_14px_34px_rgba(10,31,68,0.08)] [&_.z-section-image-asset]:h-auto [&_.z-section-image-asset]:w-full [&_.z-section-image-asset]:rounded-[1.35rem] [&_.z-section-image-asset]:object-cover [&_.z-section-cta]:mt-2 [&>div>div:nth-child(1)]:!bg-[#F9F9F7] [&>div>div:nth-child(1)]:!text-dark [&>div>div:nth-child(2)]:!bg-white [&>div>div:nth-child(3)]:!bg-[#F9F9F7] [&>div>div:nth-child(3)]:!text-dark [&>div>div:nth-child(4)]:!bg-white"
               : undefined
           }
         >
