@@ -26,7 +26,7 @@ const EnglishPage = ({ homepage }: PageProps) => {
         <div
           className={
             isPortfolio
-              ? "[&>div>div:nth-child(odd)]:!bg-[#F9F9F7] [&>div>div:nth-child(even)]:!bg-white"
+              ? "[&>div>div:nth-child(1)]:!bg-[#F9F9F7] [&>div>div:nth-child(2)]:!bg-white [&>div>div:nth-child(3)]:!bg-[#F9F9F7] [&>div>div:nth-child(4)]:!bg-white"
               : undefined
           }
         >
