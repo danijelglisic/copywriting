@@ -38,7 +38,7 @@ const EnglishPage = ({ homepage }: PageProps) => {
               : isVideoAds
                 ? `${approvedVisualWrapper} [&_.rich-text-content>h2:first-child.text-secondary]:!mb-16 [&_.rich-text-content>h2:first-child:not(.text-secondary)]:!mb-4`
                 : isContact
-                  ? "[&>div>div:nth-child(1)]:!bg-[#F9F9F7] [&>div>div:nth-child(1)]:!text-dark"
+                  ? `${approvedVisualWrapper} [&>div>div:nth-child(1)]:!bg-[#F9F9F7] [&>div>div:nth-child(1)]:!text-dark`
                   : undefined
           }
         >
