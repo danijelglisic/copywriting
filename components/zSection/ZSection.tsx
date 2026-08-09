@@ -29,7 +29,7 @@ const ZSection = ({ props, isDark }: ZSectionProps) => {
   return (
     <div className={bgColor + " py-20 " + textColor}>
       <div className="container">
-        <div className="flex flex-col justify-between items-center lg:flex-row gap-6 overflow-hidden">
+        <div className="flex flex-col justify-between items-center lg:flex-row gap-6">
           <FadeUp delay={0.1} className={imageOrder}>
             {image?.fields.image?.fields.file.url && (
               <Image
