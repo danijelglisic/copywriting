@@ -19,7 +19,7 @@ const RichTextSection = ({ props }: RichTextSectionProps) => {
             izgledala drugacije od sekcije gde je naslov otkucan unutar teksta
             kao Heading — isti sadrzaj, dva razlicita izgleda. Sve je sada levo;
             centriran ostaje samo CTA baner. */}
-        <div className="mx-auto w-full max-w-3xl body-2">
+        <div className="rich-text-content mx-auto w-full max-w-3xl body-2">
           {title && (
             // h2, ne h1: primarni naslov strane dolazi iz hero sekcije. Ranije
             // su strane imale i po tri h1.
