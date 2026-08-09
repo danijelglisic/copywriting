@@ -44,7 +44,7 @@ const EnglishPage = ({ homepage }: PageProps) => {
         >
           <RenderContent
             sections={contentSections}
-            useRedesignFinalCta={isPortfolio}
+            useRedesignFinalCta={isPortfolio || isContact}
             useVideoAdsRedesign={isVideoAds}
           />
         </div>
