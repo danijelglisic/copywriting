@@ -26,7 +26,7 @@ const EnglishPage = ({ homepage }: PageProps) => {
         <div
           className={
             isPortfolio
-              ? "[&>div>div:nth-child(1)]:!bg-[#F9F9F7] [&>div>div:nth-child(2)]:!bg-white [&>div>div:nth-child(3)]:!bg-[#F9F9F7] [&>div>div:nth-child(4)]:!bg-white"
+              ? "[&>div>div:nth-child(1)]:!bg-[#F9F9F7] [&>div>div:nth-child(1)]:!text-dark [&>div>div:nth-child(2)]:!bg-white [&>div>div:nth-child(3)]:!bg-[#F9F9F7] [&>div>div:nth-child(3)]:!text-dark [&>div>div:nth-child(4)]:!bg-white"
               : undefined
           }
         >
