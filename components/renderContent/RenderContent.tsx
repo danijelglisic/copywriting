@@ -16,6 +16,7 @@ import FreeConsultationBanner from "../freeConsultationBanner/FreeConsultationBa
 import ZSection from "../zSection/ZSection";
 import VideoLandingSection from "../videoLandingSection/VideoLandingSection";
 import dynamic from "next/dynamic";
+import { FinalCtaPreview } from "@/pages/redesign-concepts";
 
 const Reels = dynamic(() => import("../reels/Reels"), {
   ssr: false,
@@ -33,14 +34,21 @@ interface RenderComponentProps {
         | IVideoLandingSection
       )[]
     | undefined;
+  redesignedFinalCta?: boolean;
 }
-const RenderContent = ({ sections }: RenderComponentProps) => {
+const RenderContent = ({
+  sections,
+  redesignedFinalCta,
+}: RenderComponentProps) => {
   if (!sections) return <div></div>;
 
   const render = () => {
     // Prati da li je prethodna sekcija bila tamna, pa se sledeca postavlja
     // suprotno. Bez ovoga dve uzastopne tamne sekcije izgledaju kao jedna.
     let lastDark = false;
+    const finalSection = sections
+      .filter((section) => section?.sys?.contentType)
+      .at(-1);
 
     return sections
       .filter((section) => section?.sys?.contentType)
@@ -65,6 +73,24 @@ const RenderContent = ({ sections }: RenderComponentProps) => {
           // Baner je uvek crn, ali i dalje broji kao tamna sekcija da sledeca
           // Z sekcija ispadne svetla.
           lastDark = true;
+          if (redesignedFinalCta && section === finalSection) {
+            const fields = consultationBanner.fields as any;
+            return (
+              <FinalCtaPreview
+                key={id}
+                section={{
+                  headline: fields.text,
+                  description: fields.description,
+                  cta: fields.cta?.fields
+                    ? {
+                        label: fields.cta.fields.text,
+                        href: fields.cta.fields.url,
+                      }
+                    : null,
+                }}
+              />
+            );
+          }
           return <FreeConsultationBanner key={id} props={consultationBanner} />;
         }
         if (section.sys.contentType.sys.id === "zSection") {
