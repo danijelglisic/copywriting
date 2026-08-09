@@ -18,7 +18,6 @@ const primaryButtonClass =
   "rounded-full bg-navy px-7 py-[0.8125rem] text-center text-sm font-semibold text-white shadow-[0_18px_38px_rgba(10,31,68,0.16)] outline-offset-4 ring-1 ring-navy/10 transition duration-300 hover:-translate-y-0.5 hover:bg-black active:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-black";
 const serviceTitleClass = "text-xl font-bold uppercase text-black";
 const serviceBodyClass = "pt-10 text-lg leading-9 text-black/68";
-
 const PrimaryCtaLink = ({ href, label }: { href: string; label: string }) => (
   <Link href={href} legacyBehavior>
     <a className={primaryButtonClass}>{label}</a>
@@ -144,23 +143,41 @@ const PreviewHeader = () => {
             <span className="sr-only">
               {isOpen ? "close menu" : "toggle menu"}
             </span>
-            <span className="relative h-4 w-5">
-              <span
-                className={`absolute left-0 top-0 h-px w-5 bg-current transition-transform ${
-                  isOpen ? "translate-y-2 rotate-45" : ""
+            <svg
+              viewBox="0 0 20 16"
+              className="h-4 w-5"
+              aria-hidden="true"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1"
+              strokeLinecap="butt"
+            >
+              <line
+                x1="0"
+                y1="0.5"
+                x2="20"
+                y2="0.5"
+                className={`origin-center [transform-box:fill-box] transition-transform ${
+                  isOpen ? "translate-y-[7px] rotate-45" : ""
                 }`}
               />
-              <span
-                className={`absolute left-0 top-2 h-px w-5 bg-current transition-opacity ${
-                  isOpen ? "opacity-0" : ""
-                }`}
+              <line
+                x1="0"
+                y1="7.5"
+                x2="20"
+                y2="7.5"
+                className={`transition-opacity ${isOpen ? "opacity-0" : ""}`}
               />
-              <span
-                className={`absolute bottom-0 left-0 h-px w-5 bg-current transition-transform ${
+              <line
+                x1="0"
+                y1="14.5"
+                x2="20"
+                y2="14.5"
+                className={`origin-center [transform-box:fill-box] transition-transform ${
                   isOpen ? "-translate-y-[7px] -rotate-45" : ""
                 }`}
               />
-            </span>
+            </svg>
           </button>
         </div>
       </header>
@@ -243,7 +260,11 @@ export const PreviewFooter = () => (
   </footer>
 );
 
-export const RedesignPreviewLayout = ({ children }: { children: React.ReactNode }) => (
+export const RedesignPreviewLayout = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => (
   <div className="min-h-screen bg-white text-black">
     <PreviewHeader />
     <main>{children}</main>
@@ -336,6 +357,8 @@ type RedesignConceptsProps = {
     images: {
       url: string;
       alt: string;
+      width?: number;
+      height?: number;
     }[];
   } | null;
   finalCta: {
@@ -350,12 +373,15 @@ type RedesignConceptsProps = {
 
 const getAsset = (asset: any) => {
   const fileUrl = asset?.fields?.file?.url;
+  const dimensions = asset?.fields?.file?.details?.image;
 
   if (!fileUrl) return null;
 
   return {
     url: fileUrl.startsWith("http") ? fileUrl : `https:${fileUrl}`,
     alt: asset?.fields?.description || asset?.fields?.title || "",
+    width: dimensions?.width,
+    height: dimensions?.height,
   };
 };
 
@@ -765,7 +791,9 @@ const LandingPagesPreview = ({
             transition={sharedTransition}
             className="max-w-3xl"
           >
-            {label ? <p className={`${serviceTitleClass} mb-12`}>{label}</p> : null}
+            {label ? (
+              <p className={`${serviceTitleClass} mb-12`}>{label}</p>
+            ) : null}
             {heading || section.richText ? (
               <div className={`${serviceBodyClass} pt-20`}>
                 {heading ? (
@@ -774,7 +802,11 @@ const LandingPagesPreview = ({
                   </h2>
                 ) : null}
                 {section.richText ? (
-                  <div className={heading ? "mt-32 border-4 border-red-500" : undefined}>
+                  <div
+                    className={
+                      heading ? "mt-32 border-4 border-red-500" : undefined
+                    }
+                  >
                     {documentToReactComponents(
                       section.richText,
                       landingPagesRichTextOptions
@@ -785,7 +817,18 @@ const LandingPagesPreview = ({
             ) : null}
             {section.cta?.href && section.cta?.label ? (
               <div className="mt-8">
-                <PrimaryCtaLink href={section.cta.href} label="Landing pages" />
+                <div className="sm:hidden">
+                  <PrimaryCtaLink
+                    href="/en/landing-pages"
+                    label="Landing pages"
+                  />
+                </div>
+                <div className="hidden sm:block">
+                  <PrimaryCtaLink
+                    href={section.cta.href}
+                    label="Landing pages"
+                  />
+                </div>
               </div>
             ) : null}
           </motion.div>
@@ -848,10 +891,18 @@ const EmailSequencesPreview = ({
             ) : null}
             {section.cta?.href && section.cta?.label ? (
               <div className="mt-8">
-                <PrimaryCtaLink
-                  href={section.cta.href}
-                  label={section.cta.label}
-                />
+                <div className="sm:hidden">
+                  <PrimaryCtaLink
+                    href="/en/email-sequences"
+                    label={section.cta.label}
+                  />
+                </div>
+                <div className="hidden sm:block">
+                  <PrimaryCtaLink
+                    href={section.cta.href}
+                    label={section.cta.label}
+                  />
+                </div>
               </div>
             ) : null}
           </motion.div>
@@ -994,7 +1045,10 @@ const SocialProofPreview = ({
       },
       {
         breakpoint: 640,
-        settings: { slidesToShow: 1, slidesToScroll: 1 },
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
       },
     ],
   };
@@ -1019,13 +1073,24 @@ const SocialProofPreview = ({
             {socialProof.images.map((image) => (
               <div key={image.url} className="px-2 pb-5">
                 <div className="overflow-hidden rounded-[1.25rem] bg-white p-2 shadow-[0_16px_44px_rgba(10,31,68,0.08)] ring-1 ring-navy/10">
-                  <Image
-                    src={image.url}
-                    alt={image.alt}
-                    width={360}
-                    height={720}
-                    className="h-auto w-full rounded-[1rem]"
-                  />
+                  <div className="sm:hidden">
+                    <Image
+                      src={image.url}
+                      alt={image.alt}
+                      width={image.width ?? 360}
+                      height={image.height ?? 720}
+                      className="h-auto w-full rounded-[1rem]"
+                    />
+                  </div>
+                  <div className="hidden sm:block">
+                    <Image
+                      src={image.url}
+                      alt={image.alt}
+                      width={360}
+                      height={720}
+                      className="h-auto w-full rounded-[1rem]"
+                    />
+                  </div>
                 </div>
               </div>
             ))}
@@ -1042,11 +1107,26 @@ const SocialProofPreview = ({
           </button>
           <button
             type="button"
+            onClick={() => sliderRef.current?.slickPrev()}
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border-2 border-navy bg-white text-navy outline-offset-4 transition hover:-translate-y-0.5 hover:bg-navy/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-navy max-sm:hover:translate-y-0 sm:hidden"
+            aria-label="Previous testimonial"
+          >
+            <span
+              className="inline-block rotate-180 font-bold text-navy"
+              aria-hidden="true"
+            >
+              →
+            </span>
+          </button>
+          <button
+            type="button"
             onClick={() => sliderRef.current?.slickNext()}
-            className="hidden h-11 w-11 items-center justify-center rounded-full border-2 border-navy bg-white text-navy outline-offset-4 transition hover:-translate-y-0.5 hover:bg-navy/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-navy sm:inline-flex"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border-2 border-navy bg-white text-navy outline-offset-4 transition hover:-translate-y-0.5 hover:bg-navy/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-navy max-sm:hover:translate-y-0"
             aria-label="Next testimonial"
           >
-            <span className="font-bold text-navy" aria-hidden="true">→</span>
+            <span className="font-bold text-navy" aria-hidden="true">
+              →
+            </span>
           </button>
         </div>
       </div>

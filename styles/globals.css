@@ -91,7 +91,9 @@
     right: 0;
     height: 2px;
     background: linear-gradient(90deg, #0a66c2, #4a90d9);
-    box-shadow: 0 0 8px rgba(10, 102, 194, 0.8), 0 0 20px rgba(10, 102, 194, 0.4);
+    box-shadow:
+      0 0 8px rgba(10, 102, 194, 0.8),
+      0 0 20px rgba(10, 102, 194, 0.4);
     transform-origin: 0%;
     z-index: 49;
   }
@@ -110,6 +112,18 @@
   display: none !important;
 }
 
-.p-height p{
+.p-height p {
   min-height: 1rem;
+}
+
+@media (max-width: 639px) {
+  .redesigned-page-content > div > :first-child,
+  .redesigned-page-content > div > :first-child > :first-child {
+    padding-top: 0.75rem !important;
+  }
+
+  .redesigned-page-content > div > :first-child > .container,
+  .redesigned-page-content > div > :first-child > :first-child > .container {
+    padding-top: 0 !important;
+  }
 }
