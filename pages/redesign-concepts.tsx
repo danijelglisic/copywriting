@@ -712,7 +712,7 @@ const MeetSarahPreview = ({
         </div>
       </section>
 
-      <section className="bg-[#F9F9F7] pb-8 pt-16 sm:pb-12 sm:pt-20 lg:pb-8 lg:pt-16">
+      <section className="bg-[#F9F9F7] py-16 sm:py-20 lg:py-16">
         <div className="container">
           <div className="grid items-start gap-14 lg:grid-cols-[minmax(18rem,0.95fr)_minmax(0,1.05fr)] lg:gap-20">
             <motion.div
@@ -781,7 +781,7 @@ const LandingPagesPreview = ({
   const heading = section.subtitle ? section.title : null;
 
   return (
-    <section className="bg-white py-16 sm:py-20 lg:pb-24 lg:pt-16">
+    <section className="bg-white pb-16 pt-8 sm:pb-20 sm:pt-12 lg:pb-24 lg:pt-8">
       <div className="container">
         <div className="grid items-start gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.9fr)] lg:gap-20">
           <motion.div
