@@ -509,7 +509,7 @@ const QuietAuthorityHero = ({
   primaryCta: RedesignConceptsProps["primaryCta"];
 }) => (
   <section className="relative overflow-hidden bg-[#F9F9F7]">
-    <div className="container relative pb-16 pt-3 sm:pb-20 sm:pt-5 lg:pb-28 lg:pt-7">
+    <div className="page-content-start container relative pb-16 sm:pb-20 lg:pb-28">
       <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.28fr)_minmax(22rem,0.72fr)] lg:gap-10">
         <HeroCopy hero={hero} primaryCta={primaryCta} />
         <Portrait hero={hero} />
