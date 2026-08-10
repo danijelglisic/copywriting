@@ -1100,28 +1100,15 @@ const SocialProofPreview = ({
           <button
             type="button"
             onClick={() => sliderRef.current?.slickPrev()}
-            className="hidden h-11 w-11 items-center justify-center rounded-full border border-navy/20 bg-white text-navy outline-offset-4 transition hover:border-navy/40 hover:bg-navy/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-navy sm:inline-flex"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-navy/20 bg-white text-navy outline-offset-4 transition hover:border-navy/40 hover:bg-navy/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-navy"
             aria-label="Previous testimonial"
           >
             <span aria-hidden="true">←</span>
           </button>
           <button
             type="button"
-            onClick={() => sliderRef.current?.slickPrev()}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full border-2 border-navy bg-white text-navy outline-offset-4 transition hover:-translate-y-0.5 hover:bg-navy/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-navy max-sm:hover:translate-y-0 sm:hidden"
-            aria-label="Previous testimonial"
-          >
-            <span
-              className="inline-block rotate-180 font-bold text-navy"
-              aria-hidden="true"
-            >
-              →
-            </span>
-          </button>
-          <button
-            type="button"
             onClick={() => sliderRef.current?.slickNext()}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full border-2 border-navy bg-white text-navy outline-offset-4 transition hover:-translate-y-0.5 hover:bg-navy/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-navy max-sm:hover:translate-y-0"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border-2 border-navy bg-white text-navy outline-offset-4 transition hover:-translate-y-0.5 hover:bg-navy/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-navy max-sm:active:-translate-y-0.5 max-sm:hover:translate-y-0"
             aria-label="Next testimonial"
           >
             <span className="font-bold text-navy" aria-hidden="true">
