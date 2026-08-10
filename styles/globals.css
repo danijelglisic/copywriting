@@ -116,14 +116,29 @@
   min-height: 1rem;
 }
 
-@media (max-width: 639px) {
+@layer components {
+  .page-content-start {
+    padding-top: 2.5rem !important;
+  }
+
   .redesigned-page-content > div > :first-child,
   .redesigned-page-content > div > :first-child > :first-child {
-    padding-top: 0.75rem !important;
+    padding-top: 0 !important;
   }
 
   .redesigned-page-content > div > :first-child > .container,
   .redesigned-page-content > div > :first-child > :first-child > .container {
-    padding-top: 0 !important;
+    padding-top: 2.5rem !important;
+  }
+
+  @media (min-width: 640px) {
+    .page-content-start {
+      padding-top: 4rem !important;
+    }
+
+    .redesigned-page-content > div > :first-child > .container,
+    .redesigned-page-content > div > :first-child > :first-child > .container {
+      padding-top: 4rem !important;
+    }
   }
 }
