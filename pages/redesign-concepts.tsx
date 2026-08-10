@@ -781,7 +781,7 @@ const LandingPagesPreview = ({
   const heading = section.subtitle ? section.title : null;
 
   return (
-    <section className="bg-white pb-16 pt-8 sm:pb-20 sm:pt-12 lg:pb-24 lg:pt-8">
+    <section className="bg-white py-16 sm:py-20 lg:pb-24 lg:pt-16">
       <div className="container">
         <div className="grid items-start gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.9fr)] lg:gap-20">
           <motion.div
@@ -795,7 +795,7 @@ const LandingPagesPreview = ({
               <p className={`${serviceTitleClass} mb-12`}>{label}</p>
             ) : null}
             {heading || section.richText ? (
-              <div className={`${serviceBodyClass} pt-20`}>
+              <div className={serviceBodyClass}>
                 {heading ? (
                   <h2 className="text-4xl font-semibold leading-tight tracking-[-0.045em] text-black sm:text-5xl">
                     {heading}
