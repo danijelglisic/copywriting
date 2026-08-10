@@ -4,6 +4,7 @@ import { client } from "@/helpers/clinet";
 import { GetStaticPaths, GetStaticProps } from "next";
 import RenderContent from "@/components/renderContent/RenderContent";
 import Metadata from "@/components/metadata/Metadata";
+import { PreviewFooter, RedesignPreviewLayout } from "../redesign-concepts";
 import {
   EN_HOME_SLUG,
   EN_PREFIX,
@@ -11,18 +12,50 @@ import {
   PageProps,
 } from "@/helpers/contentTypes";
 
+const approvedVisualWrapper =
+  "[&_.z-section-visual]:relative [&_.z-section-visual]:overflow-hidden [&_.z-section-visual]:rounded-[1.75rem] [&_.z-section-visual]:border [&_.z-section-visual]:border-navy/10 [&_.z-section-visual]:bg-white [&_.z-section-visual]:p-2 [&_.z-section-visual]:shadow-[0_14px_34px_rgba(10,31,68,0.08)] [&_.z-section-visual]:transition [&_.z-section-visual]:duration-300 [&_.z-section-visual]:hover:-translate-y-1 [&_.z-section-visual_img]:h-auto [&_.z-section-visual_img]:w-full [&_.z-section-visual_img]:rounded-[1.35rem]";
+
 const EnglishPage = ({ homepage }: PageProps) => {
   const contentSections = (homepage?.fields as any)?.contentSections;
+  const isPortfolio = (homepage?.fields as any)?.slug === "en/portfolio";
+  const isVideoAds = (homepage?.fields as any)?.slug === "en/video-ads";
+  const isContact = (homepage?.fields as any)?.slug === "en/contact";
+  const usesRedesignedFooter =
+    (homepage?.fields as any)?.slug === "en/email-sequences" ||
+    (homepage?.fields as any)?.slug === "en/landing-pages";
+  const PageLayout = (
+    isPortfolio || isVideoAds || isContact || usesRedesignedFooter
+      ? RedesignPreviewLayout
+      : Layout
+  ) as typeof Layout;
 
   return (
-    <Layout>
+    <PageLayout footer={usesRedesignedFooter ? <PreviewFooter /> : undefined}>
       <Metadata
         title={(homepage?.fields as any)?.seoTitle ?? "Slaviša Bogdanović"}
         description={(homepage?.fields as any)?.seoDesctiption ?? ""}
         path={(homepage?.fields as any)?.slug ?? ""}
       />
-      {contentSections && <RenderContent sections={contentSections} />}
-    </Layout>
+      {contentSections && (
+        <div
+          className={`redesigned-page-content ${
+            isPortfolio
+              ? `[&_.z-section]:py-16 sm:[&_.z-section]:py-20 [&_.z-section-title]:!text-xl [&_.z-section-title]:!font-bold [&_.z-section-title]:uppercase [&_.z-section-title]:!leading-normal [&_.z-section-title]:!tracking-normal [&_.z-section-subtitle]:!text-xl [&_.z-section-subtitle]:!font-medium [&_.z-section-subtitle]:!leading-8 [&_.z-section-body]:!text-lg [&_.z-section-body]:!font-normal [&_.z-section-body]:!leading-9 [&_.z-section.bg-white_.z-section-subtitle]:!text-black/72 [&_.z-section.bg-white_.z-section-body]:!text-black/68 [&_.z-section.bg-navy_.z-section-subtitle]:!text-white/72 [&_.z-section.bg-navy_.z-section-body]:!text-white/72 [&_.z-section-cta]:mt-2 ${approvedVisualWrapper} [&>div>div:nth-child(1)]:!bg-[#F9F9F7] [&>div>div:nth-child(1)]:!text-dark [&>div>div:nth-child(2)]:!bg-white [&>div>div:nth-child(3)]:!bg-[#F9F9F7] [&>div>div:nth-child(3)]:!text-dark [&>div>div:nth-child(4)]:!bg-white`
+              : isVideoAds
+                ? `${approvedVisualWrapper} [&_.rich-text-content>h2:first-child.text-secondary]:!mb-16 [&_.rich-text-content>h2:first-child:not(.text-secondary)]:!mb-4`
+                : isContact
+                  ? `${approvedVisualWrapper} [&>div>div:nth-child(1)]:!bg-[#F9F9F7] [&>div>div:nth-child(1)]:!text-dark`
+                  : ""
+          }`}
+        >
+          <RenderContent
+            sections={contentSections}
+            useRedesignFinalCta={isPortfolio || isContact}
+            useVideoAdsRedesign={isVideoAds}
+          />
+        </div>
+      )}
+    </PageLayout>
   );
 };
 

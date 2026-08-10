@@ -25,12 +25,18 @@ const ZSection = ({ props, isDark }: ZSectionProps) => {
   const bgColor = isDark ? "bg-navy" : "bg-white";
   const textColor = isDark ? "text-white" : "text-dark";
   const imageOrder = imagePosition ? "" : "order-2";
+  const isCaseStudyCta =
+    cta?.fields.text?.trim().toLowerCase() === "read the full case study";
 
   return (
-    <div className={bgColor + " py-20 " + textColor}>
+    <div className={"z-section " + bgColor + " py-20 " + textColor}>
       <div className="container">
-        <div className="flex flex-col justify-between items-center lg:flex-row gap-6 overflow-hidden">
-          <FadeUp delay={0.1} className={imageOrder}>
+        <div
+          className={`flex flex-col justify-between items-center lg:flex-row gap-6 ${
+            isCaseStudyCta ? "max-lg:gap-10" : ""
+          }`}
+        >
+          <FadeUp delay={0.1} className={`z-section-visual ${imageOrder}`}>
             {image?.fields.image?.fields.file.url && (
               <Image
                 src={"https:" + image.fields.image.fields.file.url}
@@ -41,19 +47,24 @@ const ZSection = ({ props, isDark }: ZSectionProps) => {
             )}
           </FadeUp>
           <div className="lg:max-w-[50%] flex flex-col gap-4">
-            <p className="heading-4">
+            <p className="z-section-title heading-4">
               {title && <AnimatedText text={title} />}
             </p>
             <FadeUp delay={0.15}>
-              <p className="subtitle-2">{subtitle}</p>
+              <p className="z-section-subtitle subtitle-2">{subtitle}</p>
             </FadeUp>
-            <FadeUp delay={0.25} className="regular-1 p-height">
+            <FadeUp delay={0.25} className="z-section-body regular-1 p-height">
               {richText && documentToReactComponents(richText, richTextOptions)}
             </FadeUp>
             {cta?.fields.url && cta?.fields.text && (
-              <FadeUp delay={0.35}>
+              <FadeUp
+                delay={0.35}
+                className={`z-section-cta ${
+                  isCaseStudyCta ? "max-lg:mt-4 max-lg:mb-2" : ""
+                }`}
+              >
                 <Link legacyBehavior href={cta.fields.url}>
-                  <a className="inline-block p-4 font-bold bg-secondary text-white w-fit">
+                  <a className="rounded-full bg-navy px-7 py-[0.8125rem] text-center text-sm font-semibold text-white shadow-[0_18px_38px_rgba(10,31,68,0.16)] outline-offset-4 ring-1 ring-navy/10 transition duration-300 hover:-translate-y-0.5 hover:bg-black active:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-black">
                     {cta.fields.text}
                   </a>
                 </Link>

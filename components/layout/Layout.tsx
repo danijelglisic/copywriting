@@ -18,9 +18,10 @@ const NAV: NavItem[] = [
 
 interface Props {
   children: ReactElement | ReactElement[];
+  footer?: ReactElement;
 }
 
-const Layout: FC<Props> = ({ children }) => {
+const Layout: FC<Props> = ({ children, footer }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [scrolled, setScrolled] = useState(false);
   const router = useRouter();
@@ -89,6 +90,7 @@ const Layout: FC<Props> = ({ children }) => {
       <main className="pt-[72px]" id="#main-content">
         {children}
       </main>
+      {footer || (
       <footer className="bg-navy text-white">
         <div className="container py-12">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
@@ -120,12 +122,13 @@ const Layout: FC<Props> = ({ children }) => {
                 href="https://www.linkedin.com/in/danijel-glisic/"
                 className="hover:text-white transition-colors underline"
               >
-                Danijel Glišić
+                Website TEST 123
               </a>
             </p>
           </div>
         </div>
       </footer>
+      )}
     </div>
   );
 };
