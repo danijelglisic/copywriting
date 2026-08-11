@@ -53,7 +53,11 @@ const EnglishPage = ({ homepage }: PageProps) => {
             useRedesignFinalCta={isPortfolio || isContact}
             useVideoAdsRedesign={isVideoAds}
             portfolioHeroEyebrow={
-              isPortfolio ? "COPYWRITER PORTFOLIO" : undefined
+              isPortfolio
+                ? "COPYWRITER PORTFOLIO"
+                : isContact
+                  ? "COPYWRITER FOR HIRE"
+                  : undefined
             }
           />
         </div>
