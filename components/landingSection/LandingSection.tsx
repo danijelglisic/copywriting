@@ -8,10 +8,9 @@ import { FadeUp } from "@/components/ui/FadeUp";
 
 interface LandingSectionprops {
   props: ILandingSection;
-  eyebrow?: string;
 }
 
-const LandingSection = ({ props, eyebrow }: LandingSectionprops) => {
+const LandingSection = ({ props }: LandingSectionprops) => {
   const fields = props.fields as any;
 
   return (
@@ -19,11 +18,6 @@ const LandingSection = ({ props, eyebrow }: LandingSectionprops) => {
       <div className="container py-10 heading-4 text-white flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="space-y-20">
           <h1 className="heading-2 drop-shadow">
-            {eyebrow && (
-              <span className="mb-3 block text-xs font-semibold uppercase tracking-[0.18em] text-dark/60 sm:text-sm">
-                {eyebrow}
-              </span>
-            )}
             {fields.heading && <AnimatedText text={fields.heading} />}
           </h1>
           <ul className="list-disc ml-8 space-y-2">
