@@ -717,6 +717,9 @@ const MeetSarahPreview = ({
 
       <section className="bg-[#F9F9F7] py-16 sm:py-20 lg:py-16">
         <div className="container">
+          <h2 className="mb-12 text-4xl font-semibold leading-tight tracking-[-0.045em] text-black sm:mb-14 sm:text-5xl">
+            COPYWRITING SERVICES
+          </h2>
           <div className="grid items-start gap-14 lg:grid-cols-[minmax(18rem,0.95fr)_minmax(0,1.05fr)] lg:gap-20">
             <motion.div
               initial={{ opacity: 0, y: 18 }}
@@ -747,7 +750,7 @@ const MeetSarahPreview = ({
               className="max-w-3xl"
             >
               {videoAdsLabel ? (
-                <p className={serviceTitleClass}>{videoAdsLabel}</p>
+                <h3 className={serviceTitleClass}>{videoAdsLabel}</h3>
               ) : null}
               {videoAdsRichText ? (
                 <div className={serviceBodyClass}>
@@ -795,7 +798,7 @@ const LandingPagesPreview = ({
             className="max-w-3xl"
           >
             {label ? (
-              <p className={`${serviceTitleClass} mb-12`}>{label}</p>
+              <h3 className={`${serviceTitleClass} mb-12`}>{label}</h3>
             ) : null}
             {heading || section.richText ? (
               <div className={serviceBodyClass}>
@@ -883,7 +886,7 @@ const EmailSequencesPreview = ({
             transition={{ ...sharedTransition, delay: 0.08 }}
             className="max-w-3xl"
           >
-            {label ? <p className={serviceTitleClass}>{label}</p> : null}
+            {label ? <h3 className={serviceTitleClass}>{label}</h3> : null}
             {section.richText ? (
               <div className={serviceBodyClass}>
                 {documentToReactComponents(
