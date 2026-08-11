@@ -25,6 +25,7 @@ const Reels = dynamic(() => import("../reels/Reels"), {
 interface RenderComponentProps {
   useRedesignFinalCta?: boolean;
   useVideoAdsRedesign?: boolean;
+  portfolioHeroEyebrow?: string;
   sections:
     | (
         | IFreeConsultationBanner
@@ -41,6 +42,7 @@ const RenderContent = ({
   sections,
   useRedesignFinalCta,
   useVideoAdsRedesign,
+  portfolioHeroEyebrow,
 }: RenderComponentProps) => {
   if (!sections) return <div></div>;
 
@@ -138,7 +140,9 @@ const RenderContent = ({
             <VideoLandingSection
               key={id}
               props={reels}
-              eyebrow={useVideoAdsRedesign ? "AD COPYWRITER" : undefined}
+              eyebrow={
+                useVideoAdsRedesign ? "AD COPYWRITER" : portfolioHeroEyebrow
+              }
             />
           );
         }
