@@ -139,6 +139,9 @@ const RenderContent = ({
               key={id}
               props={reels}
               eyebrow={useVideoAdsRedesign ? "AD COPYWRITER" : undefined}
+              bodyCopy={
+                useVideoAdsRedesign ? "That's what we'll fix." : undefined
+              }
             />
           );
         }

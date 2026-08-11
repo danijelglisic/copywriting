@@ -9,9 +9,14 @@ import { FadeUp } from "@/components/ui/FadeUp";
 interface VideoLandingSectionProps {
   props: IVideoLandingSection;
   eyebrow?: string;
+  bodyCopy?: string;
 }
 
-const VideoLandingSection = ({ props, eyebrow }: VideoLandingSectionProps) => {
+const VideoLandingSection = ({
+  props,
+  eyebrow,
+  bodyCopy,
+}: VideoLandingSectionProps) => {
   const fields = props.fields as any;
   const { title, description, youtubeVideoUrl, image } = fields;
   const imageUrl =
@@ -32,7 +37,7 @@ const VideoLandingSection = ({ props, eyebrow }: VideoLandingSectionProps) => {
           <div className="flex flex-col gap-16">
             <h1 className="heading-2">
               {eyebrow && (
-                <span className="mb-3 block text-xs font-semibold uppercase tracking-[0.18em] text-white/70 sm:text-sm">
+                <span className="mb-3 block text-xs font-semibold uppercase tracking-[0.18em] text-dark/60 sm:text-sm">
                   {eyebrow}
                 </span>
               )}
@@ -64,8 +69,12 @@ const VideoLandingSection = ({ props, eyebrow }: VideoLandingSectionProps) => {
           )}
         </div>
         <FadeUp delay={0.3} className="body-1 mt-12">
-          {description &&
-            documentToReactComponents(description, richTextOptions)}
+          {bodyCopy ? (
+            <p className="leading-relaxed">{bodyCopy}</p>
+          ) : (
+            description &&
+            documentToReactComponents(description, richTextOptions)
+          )}
         </FadeUp>
       </div>
     </div>
