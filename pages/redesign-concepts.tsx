@@ -430,6 +430,9 @@ const HeroCopy = ({
         transition={sharedTransition}
         className="text-5xl font-semibold leading-[0.98] tracking-[-0.045em] text-black [font-kerning:normal] sm:text-6xl lg:text-7xl xl:text-[5.5rem] xl:leading-[0.96]"
       >
+        <span className="mb-3 block text-xs font-semibold uppercase tracking-[0.18em] text-dark/60 sm:text-sm">
+          FREELANCE COPYWRITER
+        </span>
         {renderHeroHeading(hero.heading)}
       </motion.h1>
     ) : null}
