@@ -135,7 +135,11 @@ const RenderContent = ({
           const reels = section as IVideoLandingSection;
           lastDark = true;
           return renderVideoAdsSection(
-            <VideoLandingSection key={id} props={reels} />
+            <VideoLandingSection
+              key={id}
+              props={reels}
+              eyebrow={useVideoAdsRedesign ? "AD COPYWRITER" : undefined}
+            />
           );
         }
       });
