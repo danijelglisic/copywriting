@@ -8,9 +8,10 @@ import { FadeUp } from "@/components/ui/FadeUp";
 
 interface VideoLandingSectionProps {
   props: IVideoLandingSection;
+  eyebrow?: string;
 }
 
-const VideoLandingSection = ({ props }: VideoLandingSectionProps) => {
+const VideoLandingSection = ({ props, eyebrow }: VideoLandingSectionProps) => {
   const fields = props.fields as any;
   const { title, description, youtubeVideoUrl, image } = fields;
   const imageUrl = typeof image?.fields?.file?.url === "string" ? image.fields.file.url as string : undefined;
@@ -27,6 +28,11 @@ const VideoLandingSection = ({ props }: VideoLandingSectionProps) => {
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 lg:[&>*]:w-1/2 justify-between items-center">
           <div className="flex flex-col gap-16">
             <h1 className="heading-2">
+              {eyebrow && (
+                <span className="mb-3 block text-xs font-semibold uppercase tracking-[0.18em] text-dark/60 sm:text-sm">
+                  {eyebrow}
+                </span>
+              )}
               {title && <AnimatedText text={title} />}
             </h1>
           </div>
