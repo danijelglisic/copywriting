@@ -9,20 +9,12 @@ import { FadeUp } from "@/components/ui/FadeUp";
 interface VideoLandingSectionProps {
   props: IVideoLandingSection;
   eyebrow?: string;
-  bodyCopy?: string;
 }
 
-const VideoLandingSection = ({
-  props,
-  eyebrow,
-  bodyCopy,
-}: VideoLandingSectionProps) => {
+const VideoLandingSection = ({ props, eyebrow }: VideoLandingSectionProps) => {
   const fields = props.fields as any;
   const { title, description, youtubeVideoUrl, image } = fields;
-  const imageUrl =
-    typeof image?.fields?.file?.url === "string"
-      ? (image.fields.file.url as string)
-      : undefined;
+  const imageUrl = typeof image?.fields?.file?.url === "string" ? image.fields.file.url as string : undefined;
 
   return (
     <div className="bg-navy bg-opacity-80 relative text-white">
@@ -45,10 +37,7 @@ const VideoLandingSection = ({
             </h1>
           </div>
           {(imageUrl || youtubeVideoUrl) && (
-            <FadeUp
-              delay={0.2}
-              className="z-section-visual w-full items-center"
-            >
+            <FadeUp delay={0.2} className="z-section-visual w-full items-center">
               <div className="relative overflow-hidden w-full aspect-video rounded-[1.35rem]">
                 {imageUrl ? (
                   <Image
@@ -69,12 +58,7 @@ const VideoLandingSection = ({
           )}
         </div>
         <FadeUp delay={0.3} className="body-1 mt-12">
-          {bodyCopy ? (
-            <p className="leading-relaxed">{bodyCopy}</p>
-          ) : (
-            description &&
-            documentToReactComponents(description, richTextOptions)
-          )}
+          {description && documentToReactComponents(description, richTextOptions)}
         </FadeUp>
       </div>
     </div>
