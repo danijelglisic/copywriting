@@ -51,6 +51,7 @@ const RenderContent = ({
     // suprotno. Bez ovoga dve uzastopne tamne sekcije izgledaju kao jedna.
     let lastDark = false;
     let regularSectionIndex = 0;
+    let portfolioHeroEyebrowRendered = false;
 
     return sections
       .filter((section) => section?.sys?.contentType)
@@ -74,12 +75,16 @@ const RenderContent = ({
 
         if (contentType === "landingSection") {
           const landingSection = section as ILandingSection;
+          const eyebrow = portfolioHeroEyebrowRendered
+            ? undefined
+            : portfolioHeroEyebrow;
+          portfolioHeroEyebrowRendered ||= Boolean(eyebrow);
           lastDark = true;
           return renderVideoAdsSection(
             <LandingSection
               key={id}
               props={landingSection}
-              eyebrow={id === 0 ? portfolioHeroEyebrow : undefined}
+              eyebrow={eyebrow}
             />
           );
         }
