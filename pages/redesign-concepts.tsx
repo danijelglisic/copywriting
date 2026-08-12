@@ -41,7 +41,7 @@ const navItems: NavItem[] = [
   { text: "Portfolio", href: "/en/portfolio" },
   { text: "Video Ads", href: "/en/video-ads" },
   { text: "Email Sequences", href: "/en/email-sequences" },
-  { text: "Landing Pages", href: "/en/landing-pages" },
+  { text: "Web & Landing Pages", href: "/en/landing-pages" },
   { text: "Contact", href: "/en/contact" },
 ];
 
