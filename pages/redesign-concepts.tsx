@@ -686,7 +686,7 @@ const MeetSarahPreview = ({
 
   return (
     <>
-      <section className="bg-white pb-10 pt-16 sm:pb-12 sm:pt-20">
+      <section className="bg-white pb-10 pt-10 sm:pb-12 sm:pt-12 lg:pt-0">
         <div className="container">
           <div className="grid items-center gap-9 lg:grid-cols-[minmax(0,1.1fr)_minmax(18rem,0.9fr)] lg:gap-16">
             <div className="max-w-3xl">
@@ -694,11 +694,11 @@ const MeetSarahPreview = ({
                 COPYWRITING SERVICES
               </h2>
               {section.title && !isVideoAdsLabel(section.title) ? (
-                <h2 className="mt-3 text-4xl font-semibold leading-tight tracking-[-0.045em] text-black sm:text-5xl">
+                <h2 className="mt-6 text-4xl font-semibold leading-tight tracking-[-0.045em] text-black sm:mt-7 sm:text-5xl">
                   {section.title}
                 </h2>
               ) : null}
-              <div className="mt-7 space-y-5 text-lg leading-9 text-black/68">
+              <div className="mt-10 space-y-5 text-lg leading-9 text-black/68 sm:mt-12">
                 <p>{"She's your ideal customer."}</p>
                 <p>
                   {
@@ -708,35 +708,34 @@ const MeetSarahPreview = ({
                 <p>Then your video ad appears.</p>
               </div>
             </div>
+            <div className="hidden lg:block" aria-hidden="true" />
+          </div>
+        </div>
+      </section>
 
-            {section.image ? (
-              <motion.div
-                initial={{ opacity: 0, y: 18 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.35 }}
-                transition={sharedTransition}
-                className="relative mx-auto w-full max-w-[26rem] lg:mx-0 lg:justify-self-end"
-              >
-                <div className="absolute inset-8 rounded-[2rem] bg-navy/5 blur-3xl" />
-                <div className="relative overflow-hidden rounded-[1.75rem] border border-navy/10 bg-white p-2 shadow-[0_14px_34px_rgba(10,31,68,0.08)]">
+      <section className="bg-[#F9F9F7] py-16 sm:py-20 lg:py-16">
+        <div className="container">
+          <div className="grid items-start gap-14 lg:grid-cols-[minmax(18rem,0.95fr)_minmax(0,1.05fr)] lg:gap-20">
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.35 }}
+              transition={sharedTransition}
+              className="relative"
+            >
+              <div className="absolute inset-8 rounded-[2rem] bg-navy/5 blur-3xl" />
+              {section.image ? (
+                <div className="relative overflow-hidden rounded-[1.75rem] border border-navy/10 bg-white p-2 shadow-[0_14px_34px_rgba(10,31,68,0.08)] transition duration-300 hover:-translate-y-1">
                   <Image
                     src={section.image.url}
                     alt={section.image.alt}
                     width={520}
                     height={640}
-                    className="aspect-[4/3] w-full rounded-[1.35rem] object-cover lg:aspect-[4/5]"
+                    className="h-auto w-full rounded-[1.35rem]"
                   />
                 </div>
-              </motion.div>
-            ) : null}
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-[#F9F9F7] pb-16 pt-10 sm:pb-20 sm:pt-12 lg:py-16">
-        <div className="container">
-          <div className="grid items-start lg:grid-cols-[minmax(18rem,0.95fr)_minmax(0,1.05fr)] lg:gap-20">
-            <div className="hidden lg:block" aria-hidden="true" />
+              ) : null}
+            </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
