@@ -686,7 +686,7 @@ const MeetSarahPreview = ({
 
   return (
     <>
-      <section className="bg-white pb-10 pt-10 sm:pb-12 sm:pt-12 lg:pt-0">
+      <section className="bg-white pb-10 pt-10 sm:pb-12 sm:pt-12 lg:pt-20">
         <div className="container">
           <div className="grid items-center gap-9 lg:grid-cols-[minmax(0,1.1fr)_minmax(18rem,0.9fr)] lg:gap-16">
             <div className="max-w-3xl">
