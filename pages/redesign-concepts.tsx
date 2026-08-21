@@ -708,7 +708,25 @@ const MeetSarahPreview = ({
                 <p>Then your video ad appears.</p>
               </div>
             </div>
-            <div className="hidden lg:block" aria-hidden="true" />
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.35 }}
+              transition={{ ...sharedTransition, delay: 0.08 }}
+              className="relative mx-auto w-full lg:mx-0 lg:max-w-[30rem] lg:justify-self-end"
+            >
+              <div className="absolute inset-8 rounded-[2rem] bg-navy/5 blur-3xl" />
+              <div className="relative overflow-hidden rounded-[1.75rem] border border-navy/10 bg-white p-2 shadow-[0_14px_34px_rgba(10,31,68,0.08)]">
+                <Image
+                  src="/sarah-home.webp"
+                  alt="Sarah relaxing at home and scrolling on her phone"
+                  width={1400}
+                  height={933}
+                  sizes="(min-width: 1024px) 42vw, calc(100vw - 2rem)"
+                  className="h-auto w-full rounded-[1.35rem]"
+                />
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
