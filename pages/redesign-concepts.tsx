@@ -476,26 +476,26 @@ const HeroCopy = ({
   </motion.div>
 );
 
-const Portrait = ({ hero }: { hero: RedesignConceptsProps["hero"] }) => {
-  if (!hero.image) return null;
-
+const Portrait = () => {
   return (
     <motion.figure
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.35 }}
       transition={{ ...sharedTransition, delay: 0.1 }}
-      className="relative mx-auto w-full max-w-[26.75rem] text-black/50 lg:mx-0 lg:max-w-[31rem] lg:-translate-x-3"
+      className="relative mx-auto w-full max-w-[26.75rem] text-black/50 sm:max-w-[29rem] lg:mx-0 lg:max-w-[34rem]"
     >
-      <div className="overflow-hidden rounded-[2rem] border border-navy/10 bg-white p-2 shadow-[0_26px_66px_rgba(10,31,68,0.12)]">
-        <Image
-          src={hero.image.url}
-          alt={hero.image.alt || "Slavisa Bogdanovic"}
-          width={520}
-          height={640}
-          priority
-          className="h-auto w-full rounded-[1.5rem] object-cover"
-        />
+      <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-navy/10 bg-white p-2 shadow-[0_26px_66px_rgba(10,31,68,0.12)] lg:aspect-[3/4]">
+        <div className="relative h-full w-full overflow-hidden rounded-[1.5rem] bg-black">
+          <Image
+            src="/slavisa-home-portrait.webp"
+            alt="Slavisa Bogdanovic"
+            fill
+            sizes="(min-width: 1024px) 34rem, (min-width: 640px) 29rem, calc(100vw - 2rem)"
+            priority
+            className="object-contain object-top"
+          />
+        </div>
       </div>
       <figcaption className="mt-5 text-center text-sm font-medium text-black/52">
         Slavisa Bogdanovic
@@ -513,9 +513,9 @@ const QuietAuthorityHero = ({
 }) => (
   <section className="relative overflow-hidden bg-[#F9F9F7]">
     <div className="page-content-start container relative pb-16 sm:pb-20 lg:pb-28">
-      <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.28fr)_minmax(22rem,0.72fr)] lg:gap-10">
+      <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(25rem,0.85fr)] lg:gap-14">
         <HeroCopy hero={hero} primaryCta={primaryCta} />
-        <Portrait hero={hero} />
+        <Portrait />
       </div>
     </div>
   </section>
