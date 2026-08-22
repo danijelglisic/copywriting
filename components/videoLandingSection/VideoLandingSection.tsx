@@ -36,7 +36,11 @@ const VideoLandingSection = ({
       />
       <div className="container py-20">
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 lg:[&>*]:w-1/2 justify-between items-center">
-          <div className="flex flex-col gap-16">
+          <div
+            className={`flex flex-col ${
+              contentBeforeVisual ? "lg:order-1" : "gap-16"
+            }`}
+          >
             <h1 className="heading-2">
               {eyebrow && (
                 <span className="mb-3 block text-xs font-semibold uppercase tracking-[0.18em] text-dark/60 sm:text-sm">
@@ -48,7 +52,12 @@ const VideoLandingSection = ({
             {contentBeforeVisual ? descriptionBlock : null}
           </div>
           {(imageUrl || youtubeVideoUrl) && (
-            <FadeUp delay={0.2} className="z-section-visual w-full items-center">
+            <FadeUp
+              delay={0.2}
+              className={`z-section-visual w-full items-center ${
+                contentBeforeVisual ? "lg:order-2" : ""
+              }`}
+            >
               <div className="relative overflow-hidden w-full aspect-video rounded-[1.35rem]">
                 {imageUrl ? (
                   <Image
