@@ -733,27 +733,7 @@ const MeetSarahPreview = ({
 
       <section className="bg-[#F9F9F7] py-16 sm:py-20 lg:py-16">
         <div className="container">
-          <div className="grid items-start gap-14 lg:grid-cols-[minmax(18rem,0.95fr)_minmax(0,1.05fr)] lg:gap-20">
-            <motion.div
-              initial={{ opacity: 0, y: 18 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.35 }}
-              transition={sharedTransition}
-              className="relative"
-            >
-              <div className="absolute inset-8 rounded-[2rem] bg-navy/5 blur-3xl" />
-              {section.image ? (
-                <div className="relative overflow-hidden rounded-[1.75rem] border border-navy/10 bg-white p-2 shadow-[0_14px_34px_rgba(10,31,68,0.08)] transition duration-300 hover:-translate-y-1">
-                  <Image
-                    src={section.image.url}
-                    alt={section.image.alt}
-                    width={520}
-                    height={640}
-                    className="h-auto w-full rounded-[1.35rem]"
-                  />
-                </div>
-              ) : null}
-            </motion.div>
+          <div className="grid items-start gap-14 lg:grid-cols-[minmax(0,1.05fr)_minmax(18rem,0.95fr)] lg:gap-20">
             <motion.div
               initial={{ opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -777,6 +757,26 @@ const MeetSarahPreview = ({
                   <PrimaryCtaLink
                     href={section.cta.href}
                     label={section.cta.label}
+                  />
+                </div>
+              ) : null}
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.35 }}
+              transition={sharedTransition}
+              className="relative"
+            >
+              <div className="absolute inset-8 rounded-[2rem] bg-navy/5 blur-3xl" />
+              {section.image ? (
+                <div className="relative overflow-hidden rounded-[1.75rem] border border-navy/10 bg-white p-2 shadow-[0_14px_34px_rgba(10,31,68,0.08)] transition duration-300 hover:-translate-y-1">
+                  <Image
+                    src={section.image.url}
+                    alt={section.image.alt}
+                    width={520}
+                    height={640}
+                    className="h-auto w-full rounded-[1.35rem]"
                   />
                 </div>
               ) : null}
@@ -869,28 +869,7 @@ const EmailSequencesPreview = ({
   return (
     <section className="bg-[#F9F9F7] py-16 sm:py-20 lg:py-24">
       <div className="container">
-        <div className="grid items-center gap-14 lg:grid-cols-[minmax(18rem,0.95fr)_minmax(0,1.05fr)] lg:gap-20">
-          <motion.div
-            initial={{ opacity: 0, y: 18 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.35 }}
-            transition={sharedTransition}
-            className="relative"
-          >
-            <div className="absolute inset-8 rounded-[2rem] bg-navy/5 blur-3xl" />
-            {section.image ? (
-              <div className="relative overflow-hidden rounded-[1.75rem] border border-navy/10 bg-white p-2 shadow-[0_14px_34px_rgba(10,31,68,0.08)] transition duration-300 hover:-translate-y-1">
-                <Image
-                  src={section.image.url}
-                  alt={section.image.alt}
-                  width={520}
-                  height={640}
-                  className="h-auto w-full rounded-[1.35rem]"
-                />
-              </div>
-            ) : null}
-          </motion.div>
-
+        <div className="grid items-center gap-14 lg:grid-cols-[minmax(0,1.05fr)_minmax(18rem,0.95fr)] lg:gap-20">
           <motion.div
             initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -921,6 +900,26 @@ const EmailSequencesPreview = ({
                     label={section.cta.label}
                   />
                 </div>
+              </div>
+            ) : null}
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.35 }}
+            transition={sharedTransition}
+            className="relative"
+          >
+            <div className="absolute inset-8 rounded-[2rem] bg-navy/5 blur-3xl" />
+            {section.image ? (
+              <div className="relative overflow-hidden rounded-[1.75rem] border border-navy/10 bg-white p-2 shadow-[0_14px_34px_rgba(10,31,68,0.08)] transition duration-300 hover:-translate-y-1">
+                <Image
+                  src={section.image.url}
+                  alt={section.image.alt}
+                  width={520}
+                  height={640}
+                  className="h-auto w-full rounded-[1.35rem]"
+                />
               </div>
             ) : null}
           </motion.div>
