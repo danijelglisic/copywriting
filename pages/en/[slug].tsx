@@ -52,6 +52,7 @@ const EnglishPage = ({ homepage }: PageProps) => {
             sections={contentSections}
             useRedesignFinalCta={isPortfolio || isContact}
             useVideoAdsRedesign={isVideoAds}
+            reorderPortfolioVideoResult={isPortfolio}
             portfolioHeroEyebrow={
               isPortfolio
                 ? "COPYWRITER PORTFOLIO"

@@ -16,15 +16,16 @@ interface ZSectionProps {
    * Portfolio stranama. `imagePosition` sada kontrolise samo stranu slike.
    */
   isDark?: boolean;
+  contentFirst?: boolean;
 }
 
-const ZSection = ({ props, isDark }: ZSectionProps) => {
+const ZSection = ({ props, isDark, contentFirst }: ZSectionProps) => {
   const fields = props.fields as any;
   const { image, imagePosition, title, subtitle, richText, cta } = fields;
 
   const bgColor = isDark ? "bg-navy" : "bg-white";
   const textColor = isDark ? "text-white" : "text-dark";
-  const imageOrder = imagePosition ? "" : "order-2";
+  const imageOrder = contentFirst || !imagePosition ? "order-2" : "";
   const isCaseStudyCta =
     cta?.fields.text?.trim().toLowerCase() === "read the full case study";
 
