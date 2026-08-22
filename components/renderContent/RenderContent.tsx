@@ -25,6 +25,7 @@ const Reels = dynamic(() => import("../reels/Reels"), {
 interface RenderComponentProps {
   useRedesignFinalCta?: boolean;
   useVideoAdsRedesign?: boolean;
+  reorderPortfolioVideoResult?: boolean;
   portfolioHeroEyebrow?: string;
   sections:
     | (
@@ -42,6 +43,7 @@ const RenderContent = ({
   sections,
   useRedesignFinalCta,
   useVideoAdsRedesign,
+  reorderPortfolioVideoResult,
   portfolioHeroEyebrow,
 }: RenderComponentProps) => {
   if (!sections) return <div></div>;
@@ -123,10 +125,20 @@ const RenderContent = ({
         }
         if (section.sys.contentType.sys.id === "zSection") {
           const zSection = section as IZSection;
+          const zSectionFields = zSection.fields as any;
+          const contentFirst =
+            reorderPortfolioVideoResult &&
+            zSectionFields.title?.trim().toUpperCase() ===
+              "10X MORE SALES FROM THE FIRST VIDEO";
           const isDark = !lastDark;
           lastDark = isDark;
           return renderVideoAdsSection(
-            <ZSection key={id} props={zSection} isDark={isDark} />
+            <ZSection
+              key={id}
+              props={zSection}
+              isDark={isDark}
+              contentFirst={contentFirst}
+            />
           );
         }
         if (section.sys.contentType.sys.id === "reels") {
