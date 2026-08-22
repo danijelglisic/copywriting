@@ -152,6 +152,7 @@ const RenderContent = ({
             <VideoLandingSection
               key={id}
               props={reels}
+              contentBeforeVisual={useVideoAdsRedesign && id === 0}
               eyebrow={
                 useVideoAdsRedesign ? "AD COPYWRITER" : portfolioHeroEyebrow
               }
