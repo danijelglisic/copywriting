@@ -23,7 +23,7 @@ interface ZSectionProps {
 const adExamples = [
   {
     label: "HOOK",
-    image: "/portfolio/ad-examples/hook.webp",
+    image: "/hook.webp",
     alt: "Club staff introduced as the most dangerous cartel in central Belgrade",
     copy: [
       'We introduced the club staff as "the most dangerous cartel in central Belgrade".',
@@ -32,7 +32,7 @@ const adExamples = [
   },
   {
     label: "ANGLE",
-    image: "/portfolio/ad-examples/angle.webp",
+    image: "/angle.webp",
     alt: "Mobsters arriving at the club to collect protection money",
     copy: [
       'The "mobsters" came to collect protection money.',
@@ -41,7 +41,7 @@ const adExamples = [
   },
   {
     label: "VISUAL PROOF",
-    image: "/portfolio/ad-examples/visual-proof.webp",
+    image: "/visual-proof.webp",
     alt: "Ten shots shown together in one frame",
     copy: [
       "Instead of saying what 13 EUR gets you, we showed it.",
