@@ -17,9 +17,45 @@ interface ZSectionProps {
    */
   isDark?: boolean;
   contentFirst?: boolean;
+  showAdExamples?: boolean;
 }
 
-const ZSection = ({ props, isDark, contentFirst }: ZSectionProps) => {
+const adExamples = [
+  {
+    label: "HOOK",
+    image: "/hook.webp",
+    alt: "Club staff introduced as the most dangerous cartel in central Belgrade",
+    copy: [
+      'We introduced the club staff as "the most dangerous cartel in central Belgrade".',
+      "The next few seconds reveal they're anything but.",
+    ],
+  },
+  {
+    label: "ANGLE",
+    image: "/angle.webp",
+    alt: "Mobsters arriving at the club to collect protection money",
+    copy: [
+      'The "mobsters" came to collect protection money.',
+      "The joke? With prices this low, the club should be collecting from them.",
+    ],
+  },
+  {
+    label: "VISUAL PROOF",
+    image: "/visual-proof.webp",
+    alt: "Ten shots shown together in one frame",
+    copy: [
+      "Instead of saying what 13 EUR gets you, we showed it.",
+      "Ten shots. One frame.",
+    ],
+  },
+];
+
+const ZSection = ({
+  props,
+  isDark,
+  contentFirst,
+  showAdExamples,
+}: ZSectionProps) => {
   const fields = props.fields as any;
   const { image, imagePosition, title, subtitle, richText, cta } = fields;
 
@@ -57,7 +93,7 @@ const ZSection = ({ props, isDark, contentFirst }: ZSectionProps) => {
             <FadeUp delay={0.25} className="z-section-body regular-1 p-height">
               {richText && documentToReactComponents(richText, richTextOptions)}
             </FadeUp>
-            {cta?.fields.url && cta?.fields.text && (
+            {!showAdExamples && cta?.fields.url && cta?.fields.text && (
               <FadeUp
                 delay={0.35}
                 className={`z-section-cta ${
@@ -73,6 +109,49 @@ const ZSection = ({ props, isDark, contentFirst }: ZSectionProps) => {
             )}
           </div>
         </div>
+        {showAdExamples && (
+          <FadeUp delay={0.3} className="mt-16 lg:mt-20">
+            <h3 className="heading-4 mb-8 lg:mb-10">WHAT THAT LOOKED LIKE</h3>
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-6">
+              {adExamples.map((example) => (
+                <article
+                  key={example.label}
+                  className="flex min-w-0 flex-col overflow-hidden rounded-2xl border border-navy/10 bg-white text-dark shadow-[0_18px_38px_rgba(10,31,68,0.12)]"
+                >
+                  <Image
+                    src={example.image}
+                    alt={example.alt}
+                    width={1080}
+                    height={1350}
+                    className="h-auto w-full"
+                  />
+                  <div className="flex flex-1 flex-col gap-3 p-6">
+                    <p className="text-sm font-bold tracking-[0.14em] text-navy">
+                      {example.label}
+                    </p>
+                    <p className="regular-3 leading-relaxed">
+                      {example.copy.map((line, index) => (
+                        <React.Fragment key={line}>
+                          {index > 0 && <br />}
+                          {line}
+                        </React.Fragment>
+                      ))}
+                    </p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </FadeUp>
+        )}
+        {showAdExamples && cta?.fields.url && cta?.fields.text && (
+          <FadeUp delay={0.35} className="mt-10 mb-2 lg:mt-12">
+            <Link legacyBehavior href={cta.fields.url}>
+              <a className="inline-block rounded-full bg-navy px-7 py-[0.8125rem] text-center text-sm font-semibold text-white shadow-[0_18px_38px_rgba(10,31,68,0.16)] outline-offset-4 ring-1 ring-navy/10 transition duration-300 hover:-translate-y-0.5 hover:bg-black active:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-black">
+                {cta.fields.text}
+              </a>
+            </Link>
+          </FadeUp>
+        )}
       </div>
     </div>
   );

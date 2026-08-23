@@ -130,6 +130,10 @@ const RenderContent = ({
             reorderPortfolioVideoResult &&
             zSectionFields.title?.trim().toUpperCase() ===
               "10X MORE SALES FROM THE FIRST VIDEO";
+          const showAdExamples =
+            reorderPortfolioVideoResult &&
+            zSectionFields.title?.trim().toUpperCase() ===
+              "THE ADS WEREN'T BAD - THEY WERE FORGETTABLE";
           const isDark = !lastDark;
           lastDark = isDark;
           return renderVideoAdsSection(
@@ -138,6 +142,7 @@ const RenderContent = ({
               props={zSection}
               isDark={isDark}
               contentFirst={contentFirst}
+              showAdExamples={showAdExamples}
             />
           );
         }
