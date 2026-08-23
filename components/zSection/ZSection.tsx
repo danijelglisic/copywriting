@@ -36,7 +36,7 @@ const adExamples = [
     alt: "Mobsters arriving at the club to collect protection money",
     copy: [
       'The "mobsters" came to collect protection money.',
-      "The joke? With prices this low, the club should be collecting from them.",
+      "With prices this low, the story flips: the club should be collecting from them.",
     ],
   },
   {
