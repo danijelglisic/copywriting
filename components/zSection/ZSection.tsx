@@ -50,41 +50,6 @@ const adExamples = [
   },
 ];
 
-const AdExamplesShowcase = () => (
-  <>
-    <h3 className="heading-4 mb-8 lg:mb-10">WHAT THAT LOOKED LIKE</h3>
-    <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-6">
-      {adExamples.map((example) => (
-        <article
-          key={example.label}
-          className="flex min-w-0 flex-col overflow-hidden rounded-2xl border border-navy/10 bg-white text-dark shadow-[0_18px_38px_rgba(10,31,68,0.12)]"
-        >
-          <Image
-            src={example.image}
-            alt={example.alt}
-            width={1080}
-            height={1350}
-            className="h-auto w-full"
-          />
-          <div className="flex flex-1 flex-col gap-3 p-6">
-            <p className="text-sm font-bold tracking-[0.14em] text-navy">
-              {example.label}
-            </p>
-            <p className="regular-3 leading-relaxed">
-              {example.copy.map((line, index) => (
-                <React.Fragment key={line}>
-                  {index > 0 && <br />}
-                  {line}
-                </React.Fragment>
-              ))}
-            </p>
-          </div>
-        </article>
-      ))}
-    </div>
-  </>
-);
-
 const ZSection = ({
   props,
   isDark,
@@ -145,13 +110,37 @@ const ZSection = ({
           </div>
         </div>
         {showAdExamples && (
-          <div className="mt-16 w-full lg:hidden">
-            <AdExamplesShowcase />
-          </div>
-        )}
-        {showAdExamples && (
-          <FadeUp delay={0.3} className="hidden lg:mt-20 lg:block">
-            <AdExamplesShowcase />
+          <FadeUp delay={0.3} className="mt-16 lg:mt-20">
+            <h3 className="heading-4 mb-8 lg:mb-10">WHAT THAT LOOKED LIKE</h3>
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-6">
+              {adExamples.map((example) => (
+                <article
+                  key={example.label}
+                  className="flex min-w-0 flex-col overflow-hidden rounded-2xl border border-navy/10 bg-white text-dark shadow-[0_18px_38px_rgba(10,31,68,0.12)]"
+                >
+                  <Image
+                    src={example.image}
+                    alt={example.alt}
+                    width={1080}
+                    height={1350}
+                    className="h-auto w-full"
+                  />
+                  <div className="flex flex-1 flex-col gap-3 p-6">
+                    <p className="text-sm font-bold tracking-[0.14em] text-navy">
+                      {example.label}
+                    </p>
+                    <p className="regular-3 leading-relaxed">
+                      {example.copy.map((line, index) => (
+                        <React.Fragment key={line}>
+                          {index > 0 && <br />}
+                          {line}
+                        </React.Fragment>
+                      ))}
+                    </p>
+                  </div>
+                </article>
+              ))}
+            </div>
           </FadeUp>
         )}
         {showAdExamples && cta?.fields.url && cta?.fields.text && (

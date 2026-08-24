@@ -53,6 +53,7 @@ const RenderContent = ({
     // suprotno. Bez ovoga dve uzastopne tamne sekcije izgledaju kao jedna.
     let lastDark = false;
     let regularSectionIndex = 0;
+    let hasRenderedPortfolioShowcase = false;
 
     return sections
       .filter((section) => section?.sys?.contentType)
@@ -130,10 +131,13 @@ const RenderContent = ({
             reorderPortfolioVideoResult &&
             zSectionFields.title?.trim().toUpperCase() ===
               "10X MORE SALES FROM THE FIRST VIDEO";
-          const showAdExamples =
+          const showAdExamples = Boolean(
             reorderPortfolioVideoResult &&
-            zSectionFields.title?.trim().toUpperCase() ===
-              "THE ADS WEREN'T BAD - THEY WERE FORGETTABLE";
+              !hasRenderedPortfolioShowcase &&
+              zSectionFields.cta?.fields.text?.trim().toLowerCase() ===
+                "read the full case study"
+          );
+          hasRenderedPortfolioShowcase ||= showAdExamples;
           const isDark = !lastDark;
           lastDark = isDark;
           return renderVideoAdsSection(
