@@ -185,7 +185,7 @@ const PreviewHeader = () => {
       {isOpen ? (
         <div
           id="redesign-mobile-menu"
-          className="fixed inset-x-0 top-16 z-40 border-b border-navy/10 bg-white/96 shadow-[0_24px_60px_rgba(10,31,68,0.12)] backdrop-blur-xl lg:hidden"
+          className="fixed inset-x-0 top-16 z-40 border-b border-navy/10 bg-white shadow-[0_24px_60px_rgba(10,31,68,0.12)] lg:hidden"
         >
           <nav className="container py-4" aria-label="Main">
             <div className="grid gap-1">
