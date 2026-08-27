@@ -17,7 +17,7 @@ interface MobileMenuProps {
  *
  * Dva pravila drze ovo ispravnim:
  *
- * 1. Neprovidna pozadina je na spoljasnjem sloju koji se NIKAD ne animira. Ranije je
+ * 1. Pozadina je na spoljasnjem sloju koji se NIKAD ne animira. Ranije je
  *    opacity celog panela bio animiran i znao je da se zaglavi na ~0.15, pa je
  *    meni ostajao providan i tekst strane se video kroz njega.
  * 2. Ulazna animacija je CSS, ne Framer Motion. Framer koristi requestAnimation-
@@ -51,7 +51,7 @@ const MobileMenu: FC<MobileMenuProps> = ({ isOpen, onClose, items }) => {
   return (
     <div
       id="mobile-menu"
-      className="lg:hidden fixed top-[72px] bottom-0 left-0 right-0 z-40 bg-white overflow-y-auto overscroll-contain"
+      className="lg:hidden fixed top-[72px] bottom-0 left-0 right-0 z-40 bg-navy overflow-y-auto overscroll-contain"
     >
       <nav
         className="container flex min-h-full flex-col pb-10 pt-6 animate-menu-in motion-reduce:animate-none"
@@ -63,7 +63,7 @@ const MobileMenu: FC<MobileMenuProps> = ({ isOpen, onClose, items }) => {
               <Link
                 href={item.href}
                 onClick={onClose}
-                className="flex items-center justify-between border-b border-navy/10 py-5 text-navy subtitle-2 transition-colors hover:text-secondary active:text-secondary"
+                className="flex items-center justify-between border-b border-white/10 py-5 text-white subtitle-2 transition-colors hover:text-primary active:text-primary"
               >
                 {item.text}
                 <svg
@@ -75,7 +75,7 @@ const MobileMenu: FC<MobileMenuProps> = ({ isOpen, onClose, items }) => {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="text-navy/30"
+                  className="text-white/30"
                   aria-hidden="true"
                 >
                   <path d="M9 18l6-6-6-6" />
@@ -95,7 +95,7 @@ const MobileMenu: FC<MobileMenuProps> = ({ isOpen, onClose, items }) => {
           </Link>
         )}
 
-        <p className="mt-auto pt-10 text-navy/40 body-4">
+        <p className="mt-auto pt-10 text-white/40 body-4">
           Slavisa Bogdanovic — Copywriter
         </p>
       </nav>
